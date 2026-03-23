@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Humanity Tomorrow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#F5F2EC;--bg2:#EDE9E1;--ink:#1A1814;--ink2:#6B6560;--border:rgba(26,24,20,0.12);--serif:'Playfair Display',Georgia,serif;--mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif; }
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-weight:300;line-height:1.6;overflow-x:hidden;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(245,242,236,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-logo{font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--ink);text-decoration:none;}
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none;}
+  .nav-links a{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--ink);}.nav-links a.active{color:var(--ink);border-bottom:1px solid currentColor;}
+  .nav-links a.dimmed{opacity:0.35;cursor:default;pointer-events:none;}
+  .lang-switcher{position:relative;margin-left:24px;}
+  .lang-current{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px 3px 8px;border:1px solid var(--border);background:transparent;color:var(--ink2);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s;user-select:none;}
+  .lang-current::after{content:'▾';font-size:0.6rem;opacity:0.5;}.lang-current:hover{color:var(--ink);border-color:var(--ink);}
+  .lang-dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--bg);border:1px solid var(--border);min-width:72px;z-index:200;}
+  .lang-switcher.open .lang-dropdown{display:block;}
+  .lang-option{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 12px;color:var(--ink2);cursor:pointer;display:block;width:100%;background:transparent;border:none;text-align:left;transition:background 0.15s;}
+  .lang-option:hover{background:var(--bg2);color:var(--ink);}.lang-option.active{color:var(--ink);}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+  .burger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.25s;}
+  .burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  .mobile-drawer{display:none;position:fixed;top:61px;left:0;right:0;bottom:0;background:var(--bg);z-index:99;padding:40px 32px;flex-direction:column;overflow-y:auto;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);}
+  .mobile-drawer.open{transform:translateX(0);}
+  .drawer-link{font-family:var(--serif);font-size:1.6rem;font-weight:400;color:var(--ink);text-decoration:none;padding:16px 0;border-bottom:1px solid var(--border);display:block;background:none;border-top:none;border-left:none;border-right:none;width:100%;text-align:left;cursor:pointer;transition:color 0.2s;}
+  .drawer-link:hover{color:var(--ink2);}.drawer-link.dimmed{opacity:0.35;cursor:default;}
+  .drawer-lang{margin-top:40px;padding-top:32px;border-top:1px solid var(--border);}
+  .drawer-lang-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink2);opacity:0.5;margin-bottom:16px;}
+  .drawer-lang-btns{display:flex;gap:8px;}
+  .drawer-lang-btn{font-family:var(--mono);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 18px;border:1px solid var(--border);background:transparent;color:var(--ink2);cursor:pointer;transition:all 0.2s;}
+  .drawer-lang-btn.active,.drawer-lang-btn:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+  .about-layout{padding:140px 48px 80px;max-width:680px;animation:fadeUp 0.5s ease both;}
+  .about-layout h1{font-family:var(--serif);font-size:2.8rem;font-weight:400;letter-spacing:-0.02em;margin-bottom:40px;line-height:1.1;}
+  .about-layout p{font-size:1rem;color:var(--ink2);line-height:1.8;margin-bottom:24px;}
+  footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;}
+  footer span{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;color:var(--ink2);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  @media(max-width:768px){nav{padding:16px 20px;}.nav-links{display:none;}.burger{display:flex;}.mobile-drawer{display:flex;}.about-layout{padding:100px 20px 60px;}footer{padding:24px 20px;flex-direction:column;gap:8px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Humanity Tomorrow</a>
+  <ul class="nav-links">
+    <li><a href="/" data-i18n="nav.home">Home</a></li>
+    <li><a href="/longevity/" data-i18n="nav.life">Longevity</a></li>
+    <li><a class="dimmed" data-i18n="nav.ai">AI Risks</a></li>
+    <li><a class="dimmed" data-i18n="nav.future">Future</a></li>
+    <li><a href="/about/" class="active" data-i18n="nav.about">About</a></li>
+    <li>
+      <div class="lang-switcher" id="langSwitcher">
+        <div class="lang-current" id="langCurrent">EN</div>
+        <div class="lang-dropdown">
+          <button class="lang-option active" onclick="selectLang('en')">EN</button>
+          <button class="lang-option" onclick="selectLang('ru')">RU</button>
+          <button class="lang-option" onclick="selectLang('ua')">UA</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <button class="burger" id="burger" onclick="toggleDrawer()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+  <a class="drawer-link" href="/" data-i18n="nav.home">Home</a>
+  <a class="drawer-link" href="/longevity/" data-i18n="nav.life">Longevity</a>
+  <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
+  <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
+  <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
+  <div class="drawer-lang">
+    <p class="drawer-lang-label">Language</p>
+    <div class="drawer-lang-btns">
+      <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>
+      <button class="drawer-lang-btn" onclick="selectLang('ru')">RU</button>
+      <button class="drawer-lang-btn" onclick="selectLang('ua')">UA</button>
+    </div>
+  </div>
+</div>
+<div class="about-layout">
+  <h1 data-i18n="about.title">About this site</h1>
+  <p data-i18n="about.p1">[ Your opening paragraph — who you are, what this site is about, why you built it. ]</p>
+  <p data-i18n="about.p2">[ A second paragraph about your background, perspective, or motivations. ]</p>
+  <p data-i18n="about.p3">[ Contact info, links, or a closing thought. ]</p>
+</div>
+<footer>
+  <span data-i18n="footer.text">An independent project. No ads. No tracking.</span>
+  <span data-i18n="footer.made">Made with curiosity.</span>
+</footer>
+<script>
+const translations={en:{'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Longevity','nav.about':'About','about.title':'About this site','about.p1':'[ Your opening paragraph — who you are, what this site is about, why you built it. ]','about.p2':'[ A second paragraph about your background, perspective, or motivations. ]','about.p3':'[ Contact info, links, or a closing thought. ]','footer.text':'An independent project. No ads. No tracking.','footer.made':'Made with curiosity.'},ru:{'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Лонджевити','nav.about':'О сайте','about.title':'О сайте','about.p1':'[ Ваш вводный абзац. ]','about.p2':'[ Второй абзац. ]','about.p3':'[ Контакты. ]','footer.text':'Независимый проект. Без рекламы. Без слежки.','footer.made':'Сделано с любопытством.'},ua:{'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Лонджевіті','nav.about':'Про сайт','about.title':'Про сайт','about.p1':'[ Ваш вступний абзац. ]','about.p2':'[ Другий абзац. ]','about.p3':'[ Контакти. ]','footer.text':'Незалежний проект. Без реклами. Без стеження.','footer.made':'Зроблено з цікавістю.'}};
+let currentLang=localStorage.getItem('lang')||'en';
+function applyLang(lang){document.querySelectorAll('[data-i18n]').forEach(el=>{if(translations[lang][el.getAttribute('data-i18n')])el.textContent=translations[lang][el.getAttribute('data-i18n')];});document.getElementById('langCurrent').textContent=lang.toUpperCase();document.querySelectorAll('.lang-option').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang));document.querySelectorAll('.drawer-lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang));}
+function selectLang(lang){currentLang=lang;localStorage.setItem('lang',lang);applyLang(lang);document.getElementById('langSwitcher').classList.remove('open');}
+document.getElementById('langCurrent').addEventListener('click',e=>{e.stopPropagation();document.getElementById('langSwitcher').classList.toggle('open');});
+document.addEventListener('click',()=>document.getElementById('langSwitcher').classList.remove('open'));
+function toggleDrawer(){const open=document.getElementById('mobileDrawer').classList.toggle('open');document.getElementById('burger').classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
+applyLang(currentLang);
+</script>
+</body>
+</html>

@@ -3,991 +3,288 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Futures & Limits</title>
+<title>Humanity Tomorrow</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F5F2EC;
-    --bg2: #EDE9E1;
-    --ink: #1A1814;
-    --ink2: #6B6560;
-    --accent-ai: #C1440E;
-    --accent-future: #1A5C8A;
-    --accent-life: #2E7A4F;
+    --bg: #F5F2EC; --bg2: #EDE9E1; --ink: #1A1814; --ink2: #6B6560;
+    --accent-ai: #C1440E; --accent-future: #1A5C8A; --accent-life: #2E7A4F;
     --border: rgba(26,24,20,0.12);
     --serif: 'Playfair Display', Georgia, serif;
     --mono: 'DM Mono', monospace;
     --sans: 'DM Sans', sans-serif;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--ink);
-    font-weight: 300;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
 
   /* ── NAV ── */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
     padding: 20px 48px;
-    background: rgba(245,242,236,0.88);
-    backdrop-filter: blur(12px);
+    background: rgba(245,242,236,0.92); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-
-  .nav-logo {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--ink);
-    text-decoration: none;
-    letter-spacing: 0.01em;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 36px;
-    list-style: none;
-  }
-
+  .nav-logo { font-family: var(--serif); font-size: 1.1rem; font-style: italic; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
   .nav-links a {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink2);
-    text-decoration: none;
-    transition: color 0.2s;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink2); text-decoration: none; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
   .nav-links a.active { color: var(--ink); border-bottom: 1px solid currentColor; }
+  .nav-links a.dimmed { opacity: 0.35; cursor: default; pointer-events: none; }
 
-  /* Language switcher */
-  .lang-switcher {
-    display: flex;
-    gap: 4px;
-    margin-left: 24px;
+  /* ── LANG DROPDOWN ── */
+  .lang-switcher { position: relative; margin-left: 24px; }
+  .lang-current {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 10px 3px 8px;
+    border: 1px solid var(--border); background: transparent; color: var(--ink2);
+    cursor: pointer; display: flex; align-items: center; gap: 6px;
+    transition: all 0.2s; user-select: none;
   }
-  .lang-btn {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    padding: 3px 8px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--ink2);
-    cursor: pointer;
-    transition: all 0.2s;
+  .lang-current::after { content: '▾'; font-size: 0.6rem; opacity: 0.5; }
+  .lang-current:hover { color: var(--ink); border-color: var(--ink); }
+  .lang-dropdown {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0;
+    background: var(--bg); border: 1px solid var(--border); min-width: 72px; z-index: 200;
   }
-  .lang-btn:hover, .lang-btn.active {
-    background: var(--ink);
-    color: var(--bg);
-    border-color: var(--ink);
+  .lang-switcher.open .lang-dropdown { display: block; }
+  .lang-option {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 12px; color: var(--ink2);
+    cursor: pointer; display: block; width: 100%;
+    background: transparent; border: none; text-align: left; transition: background 0.15s;
   }
+  .lang-option:hover { background: var(--bg2); color: var(--ink); }
+  .lang-option.active { color: var(--ink); }
 
-  /* ── PAGE SYSTEM ── */
-  .page { display: none; min-height: 100vh; padding-top: 80px; }
-  .page.active { display: block; }
+  /* ── BURGER ── */
+  .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .burger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.25s; }
+  .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-  /* ── HOME PAGE ── */
-  .home-hero {
-    padding: 100px 48px 60px;
-    max-width: 900px;
+  /* ── MOBILE DRAWER ── */
+  .mobile-drawer {
+    display: none; position: fixed; top: 61px; left: 0; right: 0; bottom: 0;
+    background: var(--bg); z-index: 99; padding: 40px 32px;
+    flex-direction: column; overflow-y: auto;
+    transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
   }
-
-  .home-label {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink2);
-    margin-bottom: 24px;
+  .mobile-drawer.open { transform: translateX(0); }
+  .drawer-link {
+    font-family: var(--serif); font-size: 1.6rem; font-weight: 400;
+    color: var(--ink); text-decoration: none; padding: 16px 0;
+    border-bottom: 1px solid var(--border); display: block;
+    background: none; border-top: none; border-left: none; border-right: none;
+    width: 100%; text-align: left; cursor: pointer; transition: color 0.2s;
   }
-
-  .home-title {
-    font-family: var(--serif);
-    font-size: clamp(2.8rem, 6vw, 5rem);
-    line-height: 1.08;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    margin-bottom: 32px;
+  .drawer-link:hover { color: var(--ink2); }
+  .drawer-link.dimmed { opacity: 0.35; cursor: default; }
+  .drawer-lang { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .drawer-lang-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink2); opacity: 0.5; margin-bottom: 16px; }
+  .drawer-lang-btns { display: flex; gap: 8px; }
+  .drawer-lang-btn {
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 18px;
+    border: 1px solid var(--border); background: transparent; color: var(--ink2); cursor: pointer; transition: all 0.2s;
   }
+  .drawer-lang-btn.active, .drawer-lang-btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
-  .home-title em {
-    font-style: italic;
-    color: var(--ink2);
-  }
+  /* ── HOME ── */
+  .home-hero { padding: 160px 48px 60px; max-width: 900px; }
+  .home-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink2); margin-bottom: 24px; }
+  .home-title { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.08; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 32px; }
+  .home-title em { font-style: italic; color: var(--ink2); }
+  .home-desc { font-size: 1.05rem; color: var(--ink2); max-width: 560px; line-height: 1.75; margin-bottom: 64px; }
 
-  .home-desc {
-    font-size: 1.05rem;
-    color: var(--ink2);
-    max-width: 560px;
-    line-height: 1.75;
-    margin-bottom: 64px;
-  }
-
-  /* Topic cards on home */
-  .topic-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    margin: 0 48px 80px;
-  }
-
-  .topic-card {
-    background: var(--bg);
-    padding: 48px 40px;
-    cursor: pointer;
-    transition: background 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .topic-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--card-color);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-  }
-
+  /* ── CARDS ── */
+  .topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 0 48px 80px; }
+  .topic-card { background: var(--bg); padding: 48px 40px; cursor: pointer; transition: background 0.25s; position: relative; overflow: hidden; text-decoration: none; display: block; }
+  .topic-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--card-color); transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
   .topic-card:hover { background: var(--bg2); }
   .topic-card:hover::before { transform: scaleX(1); }
-
-  .topic-card[data-topic="ai"] { --card-color: var(--accent-ai); }
-  .topic-card[data-topic="future"] { --card-color: var(--accent-future); }
   .topic-card[data-topic="life"] { --card-color: var(--accent-life); }
-
-  .card-num {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    color: var(--ink2);
-    margin-bottom: 20px;
-    opacity: 0.6;
-  }
-
-  .card-title {
-    font-family: var(--serif);
-    font-size: 1.55rem;
-    font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 16px;
-    color: var(--card-color);
-  }
-
-  .card-desc {
-    font-size: 0.88rem;
-    color: var(--ink2);
-    line-height: 1.65;
-    margin-bottom: 28px;
-  }
-
-  .card-link {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--card-color);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .card-link::after {
-    content: '→';
-    transition: transform 0.2s;
-  }
-
+  .topic-card[data-topic="ai"]   { --card-color: var(--accent-ai); }
+  .topic-card[data-topic="future"] { --card-color: var(--accent-future); }
+  .card-num { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--ink2); margin-bottom: 20px; opacity: 0.6; }
+  .card-title { font-family: var(--serif); font-size: 1.55rem; font-weight: 400; line-height: 1.2; margin-bottom: 16px; color: var(--card-color); }
+  .card-desc { font-size: 0.88rem; color: var(--ink2); line-height: 1.65; margin-bottom: 28px; }
+  .card-link { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--card-color); display: inline-flex; align-items: center; gap: 8px; }
+  .card-link::after { content: '→'; transition: transform 0.2s; }
   .topic-card:hover .card-link::after { transform: translateX(4px); }
-
-  /* ── TOPIC PAGE ── */
-  .topic-header {
-    padding: 80px 24px 48px;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .topic-header-inner {
-    max-width: 720px;
-    width: 100%;
-  }
-
-  .topic-tag {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border: 1px solid var(--page-color, var(--ink));
-    color: var(--page-color, var(--ink));
-    display: inline-block;
-    margin-bottom: 24px;
-  }
-
-  .topic-title {
-    font-family: var(--serif);
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 24px;
-    color: var(--page-color, var(--ink));
-  }
-
-  .topic-intro {
-    font-size: 1rem;
-    color: var(--ink2);
-    max-width: 580px;
-    line-height: 1.75;
-    margin: 0 auto;
-  }
-
-  /* Content sections — centered reading layout */
-  .content-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 60vh;
-    padding: 48px 24px 80px;
-  }
-
-  .content-main {
-    width: 100%;
-    max-width: 720px;
-  }
-
-  /* ── TABLE OF CONTENTS — fixed left sidebar ── */
-  .toc-block {
-    position: fixed;
-    top: 50%;
-    left: 32px;
-    transform: translateY(-50%);
-    z-index: 50;
-    width: 160px;
-  }
-
-  .toc-title {
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink2);
-    opacity: 0.4;
-    margin-bottom: 14px;
-  }
-
-  .toc-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    counter-reset: toc-counter;
-  }
-
-  .toc-list li {
-    counter-increment: toc-counter;
-  }
-
-  .toc-list a {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    padding: 4px 0;
-    font-family: var(--sans);
-    font-size: 0.78rem;
-    font-weight: 300;
-    color: var(--ink2);
-    opacity: 0.5;
-    text-decoration: none;
-    transition: opacity 0.18s, color 0.18s;
-    line-height: 1.4;
-  }
-
-  .toc-list a::before {
-    content: counter(toc-counter, decimal-leading-zero);
-    font-family: var(--mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.04em;
-    color: var(--page-color, var(--ink2));
-    opacity: 0.6;
-    flex-shrink: 0;
-  }
-
-  .toc-list a:hover { opacity: 1; color: var(--ink); }
-
-  /* hide TOC on narrow screens */
-  @media (max-width: 1100px) {
-    .toc-block { display: none; }
-  }
-
-  /* ── BLOCKQUOTE ── */
-  .article-quote {
-    margin: 28px 0;
-    padding: 0 0 0 20px;
-    border-left: 2px solid var(--border);
-    position: relative;
-  }
-
-  .article-quote blockquote {
-    font-family: var(--sans);
-    font-size: 0.95rem;
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.75;
-    color: var(--ink2);
-    margin: 0 0 8px;
-  }
-
-  .article-quote blockquote::before {
-    content: '\201C';
-    font-family: var(--mono);
-    font-style: normal;
-    font-size: 0.85rem;
-    color: var(--page-color, var(--ink2));
-    opacity: 0.6;
-    margin-right: 3px;
-  }
-
-  .article-quote blockquote::after {
-    content: '\201D';
-    font-family: var(--mono);
-    font-style: normal;
-    font-size: 0.85rem;
-    color: var(--page-color, var(--ink2));
-    opacity: 0.6;
-    margin-left: 2px;
-  }
-
-  .article-quote cite {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink2);
-    opacity: 0.5;
-    display: block;
-    font-style: normal;
-  }
-
-  /* sidebar hidden */
-  .content-sidebar { display: none; }
-
-  .section-block {
-    margin-bottom: 64px;
-    padding-bottom: 64px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .section-block:last-child {
-    border-bottom: none;
-  }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--page-color, var(--ink2));
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-    max-width: 60px;
-  }
-
-  .section-heading {
-    font-family: var(--serif);
-    font-size: 1.7rem;
-    font-weight: 400;
-    line-height: 1.25;
-    margin-bottom: 20px;
-    letter-spacing: -0.01em;
-  }
-
-  .placeholder-text {
-    background: var(--bg2);
-    border-left: 2px solid var(--border);
-    padding: 16px 20px;
-    font-size: 0.85rem;
-    color: var(--ink2);
-    font-style: italic;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .resource-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 24px;
-  }
-
-  .resource-item {
-    display: flex;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .resource-item:last-child { border-bottom: none; }
-
-  .resource-type {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--bg);
-    background: var(--page-color, var(--ink2));
-    padding: 2px 6px;
-    align-self: flex-start;
-    margin-top: 3px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .resource-content {}
-
-  .resource-title {
-    font-size: 0.92rem;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 4px;
-  }
-
-  .resource-desc {
-    font-size: 0.82rem;
-    color: var(--ink2);
-    line-height: 1.5;
-  }
-
-  /* ── ABOUT PAGE ── */
-  .about-layout {
-    padding: 80px 48px;
-    max-width: 680px;
-  }
-
-  .about-layout h1 {
-    font-family: var(--serif);
-    font-size: 2.8rem;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    margin-bottom: 40px;
-    line-height: 1.1;
-  }
-
-  .about-layout p {
-    font-size: 1rem;
-    color: var(--ink2);
-    line-height: 1.8;
-    margin-bottom: 24px;
-  }
+  .topic-card.soon { cursor: default; opacity: 0.5; pointer-events: none; }
 
   /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 32px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  footer span {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    color: var(--ink2);
-  }
+  footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer span { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em; color: var(--ink2); }
 
   /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .page.active .home-hero,
-  .page.active .topic-header,
-  .page.active .about-layout {
-    animation: fadeUp 0.5s ease both;
-  }
-
-  .page.active .topic-grid {
-    animation: fadeUp 0.5s 0.15s ease both;
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .home-hero { animation: fadeUp 0.5s ease both; }
+  .topic-grid { animation: fadeUp 0.5s 0.15s ease both; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
-    .nav-links { gap: 20px; }
-    .nav-links li:nth-child(-n+3) { display: none; }
-    .home-hero { padding: 60px 20px 40px; }
+    .nav-links { display: none; }
+    .burger { display: flex; }
+    .mobile-drawer { display: flex; }
+    .home-hero { padding: 100px 20px 40px; }
     .topic-grid { grid-template-columns: 1fr; margin: 0 20px 60px; }
-    .topic-header { padding: 60px 20px 32px; }
-    .content-layout { padding: 32px 20px 60px; }
-    .content-main { max-width: 100%; }
-    .toc-block { padding: 20px; }
     footer { padding: 24px 20px; flex-direction: column; gap: 8px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ══ FIXED SIDE TOCs ══ -->
-
 <nav>
-  <a class="nav-logo" href="#" onclick="showPage('home')">Humanity Tomorrow</a>
+  <a class="nav-logo" href="/">Humanity Tomorrow</a>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active" data-i18n="nav.home">Home</a></li>
-    <li><a href="#" onclick="showPage('life')" id="nav-life" data-i18n="nav.life">Longevity</a></li>
-    <li><a href="#" id="nav-ai" data-i18n="nav.ai" style="cursor:default; opacity:0.4">AI Risks</a></li>
-    <li><a href="#" id="nav-future" data-i18n="nav.future" style="cursor:default; opacity:0.4">Future</a></li>
-    <li><a href="#" onclick="showPage('about')" id="nav-about" data-i18n="nav.about">About</a></li>
+    <li><a href="/" class="active" data-i18n="nav.home">Home</a></li>
+    <li><a href="/longevity/" data-i18n="nav.life">Longevity</a></li>
+    <li><a class="dimmed" data-i18n="nav.ai">AI Risks</a></li>
+    <li><a class="dimmed" data-i18n="nav.future">Future</a></li>
+    <li><a href="/about/" data-i18n="nav.about">About</a></li>
     <li>
-      <div class="lang-switcher">
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" onclick="setLang('ru')">RU</button>
-        <button class="lang-btn" onclick="setLang('ua')">UA</button>
+      <div class="lang-switcher" id="langSwitcher">
+        <div class="lang-current" id="langCurrent">EN</div>
+        <div class="lang-dropdown">
+          <button class="lang-option active" onclick="selectLang('en')">EN</button>
+          <button class="lang-option" onclick="selectLang('ru')">RU</button>
+          <button class="lang-option" onclick="selectLang('ua')">UA</button>
+        </div>
       </div>
     </li>
   </ul>
+  <button class="burger" id="burger" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- ══ HOME ══ -->
-<div class="page active" id="page-home">
-  <div class="home-hero">
-    <p class="home-label" data-i18n="home.label">DEMO VERSION</p>
-    <h1 class="home-title" data-i18n-html="home.title">
-      On the things<br>that <em>really</em><br>matter.
-    </h1>
-    <p class="home-desc" data-i18n="home.desc">
-      Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future.
-    </p>
-  </div>
-
-  <div class="topic-grid">
-    <div class="topic-card" data-topic="life" onclick="showPage('life')">
-      <p class="card-num">01</p>
-      <h2 class="card-title" data-i18n="nav.life">Longevity</h2>
-      <p class="card-desc" data-i18n="card.life.desc">
-        The science and philosophy of extending healthy human life — and why it matters more than we think.
-      </p>
-      <span class="card-link" data-i18n="card.read">Read more</span>
+<div class="mobile-drawer" id="mobileDrawer">
+  <a class="drawer-link" href="/" data-i18n="nav.home">Home</a>
+  <a class="drawer-link" href="/longevity/" data-i18n="nav.life">Longevity</a>
+  <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
+  <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
+  <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
+  <div class="drawer-lang">
+    <p class="drawer-lang-label">Language</p>
+    <div class="drawer-lang-btns">
+      <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>
+      <button class="drawer-lang-btn" onclick="selectLang('ru')">RU</button>
+      <button class="drawer-lang-btn" onclick="selectLang('ua')">UA</button>
     </div>
-    <div class="topic-card" data-topic="ai" style="cursor:default; opacity:0.55">
-      <p class="card-num">02</p>
-      <h2 class="card-title" data-i18n="nav.ai">AI Risks</h2>
-      <p class="card-desc" data-i18n="card.ai.desc">
-        What could go wrong as artificial intelligence grows more capable — and what might be done about it.
-      </p>
-      <span class="card-link" data-i18n="card.soon">Coming soon</span>
-    </div>
-    <div class="topic-card" data-topic="future" style="cursor:default; opacity:0.55">
-      <p class="card-num">03</p>
-      <h2 class="card-title" data-i18n="nav.future">Future</h2>
-      <p class="card-desc" data-i18n="card.future.desc">
-        Long-range thinking about technology, civilisation, and the choices shaping the next hundred years.
-      </p>
-      <span class="card-link" data-i18n="card.soon">Coming soon</span>
-    </div>
-  </div>
-
-  <footer>
-    <span data-i18n="footer.text">An independent project. No ads. No tracking.</span>
-  </footer>
-</div>
-
-<!-- ══ AI RISKS ══ -->
-<div class="page" id="page-ai" style="--page-color: var(--accent-ai)">
-  <div class="topic-header">
-    <div class="topic-header-inner">
-      <span class="topic-tag" data-i18n="nav.ai">AI Risks</span>
-      <h1 class="topic-title" data-i18n="ai.title">Artificial Intelligence<br>and its risks</h1>
-      <p class="topic-intro" data-i18n="ai.intro">
-        [Your introductory paragraph about AI risks goes here — why this topic matters, your perspective.]
-      </p>
-    </div>
-  </div>
-
-  <div class="content-layout">
-    <main class="content-main">
-
-      <div class="section-block" id="ai-s1">
-        <p class="section-label" data-i18n="ai.s1">Alignment problem</p>
-        <h2 class="section-heading" data-i18n="ai.s1.heading">Why alignment is hard</h2>
-        <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. Replace this block with your own writing. ]</div>
-
-        <!-- Example blockquote -->
-        <div class="article-quote">
-          <blockquote>The development of full artificial intelligence could spell the end of the human race — or it could be the best thing that ever happened to us.</blockquote>
-          <cite>Stephen Hawking, BBC Interview, 2014</cite>
-        </div>
-
-        <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. Replace this block with your own writing. ]</div>
-      </div>
-
-      <div class="section-block" id="ai-s2">
-        <p class="section-label" data-i18n="ai.s2">Existential risk</p>
-        <h2 class="section-heading" data-i18n="ai.s2.heading">The long-term stakes</h2>
-        <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. Replace this block with your own writing. ]</div>
-      </div>
-
-      <div class="section-block" id="ai-s4">
-        <p class="section-label" data-i18n="sidebar.resources">Key resources</p>
-        <div class="resource-list">
-          <div class="resource-item">
-            <span class="resource-type">Book</span>
-            <div class="resource-content">
-              <p class="resource-title">[ Book title ]</p>
-              <p class="resource-desc">[ Brief description of why this resource is valuable. ]</p>
-            </div>
-          </div>
-          <div class="resource-item">
-            <span class="resource-type">Essay</span>
-            <div class="resource-content">
-              <p class="resource-title">[ Essay or article title ]</p>
-              <p class="resource-desc">[ Brief description. ]</p>
-            </div>
-          </div>
-          <div class="resource-item">
-            <span class="resource-type">Course</span>
-            <div class="resource-content">
-              <p class="resource-title">[ Course name ]</p>
-              <p class="resource-desc">[ Brief description. ]</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
   </div>
 </div>
 
-<!-- ══ FUTURES ══ -->
-<div class="page" id="page-future" style="--page-color: var(--accent-future)">
-  <div class="topic-header">
-    <div class="topic-header-inner">
-      <span class="topic-tag" data-i18n="nav.future">Futures</span>
-      <h1 class="topic-title" data-i18n="future.title">The shape of<br>what's coming</h1>
-      <p class="topic-intro" data-i18n="future.intro">
-        [Your introductory paragraph about futures and futurism goes here.]
-      </p>
-    </div>
+<div class="home-hero">
+  <p class="home-label" data-i18n="home.label">DEMO VERSION</p>
+  <h1 class="home-title" data-i18n-html="home.title">On the things<br>that <em>really</em><br>matter.</h1>
+  <p class="home-desc" data-i18n="home.desc">Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future.</p>
+</div>
+
+<div class="topic-grid">
+  <a class="topic-card" data-topic="life" href="/longevity/">
+    <p class="card-num">01</p>
+    <h2 class="card-title" data-i18n="nav.life">Longevity</h2>
+    <p class="card-desc" data-i18n="card.life.desc">The science and philosophy of extending healthy human life — and why it matters more than we think.</p>
+    <span class="card-link" data-i18n="card.read">Read more</span>
+  </a>
+  <div class="topic-card soon" data-topic="ai">
+    <p class="card-num">02</p>
+    <h2 class="card-title" data-i18n="nav.ai">AI Risks</h2>
+    <p class="card-desc" data-i18n="card.ai.desc">What could go wrong as artificial intelligence grows more capable — and what might be done about it.</p>
+    <span class="card-link" data-i18n="card.soon">Coming soon</span>
   </div>
-
-  <div class="content-layout">
-    <main class="content-main">
-
-      <div class="section-block" id="future-s1">
-        <p class="section-label" data-i18n="future.s1">Technological acceleration</p>
-        <h2 class="section-heading" data-i18n="future.s1.heading">How fast is fast?</h2>
-        <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
-
-        <!-- Example blockquote -->
-        <div class="article-quote">
-          <blockquote>The future is already here — it's just not evenly distributed.</blockquote>
-          <cite>William Gibson</cite>
-        </div>
-
-        <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
-      </div>
-
-      <div class="section-block" id="future-s2">
-        <p class="section-label" data-i18n="future.s2">Civilisation trajectories</p>
-        <h2 class="section-heading" data-i18n="future.s2.heading">Which futures are possible?</h2>
-        <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
-      </div>
-
-      <div class="section-block" id="future-s3">
-        <p class="section-label" data-i18n="sidebar.resources">Key resources</p>
-        <div class="resource-list">
-          <div class="resource-item">
-            <span class="resource-type">Book</span>
-            <div class="resource-content">
-              <p class="resource-title">[ Book title ]</p>
-              <p class="resource-desc">[ Description. ]</p>
-            </div>
-          </div>
-          <div class="resource-item">
-            <span class="resource-type">Essay</span>
-            <div class="resource-content">
-              <p class="resource-title">[ Essay title ]</p>
-              <p class="resource-desc">[ Description. ]</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+  <div class="topic-card soon" data-topic="future">
+    <p class="card-num">03</p>
+    <h2 class="card-title" data-i18n="nav.future">Future</h2>
+    <p class="card-desc" data-i18n="card.future.desc">Long-range thinking about technology, civilisation, and the choices shaping the next hundred years.</p>
+    <span class="card-link" data-i18n="card.soon">Coming soon</span>
   </div>
 </div>
 
-<!-- ══ LONGEVITY ══ -->
-<div class="page" id="page-life" style="--page-color: var(--accent-life)">
-  <div class="topic-header">
-    <div class="topic-header-inner">
-      <span class="topic-tag" data-i18n="nav.life">Longevity</span>
-      <h1 class="topic-title" data-i18n="life.title">Living longer,<br>living well</h1>
-      <p class="topic-intro" data-i18n="life.intro">
-        [Your introductory paragraph about longevity and life extension goes here.]
-      </p>
-    </div>
-  </div>
-
-  <div class="content-layout">
-    <main class="content-main">
-
-      <div class="section-block" id="life-s1">
-        <p class="section-label" data-i18n="life.s1">Biology of aging</p>
-        <h2 class="section-heading" data-i18n="life.s1.heading">Why do we age?</h2>
-        <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
-
-        <!-- Example blockquote -->
-        <div class="article-quote">
-          <blockquote>Aging is not lost youth but a new stage of opportunity and strength.</blockquote>
-          <cite>Betty Friedan, The Fountain of Age, 1993</cite>
-        </div>
-
-        <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
-      </div>
-
-      <div class="section-block" id="life-s2">
-        <p class="section-label" data-i18n="life.s2">Interventions</p>
-        <h2 class="section-heading" data-i18n="life.s2.heading">What can be done today?</h2>
-        <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
-      </div>
-
-      <div class="section-block" id="life-s3">
-        <p class="section-label" data-i18n="sidebar.resources">Key resources</p>
-        <div class="resource-list">
-          <div class="resource-item">
-            <span class="resource-type">Book</span>
-            <div class="resource-content">
-              <p class="resource-title">[ Book title ]</p>
-              <p class="resource-desc">[ Description. ]</p>
-            </div>
-          </div>
-          <div class="resource-item">
-            <span class="resource-type">Paper</span>
-            <div class="resource-content">
-              <p class="resource-title">[ Paper title ]</p>
-              <p class="resource-desc">[ Description. ]</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-</div>
-
-<!-- ══ ABOUT ══ -->
-<div class="page" id="page-about">
-  <div class="about-layout">
-    <h1 data-i18n="about.title">About this site</h1>
-    <p data-i18n="about.p1">
-      [ Your opening paragraph — who you are, what this site is about, why you built it. ]
-    </p>
-    <p data-i18n="about.p2">
-      [ A second paragraph about your background, perspective, or motivations. ]
-    </p>
-    <p data-i18n="about.p3">
-      [ Contact info, links to your social / email, or just a closing thought. ]
-    </p>
-  </div>
-  <footer>
-    <span data-i18n="footer.text">An independent project. No ads. No tracking.</span>
-    <span data-i18n="footer.made">Made with curiosity.</span>
-  </footer>
-</div>
+<footer>
+  <span data-i18n="footer.text">An independent project. No ads. No tracking.</span>
+  <span data-i18n="footer.made">Made with curiosity.</span>
+</footer>
 
 <script>
-// ── i18n ──────────────────────────────────────────────────────────────────
 const translations = {
   en: {
-    'nav.home': 'Home',
-    'nav.ai': 'AI Risks',
-    'nav.future': 'Future',
-    'nav.life': 'Longevity',
-    'nav.about': 'About',
-    'home.label': 'DEMO VERSION',
-    'home.title': 'On the things<br>that <em>actually</em><br>matter.',
-    'home.desc': 'Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future.',
-    'card.ai.desc': 'What could go wrong as artificial intelligence grows more capable — and what might be done about it.',
-    'card.future.desc': 'Long-range thinking about technology, civilisation, and the choices shaping the next hundred years.',
-    'card.life.desc': 'The science and philosophy of extending healthy human life — and why it matters more than we think.',
-    'card.read': 'Read more',
-    'card.soon': 'Coming soon',
-    'footer.text': 'An independent project. No ads. No tracking.',
-    'footer.made': 'Made with curiosity.',
-    'sidebar.sections': 'Sections',
-    'sidebar.resources': 'Resources',
-    'placeholder': '[ Your text goes here. Replace this block with your own writing. ]',
-    'ai.title': 'Artificial Intelligence\nand its risks',
-    'ai.intro': '[ Your introductory paragraph about AI risks. ]',
-    'ai.s1': 'Alignment problem', 'ai.s1.heading': 'Why alignment is hard',
-    'ai.s2': 'Existential risk',  'ai.s2.heading': 'The long-term stakes',
-    'ai.s3': 'Near-term harms',   'ai.s4': 'What to do',
-    'future.title': 'The shape of\nwhat\'s coming',
-    'future.intro': '[ Your introductory paragraph about futures. ]',
-    'future.s1': 'Technological acceleration', 'future.s1.heading': 'How fast is fast?',
-    'future.s2': 'Civilisation trajectories', 'future.s2.heading': 'Which futures are possible?',
-    'future.s3': 'Wild cards',
-    'life.title': 'Living longer,\nliving well',
-    'life.intro': '[ Your introductory paragraph about longevity. ]',
-    'life.s1': 'Biology of aging', 'life.s1.heading': 'Why do we age?',
-    'life.s2': 'Interventions',   'life.s2.heading': 'What can be done today?',
-    'life.s3': 'Ethics & society',
-    'about.title': 'About this site',
-    'about.p1': '[ Your opening paragraph — who you are, what this site is about, why you built it. ]',
-    'about.p2': '[ A second paragraph about your background, perspective, or motivations. ]',
-    'about.p3': '[ Contact info, links, or a closing thought. ]',
+    'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Longevity','nav.about':'About',
+    'home.label':'DEMO VERSION',
+    'home.title':'On the things<br>that <em>really</em><br>matter.',
+    'home.desc':'Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future.',
+    'card.life.desc':'The science and philosophy of extending healthy human life — and why it matters more than we think.',
+    'card.ai.desc':'What could go wrong as artificial intelligence grows more capable — and what might be done about it.',
+    'card.future.desc':'Long-range thinking about technology, civilisation, and the choices shaping the next hundred years.',
+    'card.read':'Read more','card.soon':'Coming soon',
+    'footer.text':'An independent project. No ads. No tracking.','footer.made':'Made with curiosity.',
   },
   ru: {
-    'nav.home': 'Главная',
-    'nav.ai': 'Риски ИИ',
-    'nav.future': 'Будущее',
-    'nav.life': 'Лонджевити',
-    'nav.about': 'О сайте',
-    'home.label': 'ДЕМО ВЕРСИЯ',
-    'home.title': 'О вещах, которые<br><em>правда</em><br>важны.',
-    'home.desc': 'Получите доступ к ответам на все вопросы, которые у вас могли возникнуть при погружении в тему продления жизни, ИИ рисков и будущего.',
-    'card.ai.desc': 'Что может пойти не так по мере того, как ИИ становится мощнее — и что с этим можно сделать.',
-    'card.future.desc': 'Долгосрочные размышления о технологиях, цивилизации и выборах, формирующих следующее столетие.',
-    'card.life.desc': 'Наука и философия продления здоровой человеческой жизни — и почему это важнее, чем кажется.',
-    'card.read': 'Читать →',
-    'card.soon': 'Скоро',
-    'footer.text': 'Независимый проект. Без рекламы. Без слежки.',
-    'sidebar.sections': 'Разделы',
-    'sidebar.resources': 'Ресурсы',
-    'placeholder': '[ Ваш текст здесь. Замените этот блок своим. ]',
-    'ai.title': 'Искусственный интеллект\nи его риски',
-    'ai.intro': '[ Вводный абзац о рисках ИИ. ]',
-    'ai.s1': 'Проблема выравнивания', 'ai.s1.heading': 'Почему это сложно',
-    'ai.s2': 'Экзистенциальный риск', 'ai.s2.heading': 'Долгосрочные ставки',
-    'ai.s3': 'Краткосрочные угрозы', 'ai.s4': 'Что делать',
-    'future.title': 'Контуры\nгрядущего',
-    'future.intro': '[ Вводный абзац о будущем и футуризме. ]',
-    'future.s1': 'Технологическое ускорение', 'future.s1.heading': 'Насколько быстро?',
-    'future.s2': 'Траектории цивилизации', 'future.s2.heading': 'Какое будущее возможно?',
-    'future.s3': 'Джокеры',
-    'life.title': 'Жить дольше,\nжить хорошо',
-    'life.intro': '[ Вводный абзац о лонджевити. ]',
-    'life.s1': 'Биология старения', 'life.s1.heading': 'Почему мы стареем?',
-    'life.s2': 'Интервенции', 'life.s2.heading': 'Что можно делать сегодня?',
-    'life.s3': 'Этика и общество',
-    'about.title': 'О сайте',
-    'about.p1': '[ Ваш вводный абзац — кто вы, о чём этот сайт, зачем вы его создали. ]',
-    'about.p2': '[ Второй абзац о вашем опыте, взглядах или мотивации. ]',
-    'about.p3': '[ Контакты, ссылки или заключительная мысль. ]',
+    'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Лонджевити','nav.about':'О сайте',
+    'home.label':'ДЕМО ВЕРСИЯ',
+    'home.title':'О вещах, которые<br><em>правда</em><br>важны.',
+    'home.desc':'Получите доступ к ответам на все вопросы, которые у вас могли возникнуть при погружении в тему продления жизни, ИИ рисков и будущего.',
+    'card.life.desc':'Наука и философия продления здоровой человеческой жизни — и почему это важнее, чем кажется.',
+    'card.ai.desc':'Что может пойти не так по мере того, как ИИ становится мощнее — и что с этим можно сделать.',
+    'card.future.desc':'Долгосрочные размышления о технологиях, цивилизации и выборах, формирующих следующее столетие.',
+    'card.read':'Читать →','card.soon':'Скоро',
+    'footer.text':'Независимый проект. Без рекламы. Без слежки.','footer.made':'Сделано с любопытством.',
   },
   ua: {
-    'nav.home': 'Головна',
-    'nav.ai': 'Ризики ШІ',
-    'nav.future': 'Майбутнє',
-    'nav.life': 'Лонджевіті',
-    'nav.about': 'Про сайт',
-    'home.label': 'ДЕМО ВЕРСІЯ',
-    'home.title': 'Про речі, які<br><em>дійсно</em><br>важливі.',
-    'home.desc': 'Отримайте відповіді на всі питання, які могли у вас виникнути при зануренні в теми продовження життя, ризиків ШІ та майбутнього.',
-    'card.ai.desc': 'Що може піти не так у міру того, як ШІ стає потужнішим — і що з цим можна зробити.',
-    'card.future.desc': 'Довгострокові роздуми про технології, цивілізацію та вибори, що формують наступне сторіччя.',
-    'card.life.desc': 'Наука і філософія продовження здорового людського життя — і чому це важливіше, ніж здається.',
-    'card.read': 'Читати →',
-    'card.soon': 'Незабаром',
-    'footer.text': 'Незалежний проект. Без реклами. Без стеження.',
-    'sidebar.sections': 'Розділи',
-    'sidebar.resources': 'Ресурси',
-    'placeholder': '[ Ваш текст тут. Замініть цей блок своїм. ]',
-    'ai.title': 'Штучний інтелект\nта його ризики',
-    'ai.intro': '[ Вступний абзац про ризики ШІ. ]',
-    'ai.s1': 'Проблема вирівнювання', 'ai.s1.heading': 'Чому це складно',
-    'ai.s2': 'Екзистенційний ризик', 'ai.s2.heading': 'Довгострокові ставки',
-    'ai.s3': 'Короткострокові загрози', 'ai.s4': 'Що робити',
-    'future.title': 'Обриси\nгрядущого',
-    'future.intro': '[ Вступний абзац про майбутнє і футуризм. ]',
-    'future.s1': 'Технологічне прискорення', 'future.s1.heading': 'Наскільки швидко?',
-    'future.s2': 'Траєкторії цивілізації', 'future.s2.heading': 'Яке майбутнє можливе?',
-    'future.s3': 'Джокери',
-    'life.title': 'Жити довше,\nжити добре',
-    'life.intro': '[ Вступний абзац про лонджевіті. ]',
-    'life.s1': 'Біологія старіння', 'life.s1.heading': 'Чому ми старіємо?',
-    'life.s2': 'Інтервенції', 'life.s2.heading': 'Що можна робити сьогодні?',
-    'life.s3': 'Етика та суспільство',
-    'about.title': 'Про сайт',
-    'about.p1': '[ Ваш вступний абзац — хто ви, про що цей сайт, навіщо ви його створили. ]',
-    'about.p2': '[ Другий абзац про ваш досвід, погляди або мотивацію. ]',
-    'about.p3': "[ Контакти, посилання або заключна думка. ]",
+    'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Лонджевіті','nav.about':'Про сайт',
+    'home.label':'ДЕМО ВЕРСІЯ',
+    'home.title':'Про речі, які<br><em>дійсно</em><br>важливі.',
+    'home.desc':'Отримайте відповіді на всі питання, які могли у вас виникнути при зануренні в теми продовження життя, ризиків ШІ та майбутнього.',
+    'card.life.desc':'Наука і філософія продовження здорового людського життя — і чому це важливіше, ніж здається.',
+    'card.ai.desc':'Що може піти не так у міру того, як ШІ стає потужнішим — і що з цим можна зробити.',
+    'card.future.desc':'Довгострокові роздуми про технології, цивілізацію та вибори, що формують наступне сторіччя.',
+    'card.read':'Читати →','card.soon':'Незабаром',
+    'footer.text':'Незалежний проект. Без реклами. Без стеження.','footer.made':'Зроблено з цікавістю.',
   }
 };
 
-let currentLang = 'en';
+let currentLang = localStorage.getItem('lang') || 'en';
+applyLang(currentLang);
 
-function setLang(lang) {
-  currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.toLowerCase() === lang);
-  });
+function applyLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (translations[lang][key]) el.textContent = translations[lang][key];
+    if (translations[lang][el.getAttribute('data-i18n')]) el.textContent = translations[lang][el.getAttribute('data-i18n')];
   });
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    const key = el.getAttribute('data-i18n-html');
-    if (translations[lang][key]) el.innerHTML = translations[lang][key];
+    if (translations[lang][el.getAttribute('data-i18n-html')]) el.innerHTML = translations[lang][el.getAttribute('data-i18n-html')];
   });
+  document.getElementById('langCurrent').textContent = lang.toUpperCase();
+  document.querySelectorAll('.lang-option').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
+  document.querySelectorAll('.drawer-lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
 }
 
-// ── Navigation ─────────────────────────────────────────────────────────────
-const topicPages = ['ai', 'future', 'life'];
-
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-  const page = document.getElementById('page-' + name);
-  if (page) { page.classList.add('active'); window.scrollTo(0,0); }
-  const navEl = document.getElementById('nav-' + name);
-  if (navEl) navEl.classList.add('active');
-
-  // Show/hide the correct TOC
-  document.querySelectorAll('.toc-block').forEach(t => t.style.display = 'none');
-  if (topicPages.includes(name)) {
-    const toc = document.getElementById('toc-' + name);
-    if (toc) toc.style.display = 'block';
-  }
-  return false;
+function selectLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  applyLang(lang);
+  document.getElementById('langSwitcher').classList.remove('open');
 }
 
-// Prevent default on all nav links
-document.querySelectorAll('nav a, .topic-card, .card-link').forEach(el => {
-  el.addEventListener('click', e => e.preventDefault());
+document.getElementById('langCurrent').addEventListener('click', e => {
+  e.stopPropagation();
+  document.getElementById('langSwitcher').classList.toggle('open');
 });
+document.addEventListener('click', () => document.getElementById('langSwitcher').classList.remove('open'));
+
+function toggleDrawer() {
+  const open = document.getElementById('mobileDrawer').classList.toggle('open');
+  document.getElementById('burger').classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
 </script>
 </body>
 </html>
