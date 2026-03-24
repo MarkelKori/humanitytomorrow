@@ -44,6 +44,49 @@
   footer span{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;color:var(--ink2);}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
   @media(max-width:768px){nav{padding:16px 20px;}.nav-links{display:none;}.burger{display:flex;}.mobile-drawer{display:flex;}.about-layout{padding:100px 20px 60px;}footer{padding:24px 20px;flex-direction:column;gap:8px;}}
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position: fixed; bottom: 32px; right: 32px; z-index: 80;
+    width: 40px; height: 40px;
+    background: var(--ink); color: var(--bg);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    font-size: 1.1rem; line-height: 1;
+  }
+  .back-top.visible { opacity: 1; pointer-events: auto; }
+  .back-top:hover { transform: translateY(-3px); }
+
+  /* ── QR ── */
+  .qr-overlay {
+    display: none; position: fixed; inset: 0; z-index: 300;
+    background: rgba(26,24,20,0.5); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .qr-overlay.open { display: flex; }
+  .qr-panel {
+    background: var(--bg); padding: 40px 48px; text-align: center;
+    max-width: 300px; width: 88%; position: relative;
+    animation: fadeUp 0.28s ease both;
+  }
+  .qr-panel img { width: 190px; height: 190px; display: block; margin: 0 auto 20px; image-rendering: pixelated; }
+  .qr-share-text { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2); margin-bottom: 6px; }
+  .qr-url { font-family: var(--mono); font-size: 0.68rem; color: var(--ink); opacity: 0.4; }
+  .qr-close { position: absolute; top: 12px; right: 16px; font-size: 1.3rem; background: none; border: none; cursor: pointer; color: var(--ink2); line-height: 1; padding: 4px; }
+  .drawer-qr-row { padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .drawer-qr-btn {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 7px 20px;
+    border: 1px solid var(--border); background: transparent; color: var(--ink2);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .drawer-qr-btn:hover { color: var(--ink); border-color: var(--ink); }
+
+  @media (max-width: 768px) {
+    .back-top { bottom: 20px; right: 20px; width: 36px; height: 36px; }
+  }
 </style>
 </head>
 <body>
@@ -74,10 +117,11 @@
   <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
   <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
   <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
+  <div class="drawer-qr-row"><button class="drawer-qr-btn" onclick="openQR()">QR</button></div>
   <div class="drawer-lang">
     <p class="drawer-lang-label">Language</p>
     <div class="drawer-lang-btns">
-      <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>\
+      <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>
       <button class="drawer-lang-btn" onclick="selectLang('ua')">UA</button>
       <button class="drawer-lang-btn" onclick="selectLang('ru')">RU</button>
     </div>
@@ -101,6 +145,35 @@ document.getElementById('langCurrent').addEventListener('click',e=>{e.stopPropag
 document.addEventListener('click',()=>document.getElementById('langSwitcher').classList.remove('open'));
 function toggleDrawer(){const open=document.getElementById('mobileDrawer').classList.toggle('open');document.getElementById('burger').classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
 applyLang(currentLang);
+</script>
+
+<!-- Back to top -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- QR overlay -->
+<div class="qr-overlay" id="qrOverlay">
+  <div class="qr-panel">
+    <button class="qr-close" onclick="document.getElementById('qrOverlay').classList.remove('open')">×</button>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAEICAIAAAAslP2oAAAFGklEQVR4nO3dQWolNxRA0ThkKwnZ/2pCsgWPDJ5nkFHg1kCgh1Td5wwbd1V9978ISi3p4/vr8xfg/349/QBwI2FAEAYEYUAQBgRhQBAGBGFAEAYEYUAQBgRhQBAGBGFAEAaE31b/wu9//DnxHNv98/df+eerz796naefX/WjPucpq5/XiAFBGBCEAUEYEIQBQRgQhAFheR7jya734qum3/evXn/Xe/3p55z2lu/DEyMGBGFAEAYEYUAQBgRhQBAGhG3zGE+m3+uv2jXvscv0vMTq879l/cb0v4sRA4IwIAgDgjAgCAOCMCAIA8L4PMZtdr3Xn77vruecnpf4URkxIAgDgjAgCAOCMCAIA4IwIPx08xhPptdp7Nqfano+xPzGf4wYEIQBQRgQhAFBGBCEAUEYEMbnMW57L746P7BrncOpdSC3rce47fvwxIgBQRgQhAFBGBCEAUEYEIQBYds8xm3nTE9bnfe47eef7Jr3ePv3wYgBQRgQhAFBGBCEAUEYEIQB4eP76/P0M7zSrn2ops/fuO1c87cwYkAQBgRhQBAGBGFAEAYEYUBYXo8xvX5g1/M8mX7fv7oP1er132J6Xcf0982IAUEYEIQBQRgQhAFBGBCEAeHY+Rin1iFM73c0/XmfnDr340f9fRoxIAgDgjAgCAOCMCAIA4IwIBw7H+PUeRHTTq1D2PV5V69z6tyM6fkNIwYEYUAQBgRhQBAGBGFAEAaE5fMx3rI/0lvO277t9/Nk+nPd9vsxYkAQBgRhQBAGBGFAEAYEYUBYXo+x6//Bn9qPaNfPT5ueL5pez3BqPYnzMWCQMCAIA4IwIAgDgjAgCAPC+Dnfu9y2f9HqfU/NM0zPF53ifAw4QBgQhAFBGBCEAUEYEIQBYXw9xq7/fz+9PmHXuder139yan3IW/aPcj4GHCAMCMKAIAwIwoAgDAjCgLDtnO8nbzlHYnr9w+r1T+27Nb2v1LRd3xMjBgRhQBAGBGFAEAYEYUAQBoTxeYxVu96vT7+nX3VqPcb0dW5bZ+J8DBgkDAjCgCAMCMKAIAwIwoAwPo9x27kZb1nXsWrXOpDV6087dV8jBgRhQBAGBGFAEAYEYUAQBoRt53zfdp1d8xWn9sV6y7kc0/Mnp853N2JAEAYEYUAQBgRhQBAGBGFA+Pj++jxy4+n5gV3vs09df5dTz3nqnJNdjBgQhAFBGBCEAUEYEIQBQRgQlucxTp1Tcdv5DLfNw0x/rlNOnQdvxIAgDAjCgCAMCMKAIAwIwoBwbD3GKaf2idrl1PzJbfMk089vxIAgDAjCgCAMCMKAIAwIwoBw7HyMabveu596f/+WfZx23fe2/aaMGBCEAUEYEIQBQRgQhAFBGBCW5zGe3LY+4cmpc7JX1w/c9rl23fctjBgQhAFBGBCEAUEYEIQBQRgQts1jPHnL+/Lb9lOaPl981fR9b1vXYcSAIAwIwoAgDAjCgCAMCMKAMD6P8RZvWVdwar+s6XPKV+/7xDwGDBIGBGFAEAYEYUAQBgRhQPjp5jFOvY9fdep87ul1EdPP6ZxvGCQMCMKAIAwIwoAgDAjCgDA+j3HbOofp9QzT+0fdNg+z+jy75jemv1dGDAjCgCAMCMKAIAwIwoAgDAjb5jFOrVtY9Zb9jqbnJU7tB/WWc06MGBCEAUEYEIQBQRgQhAFBGBA+vr8+Tz8DXMeIAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQB4V9KszKQdzBN1QAAAABJRU5ErkJggg==" alt="QR">
+    <p class="qr-share-text" id="qrShareText">Share the knowledge</p>
+    <p class="qr-url">humanitytomorrow.site</p>
+  </div>
+</div>
+
+<script>
+// Back to top
+window.addEventListener('scroll', () => {
+  document.getElementById('backTop').classList.toggle('visible', window.scrollY > 400);
+});
+// QR
+const qrTexts = { en: 'Share the knowledge', ru: 'Поделись знаниями', ua: 'Поділися знаннями' };
+function openQR() {
+  document.getElementById('qrShareText').textContent = qrTexts[currentLang] || qrTexts.en;
+  document.getElementById('qrOverlay').classList.add('open');
+}
+document.getElementById('qrOverlay').addEventListener('click', function(e) {
+  if (e.target === this) this.classList.remove('open');
+});
 </script>
 </body>
 </html>
