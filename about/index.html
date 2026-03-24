@@ -51,7 +51,7 @@
   <a class="nav-logo" href="/">Humanity Tomorrow</a>
   <ul class="nav-links">
     <li><a href="/" data-i18n="nav.home">Home</a></li>
-    <li><a href="/longevity/" data-i18n="nav.life">Longevity</a></li>
+    <li><a href="/longevity/" data-i18n="nav.life">Immortalism</a></li>
     <li><a class="dimmed" data-i18n="nav.ai">AI Risks</a></li>
     <li><a class="dimmed" data-i18n="nav.future">Future</a></li>
     <li><a href="/about/" class="active" data-i18n="nav.about">About</a></li>
@@ -60,8 +60,8 @@
         <div class="lang-current" id="langCurrent">EN</div>
         <div class="lang-dropdown">
           <button class="lang-option active" onclick="selectLang('en')">EN</button>
-          <button class="lang-option" onclick="selectLang('ru')">RU</button>
           <button class="lang-option" onclick="selectLang('ua')">UA</button>
+          <button class="lang-option" onclick="selectLang('ru')">RU</button>
         </div>
       </div>
     </li>
@@ -70,16 +70,16 @@
 </nav>
 <div class="mobile-drawer" id="mobileDrawer">
   <a class="drawer-link" href="/" data-i18n="nav.home">Home</a>
-  <a class="drawer-link" href="/longevity/" data-i18n="nav.life">Longevity</a>
+  <a class="drawer-link" href="/longevity/" data-i18n="nav.life">Immortalism</a>
   <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
   <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
   <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
   <div class="drawer-lang">
     <p class="drawer-lang-label">Language</p>
     <div class="drawer-lang-btns">
-      <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>
-      <button class="drawer-lang-btn" onclick="selectLang('ru')">RU</button>
+      <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>\
       <button class="drawer-lang-btn" onclick="selectLang('ua')">UA</button>
+      <button class="drawer-lang-btn" onclick="selectLang('ru')">RU</button>
     </div>
   </div>
 </div>
@@ -90,8 +90,7 @@
   <p data-i18n="about.p3">[ Contact info, links, or a closing thought. ]</p>
 </div>
 <footer>
-  <span data-i18n="footer.text">An independent project. No ads. No tracking.</span>
-  <span data-i18n="footer.made">Made with curiosity.</span>
+  <span data-i18n="footer.text">© Humanity Tomorrow 2026</span>
 </footer>
 <script>
 const translations={en:{'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Longevity','nav.about':'About','about.title':'About this site','about.p1':'[ Your opening paragraph — who you are, what this site is about, why you built it. ]','about.p2':'[ A second paragraph about your background, perspective, or motivations. ]','about.p3':'[ Contact info, links, or a closing thought. ]','footer.text':'An independent project. No ads. No tracking.','footer.made':'Made with curiosity.'},ru:{'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Лонджевити','nav.about':'О сайте','about.title':'О сайте','about.p1':'[ Ваш вводный абзац. ]','about.p2':'[ Второй абзац. ]','about.p3':'[ Контакты. ]','footer.text':'Независимый проект. Без рекламы. Без слежки.','footer.made':'Сделано с любопытством.'},ua:{'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Лонджевіті','nav.about':'Про сайт','about.title':'Про сайт','about.p1':'[ Ваш вступний абзац. ]','about.p2':'[ Другий абзац. ]','about.p3':'[ Контакти. ]','footer.text':'Незалежний проект. Без реклами. Без стеження.','footer.made':'Зроблено з цікавістю.'}};
