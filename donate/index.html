@@ -31,7 +31,8 @@
   .lang-current:hover { color: var(--ink); border-color: var(--ink); }
   .lang-dropdown { display: none; position: absolute; top: calc(100% + 6px); right: 0; background: var(--bg); border: 1px solid var(--border); min-width: 72px; z-index: 200; }
   .lang-switcher.open .lang-dropdown { display: block; }
-  .lang-option { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 12px; color: var(--ink2); cursor: pointer; display: block; width: 100%; background: transparent; border: none; text-align: left; transition: background 0.15s; }
+  .lang-option { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 12px; color: var(--ink2); cursor: pointer; display: block; width: 100%; background: transparent; border: none; text-align: left; transition: background 0.15s, opacity 0.22s ease;
+  will-change: opacity; }
   .lang-option:hover { background: var(--bg2); color: var(--ink); }
   .lang-option.active { color: var(--ink); }
   .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
@@ -54,9 +55,10 @@
   .drawer-qr-btn:hover { color: var(--ink); border-color: var(--ink); }
 
   .page-header { padding: 140px 48px 56px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+  .page-header-inner { max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; }
   .page-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border: 1px solid var(--accent); color: var(--accent); display: inline-block; margin-bottom: 24px; }
-  .page-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px; }
-  .page-intro { font-size: 1rem; color: var(--ink2); max-width: 520px; line-height: 1.75; }
+  .page-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px; text-align: center; width: 100%; }
+  .page-intro { font-size: 1rem; color: var(--ink2); max-width: 520px; line-height: 1.75; margin: 0 auto; text-align: center; }
 
   .donate-layout { max-width: 860px; margin: 0 auto; padding: 64px 48px 100px; }
   .section-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2); opacity: 0.6; margin-bottom: 20px; }
@@ -87,8 +89,10 @@
   .crypto-card { background: var(--bg); padding: 40px 36px; }
   .crypto-name { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2); opacity: 0.6; margin-bottom: 10px; }
   .crypto-currency { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; color: var(--ink); margin-bottom: 20px; }
-  .crypto-address { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em; color: var(--ink2); background: var(--bg2); padding: 10px 14px; border: 1px solid var(--border); word-break: break-all; line-height: 1.6; margin-bottom: 24px; cursor: pointer; transition: background 0.15s; display: block; position: relative; }
+  .crypto-address { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.02em; color: var(--ink2); background: var(--bg2); padding: 10px 14px; border: 1px solid var(--border); word-break: break-all; line-height: 1.6; margin-bottom: 24px; cursor: pointer; transition: background 0.15s, opacity 0.22s ease;
+  will-change: opacity; display: block; position: relative; }
   .crypto-address:hover { background: #e5e1d8; }
+  .crypto-address.is-fading { opacity: 0; }
   .crypto-qr { width: 140px; height: 140px; display: block; image-rendering: pixelated; border: 1px solid var(--border); }
   .copy-hint { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); opacity: 0.4; margin-top: 8px; margin-bottom: 0; }
 
@@ -170,9 +174,11 @@
 </div>
 
 <div class="page-header">
-  <span class="page-tag" data-i18n="nav.donate">Donate</span>
-  <h1 class="page-title" data-i18n="donate.title">Support the work</h1>
-  <p class="page-intro" data-i18n="donate.intro">This site is independent and free. If you find it valuable, consider supporting its development.</p>
+  <div class="page-header-inner">
+    <span class="page-tag" data-i18n="nav.donate">Donate</span>
+    <h1 class="page-title" data-i18n="donate.title">Support the work</h1>
+    <p class="page-intro" data-i18n="donate.intro">This site is independent and free. If you find it valuable, consider supporting its development.</p>
+  </div>
 </div>
 
 <div class="donate-layout">
@@ -341,10 +347,33 @@ function selectAmount(btn) {
 }
 function copyAddr(id, addr) {
   const el = document.getElementById(id);
+  const fadeMs = 220;
+  const showMs = 1500;
   navigator.clipboard.writeText(addr).then(() => {
-    const orig = el.textContent;
-    el.textContent = '✓ Copied';
-    setTimeout(() => el.textContent = orig, 1800);
+    if (!el.dataset.originalText) el.dataset.originalText = el.textContent;
+    if (el._copiedTimeout) clearTimeout(el._copiedTimeout);
+    if (el._restoreTimeout) clearTimeout(el._restoreTimeout);
+    if (el._swapTimeout) clearTimeout(el._swapTimeout);
+
+    const fadeSwap = (nextText) => {
+      el.classList.add('is-fading');
+      el._swapTimeout = setTimeout(() => {
+        el.textContent = nextText;
+        el.classList.remove('is-fading');
+        el._swapTimeout = null;
+      }, fadeMs);
+    };
+
+    fadeSwap('✓ Copied');
+    el._copiedTimeout = setTimeout(() => {
+      el.classList.add('is-fading');
+      el._restoreTimeout = setTimeout(() => {
+        el.textContent = el.dataset.originalText;
+        el.classList.remove('is-fading');
+        el._restoreTimeout = null;
+      }, fadeMs);
+      el._copiedTimeout = null;
+    }, showMs);
   });
 }
 window.addEventListener('scroll', () => {
