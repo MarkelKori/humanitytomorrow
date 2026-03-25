@@ -49,10 +49,10 @@
   /* ── MOBILE DRAWER ── */
   .mobile-drawer { display: none; position: fixed; top: 61px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; padding: 40px 32px; flex-direction: column; overflow-y: auto; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
   .mobile-drawer.open { transform: translateX(0); }
-  .drawer-link { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--ink); text-decoration: none; padding: 16px 0; border-bottom: 1px solid var(--border); display: block; background: none; border-top: none; border-left: none; border-right: none; width: 100%; text-align: left; cursor: pointer; transition: color 0.2s; }
+  .drawer-link { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--ink); text-decoration: none; padding: 16px 0;  display: block; background: none; border-top: none; border-left: none; border-right: none; width: 100%; text-align: left; cursor: pointer; transition: color 0.2s; }
   .drawer-link:hover { color: var(--ink2); }
   .drawer-link.dimmed { opacity: 0.35; cursor: default; }
-  .drawer-lang { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+  
   .drawer-lang-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink2); opacity: 0.5; margin-bottom: 16px; }
   .drawer-lang-btns { display: flex; gap: 8px; }
   .drawer-lang-btn { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border: 1px solid var(--border); background: transparent; color: var(--ink2); cursor: pointer; transition: all 0.2s; }
@@ -163,6 +163,17 @@
 
   .drawer-lang-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
   .drawer-lang-header .drawer-lang-label { margin-bottom: 0; }
+
+  /* ── DRAWER CLEAN SEPARATORS ── */
+  .mobile-drawer { gap: 0; }
+  .drawer-link { border-top: none; border-left: none; border-right: none; border-bottom: 1px solid var(--border); }
+  .drawer-link:last-of-type { border-bottom: none; }
+  .drawer-lang { padding-top: 24px; }
+  .drawer-lang-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .drawer-lang-header .drawer-lang-label { margin-bottom: 0; }
+  .drawer-lang-row { display: flex; align-items: center; gap: 8px; }
+  .drawer-lang-row .drawer-lang-btn { flex-shrink: 0; }
+  .drawer-lang-row .drawer-qr-btn { margin-left: auto; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -198,12 +209,13 @@
   <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
   <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
   <div class="drawer-lang">
-    <div class="drawer-lang-header"><p class="drawer-lang-label">Language</p><button class="drawer-qr-btn" onclick="openQR()">QR</button></div>
-    <div class="drawer-lang-btns">
+    <p class="drawer-lang-label">Language</p>
+    <div class="drawer-lang-row">
       <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>
       <button class="drawer-lang-btn" onclick="selectLang('ua')">UA</button>
       <button class="drawer-lang-btn" onclick="selectLang('ru')">RU</button>
     </div>
+    <!-- qr already added above -->
   </div>
 </div>
 
