@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMUExODE0Ii8+CiAgPHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRjVGMkVDIiBzdHJva2Utd2lkdGg9IjAuNiIgb3BhY2l0eT0iMC4yNSIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMy41IgogICAgZm9udC1mYW1pbHk9Ikdlb3JnaWEsICdUaW1lcyBOZXcgUm9tYW4nLCBzZXJpZiIKICAgIGZvbnQtc2l6ZT0iMjEiCiAgICBmb250LXN0eWxlPSJpdGFsaWMiCiAgICBmb250LXdlaWdodD0iNDAwIgogICAgZmlsbD0iI0Y1RjJFQyIKICAgIHRleHQtYW5jaG9yPSJtaWRkbGUiPkg8L3RleHQ+Cjwvc3ZnPg==">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMUExODE0Ii8+CiAgPHJlY3QgeD0iMS41IiB5PSIxLjUiIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRjVGMkVDIiBzdHJva2Utd2lkdGg9IjAuNiIgb3BhY2l0eT0iMC4yNSIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMy41IgogICAgZm9udC1mYW1pbHk9Ikdlb3JnaWEsICdUaW1lcyBOZXcgUm9tYW4nLCBzZXJpZiIKICAgIGZvbnQtc2l6ZT0iMjEiCiAgICBmb250LXN0eWxlPSJpdGFsaWMiCiAgICBmb250LXdlaWdodD0iNDAwIgogICAgZmlsbD0iI0Y1RjJFQyIKICAgIHRleHQtYW5jaG9yPSJtaWRkbGUiPkg8L3RleHQ+Cjwvc3ZnPg==">
 <title>Immortalism — Humanity Tomorrow</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -146,7 +148,7 @@
   .qr-share-text { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2); margin-bottom: 6px; }
   .qr-url { font-family: var(--mono); font-size: 0.68rem; color: var(--ink); opacity: 0.4; }
   .qr-close { position: absolute; top: 12px; right: 16px; font-size: 1.3rem; background: none; border: none; cursor: pointer; color: var(--ink2); line-height: 1; padding: 4px; }
-  .drawer-qr-row { padding: 16px 0; border-bottom: 1px solid var(--border); }
+  
   .drawer-qr-btn {
     font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
     text-transform: uppercase; padding: 7px 20px;
@@ -158,6 +160,9 @@
   @media (max-width: 768px) {
     .back-top { bottom: 20px; right: 20px; width: 36px; height: 36px; }
   }
+
+  .drawer-lang-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .drawer-lang-header .drawer-lang-label { margin-bottom: 0; }
 </style>
 </head>
 <body>
@@ -192,9 +197,8 @@
   <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
   <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
   <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
-  <div class="drawer-qr-row"><button class="drawer-qr-btn" onclick="openQR()">QR</button></div>
   <div class="drawer-lang">
-    <p class="drawer-lang-label">Language</p>
+    <div class="drawer-lang-header"><p class="drawer-lang-label">Language</p><button class="drawer-qr-btn" onclick="openQR()">QR</button></div>
     <div class="drawer-lang-btns">
       <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>
       <button class="drawer-lang-btn" onclick="selectLang('ua')">UA</button>
