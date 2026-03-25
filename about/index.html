@@ -133,6 +133,7 @@
   <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
   <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
   <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
+  <a class="drawer-link" href="/donate/" data-i18n="nav.donate">Donate</a>
   <div class="drawer-lang">
     <p class="drawer-lang-label">Language</p>
     <div class="drawer-lang-row">
@@ -153,7 +154,7 @@
   <span data-i18n="footer.text">© Humanity Tomorrow 2026</span>
 </footer>
 <script>
-const translations={en:{'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.about':'About','about.title':'About this site','about.p1':'[ Your opening paragraph — who you are, what this site is about, why you built it. ]','about.p2':'[ A second paragraph about your background, perspective, or motivations. ]','about.p3':'[ Contact info, links, or a closing thought. ]','footer.text':'© 2026 Humanity Tomorrow'},ru:{'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.about':'О сайте','about.title':'О сайте','about.p1':'[ Ваш вводный абзац. ]','about.p2':'[ Второй абзац. ]','about.p3':'[ Контакты. ]','footer.text':'© 2026 Humanity Tomorrow'},ua:{'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.about':'Про сайт','about.title':'Про сайт','about.p1':'[ Ваш вступний абзац. ]','about.p2':'[ Другий абзац. ]','about.p3':'[ Контакти. ]','footer.text':'© 2026 Humanity Tomorrow'}};
+const translations={en:{'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.about':'About','nav.donate':'Donate','about.title':'About this site','about.p1':'[ Your opening paragraph — who you are, what this site is about, why you built it. ]','about.p2':'[ A second paragraph about your background, perspective, or motivations. ]','about.p3':'[ Contact info, links, or a closing thought. ]','footer.text':'© 2026 Humanity Tomorrow'},ru:{'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.about':'О сайте','nav.donate':'Поддержать','about.title':'О сайте','about.p1':'[ Ваш вводный абзац. ]','about.p2':'[ Второй абзац. ]','about.p3':'[ Контакты. ]','footer.text':'© 2026 Humanity Tomorrow'},ua:{'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.about':'Про сайт','nav.donate':'Підтримати','about.title':'Про сайт','about.p1':'[ Ваш вступний абзац. ]','about.p2':'[ Другий абзац. ]','about.p3':'[ Контакти. ]','footer.text':'© 2026 Humanity Tomorrow'}};
 let currentLang=localStorage.getItem('lang')||'en';
 function applyLang(lang){document.querySelectorAll('[data-i18n]').forEach(el=>{if(translations[lang][el.getAttribute('data-i18n')])el.textContent=translations[lang][el.getAttribute('data-i18n')];});document.getElementById('langCurrent').textContent=lang.toUpperCase();document.querySelectorAll('.lang-option').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang));document.querySelectorAll('.drawer-lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang));}
 function selectLang(lang){currentLang=lang;localStorage.setItem('lang',lang);applyLang(lang);document.getElementById('langSwitcher').classList.remove('open');}
