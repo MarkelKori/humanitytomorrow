@@ -605,7 +605,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Second, aging is unlikely to be solved by one single remedy. It is too complex a problem for there to be one universal panacea. By the time intervention 2 appears, intervention 1 will already have every chance of becoming widely available.'
+                text: 'Second, aging is unlikely to be solved by one single remedy. It is too complex a problem for there to be one universal panacea. By the time intervention 2 appears, intervention 1 will already have every chance of becoming widely available. By the way, this gradual emergence of drugs, which will ultimately lead to immortality, is called the aging escape velocity.'
               },
               {
                 type: 'paragraph',
