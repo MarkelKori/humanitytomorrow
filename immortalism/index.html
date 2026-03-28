@@ -310,6 +310,10 @@
     .content-layout { padding: 32px 20px 60px; }
     .toc-shell { position: static; top: auto; }
     .toc-block { max-height: none; overflow: visible; }
+    .topic-intro { font-size: 1rem; }
+    .content-paragraph { font-size: 1.055rem; }
+    .content-subheading { font-size: 0.925rem; }
+    .article-quote blockquote { font-size: 1.025rem; }
     footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
     .site-note { max-width: none; }
   }
@@ -1168,9 +1172,6 @@ selectLang = function(lang) {
   renderFaqPage(currentLang);
   updateLangButtons(currentLang);
   document.getElementById('langSwitcher').classList.remove('open');
-  document.getElementById('mobileDrawer').classList.remove('open');
-  document.getElementById('burger').classList.remove('open');
-  document.body.style.overflow = '';
   updateActiveTocState();
 };
 
