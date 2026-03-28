@@ -63,17 +63,6 @@
   .donate-layout { max-width: 860px; margin: 0 auto; padding: 64px 48px 100px; }
   .section-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2); opacity: 0.6; margin-bottom: 20px; }
 
-  /* Amount */
-  .amount-section { margin-bottom: 64px; }
-  .amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .amount-btn { background: var(--bg); padding: 24px 20px; cursor: pointer; border: none; text-align: left; transition: background 0.2s; position: relative; overflow: hidden; }
-  .amount-btn::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
-  .amount-btn:hover { background: var(--bg2); }
-  .amount-btn:hover::before, .amount-btn.selected::before { transform: scaleX(1); }
-  .amount-btn.selected { background: var(--bg2); }
-  .amount-num { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; color: var(--accent); display: block; margin-bottom: 4px; }
-  .amount-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); }
-
   /* Payment */
   .payment-section { margin-bottom: 64px; }
   .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
@@ -120,7 +109,6 @@
     .mobile-drawer { display: flex; }
     .page-header { padding: 100px 20px 40px; }
     .donate-layout { padding: 40px 20px 80px; }
-    .amount-grid { grid-template-columns: repeat(2, 1fr); }
     .payment-grid { grid-template-columns: 1fr; }
     .crypto-grid { grid-template-columns: 1fr; }
     footer { padding: 24px 20px; flex-direction: column; gap: 8px; }
@@ -183,39 +171,17 @@
 
 <div class="donate-layout">
 
-  <div class="amount-section">
-    <p class="section-label" data-i18n="donate.choose">Choose an amount</p>
-    <div class="amount-grid">
-      <button class="amount-btn" onclick="selectAmount(this)">
-        <span class="amount-num">$10</span>
-        <span class="amount-label" data-i18n="donate.amt.s">Small support</span>
-      </button>
-      <button class="amount-btn selected" onclick="selectAmount(this)">
-        <span class="amount-num">$25</span>
-        <span class="amount-label" data-i18n="donate.amt.m">Recommended</span>
-      </button>
-      <button class="amount-btn" onclick="selectAmount(this)">
-        <span class="amount-num">$100</span>
-        <span class="amount-label" data-i18n="donate.amt.l">Generous</span>
-      </button>
-      <button class="amount-btn" onclick="selectAmount(this)">
-        <span class="amount-num" data-i18n="donate.amt.custom">Custom</span>
-        <span class="amount-label" data-i18n="donate.amt.any">Any amount</span>
-      </button>
-    </div>
-  </div>
-
   <div class="payment-section">
     <p class="section-label" data-i18n="donate.method">Payment method</p>
     <div class="payment-grid">
-      <button class="payment-btn" onclick="alert('PayPal — coming soon')">
+      <button class="payment-btn" onclick="window.open('https://www.paypal.com/paypalme/markelkori', '_blank', 'noopener,noreferrer')">
         <span class="payment-icon">P</span>
         <div>
           <p class="payment-name">PayPal</p>
           <p class="payment-desc" data-i18n="donate.paypal.desc">Fast &amp; secure</p>
         </div>
       </button>
-      <button class="payment-btn" onclick="alert('Bank transfer — coming soon')">
+      <button class="payment-btn" onclick="window.open('https://buy.stripe.com/8x228lg2n2k1c007rLdIA00', '_blank', 'noopener,noreferrer')">
         <span class="payment-icon">⊟</span>
         <div>
           <p class="payment-name" data-i18n="donate.bank">Bank transfer</p>
@@ -341,10 +307,6 @@ function toggleDrawer() {
   const open = document.getElementById('mobileDrawer').classList.toggle('open');
   document.getElementById('burger').classList.toggle('open', open);
   document.body.style.overflow = open ? 'hidden' : '';
-}
-function selectAmount(btn) {
-  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
 }
 function copyAddr(id, addr) {
   const el = document.getElementById(id);
