@@ -84,7 +84,16 @@
   .section-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 60px; }
   .section-heading { font-family: var(--serif); font-size: 1.7rem; font-weight: 400; line-height: 1.25; margin-bottom: 20px; letter-spacing: -0.01em; }
-  .placeholder-text { background: var(--bg2); border-left: 2px solid var(--border); padding: 16px 20px; font-size: 0.85rem; color: var(--ink2); font-style: italic; margin-bottom: 16px; line-height: 1.6; }
+  .placeholder-text {
+  background: none;
+  border-left: none;
+  padding: 0;
+  font-size: 1rem;
+  color: inherit;
+  font-style: normal;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
 
   /* ── BLOCKQUOTE ── */
   .article-quote { margin: 28px 0; padding: 0 0 0 20px; border-left: 2px solid var(--border); }
