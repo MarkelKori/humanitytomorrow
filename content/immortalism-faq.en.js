@@ -109,7 +109,25 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Scientists have already extended the lifespan of nematodes and yeast tenfold, fruit flies by 2.5 to 3.5 times, and mice by 1.8 times.'
+                text: 'Scientists have already extended the lifespan of nematodes[[note:nematodes-study]] and yeast[[note:yeast-study]] tenfold, fruit flies by ~2.5 to ~3.5 times[[note:fruit-flies-study]], and mice by ~1.7 times[[note:mice-study]].',
+                notes: [
+                  {
+                    id: 'nematodes-study',
+                    url: 'https://onlinelibrary.wiley.com/doi/10.1111/j.1474-9726.2007.00348.x'
+                  },
+                  {
+                    id: 'yeast-study',
+                    url: 'https://pubmed.ncbi.nlm.nih.gov/18225956/'
+                  },
+                  {
+                    id: 'fruit-flies-study',
+                    url: 'https://pubmed.ncbi.nlm.nih.gov/35681084/'
+                  },
+                  {
+                    id: 'mice-study',
+                    url: 'https://pubmed.ncbi.nlm.nih.gov/40848270/'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
@@ -256,7 +274,13 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Some substances, for example psilocybin or LSD, according to research, can already now positively shift openness to experience on the Big Five scale.'
+                text: 'Some substances, for example psilocybin or LSD, according to research, can already now positively shift openness to experience on the Big Five scale.[[note:psilocybin-openness]]',
+                notes: [
+                  {
+                    id: 'psilocybin-openness',
+                    url: 'https://pubmed.ncbi.nlm.nih.gov/21956378/'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
@@ -364,7 +388,14 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'quote',
-                text: 'Seriously, death as a motivator? Death does not even motivate people to quit smoking! Do people really believe everyone would just sit and watch TV if not for death? Oh wait, most people already do. What a motivator!'
+                text: 'Seriously, death as a motivator? Death does not even motivate people to quit smoking! Do people really believe everyone would just sit and watch TV if not for death? Oh wait, most people already do. What a motivator!',
+                appendNoteAtEnd: true,
+                notes: [
+                  {
+                    id: 'random-commenter-source',
+                    url: 'https://qr.ae/pCLZia'
+                  }
+                ]
               }
             ]
           },
@@ -472,7 +503,17 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Every day, all the wars in the world together kill eight hundred to one thousand times fewer people than aging. A lack of clean water kills roughly ten to thirty times fewer per day than aging. Hunger, a very serious problem, kills around five times fewer people than aging.'
+                text: 'Every day, all the wars in the world together kill eight hundred to one thousand times fewer people than aging. A lack of clean water kills roughly ten to thirty times fewer per day than aging.[[note:water-deaths]] Hunger, a very serious problem, kills around five times fewer people than aging.[[note:hunger-deaths]]',
+                notes: [
+                  {
+                    id: 'water-deaths',
+                    url: 'https://www.who.int/news-room/fact-sheets/detail/drinking-water'
+                  },
+                  {
+                    id: 'hunger-deaths',
+                    url: 'https://www.oxfam.org/en/press-releases/21000-people-are-dying-each-day-conflict-fuelled-hunger-around-world'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
@@ -641,7 +682,14 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'quote',
-                text: 'A significant part of the world\'s population still lives on the edge of hunger. They cannot afford clean drinking water and basic sanitation.\n\nBasic medical services that many of us take for granted are currently unavailable to a large portion of the world\'s population. This inequality has existed for thousands of years. Why should the appearance of some new technology challenge this reality any more than the discovery of antibiotics, water purification, or basic sanitation did?\n\nChildren still die every day from hunger or from simple curable diseases. Whether we are right, wrong, or indifferent, this is reality. We as a species failed to solve this problem in the past. But why should that somehow obstruct the progress of medical science? Why should I die earlier than I must because international inequality, which has existed since the birth of civilization, makes science morally incapable of seeking answers?\n\nAny argument that invokes the lack of global access to life-extension technologies as an obstacle to progress seems to me emotional and detached from reality.'
+                text: 'A significant part of the world\'s population still lives on the edge of hunger. They cannot afford clean drinking water and basic sanitation.\n\nBasic medical services that many of us take for granted are currently unavailable to a large portion of the world\'s population. This inequality has existed for thousands of years. Why should the appearance of some new technology challenge this reality any more than the discovery of antibiotics, water purification, or basic sanitation did?\n\nChildren still die every day from hunger or from simple curable diseases. Whether we are right, wrong, or indifferent, this is reality. We as a species failed to solve this problem in the past. But why should that somehow obstruct the progress of medical science? Why should I die earlier than I must because international inequality, which has existed since the birth of civilization, makes science morally incapable of seeking answers?\n\nAny argument that invokes the lack of global access to life-extension technologies as an obstacle to progress seems to me emotional and detached from reality.',
+                appendNoteAtEnd: true,
+                notes: [
+                  {
+                    id: 'fightaging-inequality',
+                    url: 'https://www.fightaging.org/archives/2006/02/death-for-everyone-before-inequality-for-anyone/'
+                  }
+                ]
               }
             ]
           },
@@ -707,7 +755,13 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'In fact, people can last together quite a long time. The world record for the length of a marriage now stands at a full ninety years. Who knows, perhaps there will be people whose love and devotion are strong enough to pass through centuries.'
+                text: 'In fact, people can last together quite a long time. The world record for the length of a marriage now stands at a full ninety years.[[note:marriage-record]] Who knows, perhaps there will be people whose love and devotion are strong enough to pass through centuries.',
+                notes: [
+                  {
+                    id: 'marriage-record',
+                    url: 'https://en.wikipedia.org/wiki/List_of_long_marriages'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
@@ -715,7 +769,13 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Even today people usually do not choose one partner for life. We are generally serially monogamous: we are with one person, not until the end of time, but for a while. In 2020, more divorces than marriages were recorded in the United Kingdom. In the United States, the divorce rate in 2021 was above 41 percent. Love is each person\'s own affair, and I think many will conclude that one need not live with the same person for hundreds of years, only for as long as one deems sufficient for love.'
+                text: 'Even today people usually do not choose one partner for life. We are generally serially monogamous: we are with one person, not until the end of time, but for a while. In 2020, more divorces than marriages were recorded in the United Kingdom. In the United States, the divorce rate in 2021 was above 41 percent.[[note:us-divorce-rate]] Love is each person\'s own affair, and I think many will conclude that one need not live with the same person for hundreds of years, only for as long as one deems sufficient for love.',
+                notes: [
+                  {
+                    id: 'us-divorce-rate',
+                    url: 'https://en.wikipedia.org/wiki/List_of_countries_by_marriage_and_divorce_rates'
+                  }
+                ]
               }
             ]
           }
@@ -770,11 +830,23 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Europe, for example, will contribute nothing to this growth. In Europe, no country except Monaco has fertility at replacement level, 2.1. South Korea has the lowest fertility rate in the world, 0.72. In many developed countries the population is not growing but rapidly shrinking. Population growth through the end of this century is expected to come exclusively from Africa and Asia.'
+                text: 'Europe, for example, will contribute nothing to this growth. In Europe, no country except Monaco has fertility at replacement level, 2.1.[[note:europe-fertility]] South Korea has the lowest fertility rate in the world, 0.72. In many developed countries the population is not growing but rapidly shrinking. Population growth through the end of this century is expected to come exclusively from Africa and Asia.',
+                notes: [
+                  {
+                    id: 'europe-fertility',
+                    url: 'https://en.wikipedia.org/wiki/List_of_countries_by_total_fertility_rate'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
-                text: 'Quite possibly, a significant part of that growth is explained by poorer female education and poorer access to contraception in some countries of those regions. UNFPA writes that 257 million women worldwide who wish to avoid pregnancy are not using a safe modern method, and that roughly half of all pregnancies, around 121 million per year, are unintended.'
+                text: 'Quite possibly, a significant part of that growth is explained by poorer female education and poorer access to contraception in some countries of those regions. UNFPA writes that 257 million women worldwide who wish to avoid pregnancy are not using a safe modern method, and that roughly half of all pregnancies, around 121 million per year, are unintended.[[note:unfpa-pregnancy]]',
+                notes: [
+                  {
+                    id: 'unfpa-pregnancy',
+                    url: 'https://www.unfpa.org/sites/default/files/pub-pdf/UNFPA%20Supplies%20Partnership%20Annual%20Report%202024_web%20%282%29.pdf'
+                  }
+                ]
               }
             ]
           },
@@ -810,7 +882,17 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Excluding seasonal and weekend homes, the OECD notes that Spain, Japan, and Portugal each have more than 12 percent vacant dwellings in their housing stock. In Japan in 2023 there were around 9 million vacant dwellings, that is, 13.8 percent of all housing.'
+                text: 'Excluding seasonal and weekend homes, the OECD notes that Spain, Japan, and Portugal each have more than 12 percent vacant dwellings in their housing stock.[[note:oecd-vacant-housing]] In Japan in 2023 there were around 9 million vacant dwellings, that is, 13.8 percent of all housing.[[note:japan-vacant-housing]]',
+                notes: [
+                  {
+                    id: 'oecd-vacant-housing',
+                    url: 'https://www.oecd.org/content/dam/oecd/en/data/datasets/affordable-housing-database/hm1-1-housing-stock-and-construction.pdf'
+                  },
+                  {
+                    id: 'japan-vacant-housing',
+                    url: 'https://www.stat.go.jp/english/data/handbook/pdf/2025half_2.pdf'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
@@ -818,23 +900,53 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'FAO adds that another 13.2 percent of food is lost before it even reaches retail, after harvest and along the supply chain.'
+                text: 'FAO adds that another 13.2 percent of food is lost before it even reaches retail, after harvest and along the supply chain.[[note:fao-food-loss]]',
+                notes: [
+                  {
+                    id: 'fao-food-loss',
+                    url: 'https://www.fao.org/policy-support/policy-themes/food-loss-and-food-waste/-Food-Loss-and-Food-Waste-Database/en'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
-                text: 'Urban intuition misleads us. Cities seem enormous, but built-up land occupies less than 2 percent of the world\'s land surface. The main consumer of land is not housing or cities, but agriculture.'
+                text: 'Urban intuition misleads us. Cities seem enormous, but built-up land occupies less than 2 percent of the world\'s land surface.[[note:built-up-land]] The main consumer of land is not housing or cities, but agriculture.',
+                notes: [
+                  {
+                    id: 'built-up-land',
+                    url: 'https://ourworldindata.org/how-urban-is-the-world'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
-                text: 'About half of all habitable land is already used for agriculture. At the same time, if one adds together pasture and land used to grow feed, livestock farming occupies around 80 percent of agricultural land while supplying only about 17 percent of the world\'s calories.'
+                text: 'About half of all habitable land is already used for agriculture. At the same time, if one adds together pasture and land used to grow feed, livestock farming occupies around 80 percent of agricultural land while supplying only about 17 percent of the world\'s calories.[[note:livestock-land-use]]',
+                notes: [
+                  {
+                    id: 'livestock-land-use',
+                    url: 'https://ourworldindata.org/global-land-for-agriculture'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
-                text: 'This, by the way, is another argument in favor of shifting toward plant-based food, if ethical arguments are not enough for you. If the whole world switched to a plant-based diet, global agricultural land use would shrink by around 75 percent, that is, from roughly 4 billion hectares to 1 billion. Those billions of hectares could be used for housing construction.'
+                text: 'This, by the way, is another argument in favor of shifting toward plant-based food, if ethical arguments are not enough for you. If the whole world switched to a plant-based diet, global agricultural land use would shrink by around 75 percent, that is, from roughly 4 billion hectares to 1 billion.[[note:plant-based-land-use]] Those billions of hectares could be used for housing construction.',
+                notes: [
+                  {
+                    id: 'plant-based-land-use',
+                    url: 'https://ourworldindata.org/land-use-diets'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
-                text: 'Finally, the FAO notes that agriculture consumes around 70 percent of global freshwater withdrawals.'
+                text: 'Finally, the FAO notes that agriculture consumes around 70 percent of global freshwater withdrawals.[[note:fao-freshwater]]',
+                notes: [
+                  {
+                    id: 'fao-freshwater',
+                    url: 'https://www.fao.org/one-health/areas-of-work/water/en'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
@@ -842,7 +954,17 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'A transition to cellular agriculture by 2050 could reduce agricultural land use by around 83 percent. Vertical farms can increase yields in tons per hectare per year by ten to one hundred times. The development of underground urbanism, moving transportation, warehouses, and certain elements of logistics below ground, and so on, would free a great deal of surface space.'
+                text: 'A transition to cellular agriculture by 2050 could reduce agricultural land use by around 83 percent.[[note:cellular-agriculture]] Vertical farms can increase yields in tons per hectare per year by ten to one hundred times.[[note:vertical-farms]] The development of underground urbanism, moving transportation, warehouses, and certain elements of logistics below ground, and so on, would free a great deal of surface space.',
+                notes: [
+                  {
+                    id: 'cellular-agriculture',
+                    url: 'https://www.nature.com/articles/s43247-024-01227-8'
+                  },
+                  {
+                    id: 'vertical-farms',
+                    url: 'https://www.nature.com/articles/s44383-025-00006-4'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
@@ -860,7 +982,17 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'The fertile period in women is extremely limited. After age thirty to thirty-five, the risks of complications associated with childbirth begin to rise noticeably. In women over forty-five, the risk of dying in childbirth is five times higher than among mothers under twenty-five. If a woman wants to give birth, she usually has to do it in the very years of life now considered the best ones. By fifty, menopause will most likely arrive, after which childbearing will in general become impossible. In other words, there is only a very small window in which children can be had, and every day that passes increases the psychological pressure.'
+                text: 'The fertile period in women is extremely limited. After age thirty to thirty-five, the risks of complications associated with childbirth begin to rise noticeably.[[note:maternal-risk-30-35]] In women over forty-five, the risk of dying in childbirth is five times higher than among mothers under twenty-five.[[note:maternal-risk-45]] If a woman wants to give birth, she usually has to do it in the very years of life now considered the best ones. By fifty, menopause will most likely arrive, after which childbearing will in general become impossible. In other words, there is only a very small window in which children can be had, and every day that passes increases the psychological pressure.',
+                notes: [
+                  {
+                    id: 'maternal-risk-30-35',
+                    url: 'https://www.healthline.com/health/womens-health/childbearing-age'
+                  },
+                  {
+                    id: 'maternal-risk-45',
+                    url: 'https://www.cdc.gov/nchs/data/hestat/maternal-mortality/2023/maternal-mortality-rates-2023.htm#:~:text=Rates%20in%202023%20were%2012.5%20deaths%20per,rates%20between%20age%20groups%20were%20statistically%20significant.'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
@@ -894,11 +1026,31 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'According to the OECD, the average share of the population aged sixty-five and over had already risen to 18.5 percent in 2023. The old-age dependency ratio in the OECD, the number of people sixty-five and over per one hundred people aged twenty to sixty-four, is 33 in 2025. In developed countries these indicators are even higher. Japan, for instance, is the "oldest" OECD country: 29 percent of its population is sixty-five or older, and its old-age dependency ratio is 54.9 elderly people per one hundred people aged twenty to sixty-four.'
+                text: 'According to the OECD, the average share of the population aged sixty-five and over had already risen to 18.5 percent in 2023.[[note:oecd-aging-share]] The old-age dependency ratio in the OECD, the number of people sixty-five and over per one hundred people aged twenty to sixty-four, is 33 in 2025. In developed countries these indicators are even higher.[[note:un-aging-developed]] Japan, for instance, is the "oldest" OECD country: 29 percent of its population is sixty-five or older, and its old-age dependency ratio is 54.9 elderly people per one hundred people aged twenty to sixty-four.',
+                notes: [
+                  {
+                    id: 'oecd-aging-share',
+                    url: 'https://www.oecd.org/en/publications/health-at-a-glance-2025_8f9e3f98-en/full-report/demographic-trends_257a22c9.html'
+                  },
+                  {
+                    id: 'un-aging-developed',
+                    url: 'https://www.un.org/development/desa/pd/sites/www.un.org.development.desa.pd/files/undesa_pd_2024_wpa2023-report.pdf'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
-                text: 'If we look at the share of total government expenditure, public pensions account on average in the OECD for 18 percent of total government spending, and healthcare another 15.1 percent in 2023. The greater part of healthcare spending falls specifically on older people. In the EU, almost half of all social spending already goes to old age and survivor pensions.'
+                text: 'If we look at the share of total government expenditure, public pensions account on average in the OECD for 18 percent of total government spending.[[note:oecd-pensions-share]] Healthcare accounts for another 15.1 percent in 2023.[[note:oecd-healthcare-share]] The greater part of healthcare spending falls specifically on older people. In the EU, almost half of all social spending already goes to old age and survivor pensions.',
+                notes: [
+                  {
+                    id: 'oecd-pensions-share',
+                    url: 'https://www.oecd.org/en/publications/pensions-at-a-glance-2025_e40274c1-en.html'
+                  },
+                  {
+                    id: 'oecd-healthcare-share',
+                    url: 'https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/06/society-at-a-glance-2024_08001b73/918d8db3-en.pdf'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
