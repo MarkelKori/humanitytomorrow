@@ -16,6 +16,19 @@ window.immortalismPageContent = window.immortalismPageContent || {};
   // { type: 'list', items: ['Point one', 'Point two'] }
   // { type: 'interactive', title: 'Widget title', description: 'Short note', html: '<div>Custom HTML here</div>' }
   // { type: 'html', html: '<p>Use <strong>HTML</strong> for custom formatting, links, embeds, or buttons.</p>' }
+  // Inline notes:
+  // {
+  //   type: 'paragraph',
+  //   text: 'Some statement[[note:source-1]] inside a paragraph.',
+  //   notes: [{ id: 'source-1', text: 'Plain note text' }]
+  // }
+  // Or with a link:
+  // {
+  //   type: 'html',
+  //   html: '<p>Formatted text with a note[[note:paper]].</p>',
+  //   notes: [{ id: 'paper', text: 'Optional description', url: 'https://example.com', linkLabel: 'Open source' }]
+  // }
+  // Numbers are assigned automatically in reading order.
   // You can also write plain text directly inside a section, without any subsection heading:
   // sections: [{ id: 's1', label: 'Introduction', blocks: [{ type: 'paragraph', text: 'Plain text right away.' }], items: [] }]
   // And a subsection heading is optional too:
@@ -80,8 +93,15 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'quote',
-                text: 'It is one of the most remarkable things that in all of the biological sciences there is no clue as to the necessity of death. If you say we want to make perpetual motion, we have discovered enough laws as we studied physics to see that it is either absolutely impossible or else the laws are wrong. But there is nothing in biology yet found that indicates the inevitability of death. This suggests to me that it is not at all inevitable, and that it is only a matter of time before the biologists discover what it is that is causing us the trouble and that that terrible universal disease or temporariness of the human’s body will be cured.',
-                cite: 'Richard Feynman'
+                text: 'It is one of the most remarkable things that in all of the biological sciences there is no clue as to the necessity of death. If you say we want to make perpetual motion, we have discovered enough laws as we studied physics to see that it is either absolutely impossible or else the laws are wrong. But there is nothing in biology yet found that indicates the inevitability of death. This suggests to me that it is not at all inevitable, and that it is only a matter of time before the biologists discover what it is that is causing us the trouble and that that terrible universal disease or temporariness of the human’s body will be cured.[[note:feynman-source]]',
+                cite: 'Richard Feynman',
+                appendNoteAtEnd: true,
+                notes: [
+                  {
+                    id: 'feynman-source',
+                    url: 'https://artdiamondblog.com/archives/2006/12/feynman_nothing.html'
+                  }
+                ]
               },
               {
                 type: 'paragraph',

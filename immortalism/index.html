@@ -58,6 +58,7 @@
   .drawer-lang-btns { display: flex; gap: 8px; }
   .drawer-lang-btn { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border: 1px solid var(--border); background: transparent; color: var(--ink2); cursor: pointer; transition: all 0.2s; }
   .drawer-lang-btn.active, .drawer-lang-btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .drawer-note { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82rem; line-height: 1.7; color: var(--ink2); }
 
   /* ── TOPIC HEADER ── */
   .topic-header { padding: 120px 24px 48px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; text-align: center; animation: fadeUp 0.5s ease both; }
@@ -76,11 +77,10 @@
 
   /* ── TOC (desktop sidebar) ── */
   .article-shell { position: relative; width: 100%; max-width: 700px; }
-  .resources-shell { width: 100%; max-width: 700px; }
-  .toc-col { position: absolute; top: 0; left: calc(-250px - 40px); width: 250px; }
+  .resources-shell { width: 100%; max-width: 700px; margin-top: 28px; }
+  .toc-col { position: fixed; top: 108px; left: max(24px, calc(50% - 350px - 290px)); width: 250px; }
   .toc-shell {
-    position: sticky;
-    top: 94px;
+    position: static;
     width: 100%;
   }
   .toc-block {
@@ -98,7 +98,7 @@
     position: absolute;
     left: 0;
     right: 14px;
-    height: 26px;
+    height: 76px;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.18s ease;
@@ -106,11 +106,11 @@
   }
   .toc-fade-top {
     top: 0;
-    background: linear-gradient(to bottom, var(--bg), rgba(245,242,236,0));
+    background: linear-gradient(to bottom, var(--bg) 0%, var(--bg) 34%, rgba(245,242,236,0.92) 58%, rgba(245,242,236,0) 100%);
   }
   .toc-fade-bottom {
     bottom: 0;
-    background: linear-gradient(to top, var(--bg), rgba(245,242,236,0));
+    background: linear-gradient(to top, var(--bg) 0%, var(--bg) 34%, rgba(245,242,236,0.92) 58%, rgba(245,242,236,0) 100%);
   }
   .toc-shell.fade-top .toc-fade-top { opacity: 1; }
   .toc-shell.fade-bottom .toc-fade-bottom { opacity: 1; }
@@ -122,7 +122,7 @@
     text-transform: uppercase;
     color: var(--ink2);
     opacity: 0.45;
-    margin: 0 0 16px;
+    margin: 8px 0 16px;
   }
   .toc-list { list-style: none; counter-reset: toc; }
   .toc-list > li { counter-increment: toc; margin-bottom: 14px; }
@@ -148,7 +148,10 @@
     flex-shrink: 0;
     transform: translateY(-0.04em);
   }
-  .toc-list > li > a:hover { color: var(--accent); }
+  .toc-list > li > a:hover,
+  .toc-list > li > a.active { color: var(--accent); }
+  .toc-list > li > a.active { font-weight: 500; }
+  .toc-list > li > a.active::before { opacity: 1; }
   .toc-sublist {
     list-style: none;
     margin: 8px 0 0 22px;
@@ -167,13 +170,19 @@
     text-decoration: none;
     transition: color 0.18s ease;
   }
-  .toc-sublist a:hover { color: var(--ink); }
+  .toc-sublist a:hover,
+  .toc-sublist a.active { color: var(--ink); }
+  .toc-sublist a.active {
+    font-weight: 500;
+    padding-left: 6px;
+  }
   .toc-sublist a::before {
     content: '·';
     color: var(--accent);
     opacity: 0.6;
     margin-right: 7px;
   }
+  .toc-sublist a.active::before { opacity: 1; }
 
   /* ── CONTENT ── */
   .content-layout {
@@ -236,6 +245,20 @@
   .content-html a,
   .interactive-card a,
   .resource-content a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+  .note-ref {
+    display: inline;
+    margin-left: 0.18em;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.45em;
+    line-height: 1;
+    cursor: pointer;
+    vertical-align: super;
+  }
+  .note-ref:hover { color: var(--ink); }
   .interactive-card { margin-bottom: 16px; padding: 18px 20px; border: 1px dashed rgba(46,122,79,0.45); background: rgba(46,122,79,0.05); }
   .interactive-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
   .interactive-title { font-size: 1rem; font-weight: 500; margin-bottom: 8px; }
@@ -252,8 +275,8 @@
     color: #4F4943;
     margin: 0 0 10px;
   }
-  .article-quote blockquote::before { content: '\201C'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 3px; }
-  .article-quote blockquote::after { content: '\201D'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-left: 2px; }
+  .article-quote .quote-text::before { content: '\201C'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 3px; }
+  .article-quote .quote-text::after { content: '\201D'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-left: 2px; }
   .article-quote cite { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); opacity: 0.5; display: block; font-style: normal; }
 
   /* ── RESOURCES ── */
@@ -265,13 +288,18 @@
   .resource-desc { font-size: 0.82rem; color: var(--ink2); line-height: 1.5; }
 
   /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .site-note { max-width: 520px; font-size: 0.8rem; line-height: 1.7; color: var(--ink2); }
   footer span { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em; color: var(--ink2); }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
   @media (max-width: 1239px) {
-    .toc-col { display: none; }
+    .article-shell, .resources-shell { max-width: 700px; width: 100%; }
+    .toc-col { position: static; left: auto; top: auto; width: 100%; display: block; margin-bottom: 28px; }
+    .toc-shell { position: sticky; top: 82px; }
+    .toc-block { max-height: min(360px, calc(100vh - 106px)); overflow-y: auto; padding-right: 0; }
+    .toc-fade { display: none; }
   }
   @media (max-width: 768px) {
     .site-nav { padding: 16px 20px; }
@@ -280,12 +308,15 @@
     .mobile-drawer { display: flex; }
     .topic-header { padding: 90px 20px 32px; }
     .content-layout { padding: 32px 20px 60px; }
-    footer { padding: 24px 20px; flex-direction: column; gap: 8px; }
+    .toc-shell { position: static; top: auto; }
+    .toc-block { max-height: none; overflow: visible; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .site-note { max-width: none; }
   }
 
   /* ── BACK TO TOP ── */
   .back-top {
-    position: fixed; bottom: 32px; right: 32px; z-index: 80;
+    position: fixed; bottom: 104px; right: 32px; z-index: 80;
     width: 40px; height: 40px;
     background: var(--ink); color: var(--bg);
     border: none; cursor: pointer;
@@ -313,6 +344,37 @@
   .qr-share-text { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2); margin-bottom: 6px; }
   .qr-url { font-family: var(--mono); font-size: 0.68rem; color: var(--ink); opacity: 0.4; }
   .qr-close { position: absolute; top: 12px; right: 16px; font-size: 1.3rem; background: none; border: none; cursor: pointer; color: var(--ink2); line-height: 1; padding: 4px; }
+  .note-overlay {
+    display: none; position: fixed; inset: 0; z-index: 310;
+    background: rgba(26,24,20,0.5); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .note-overlay.open { display: flex; }
+  .note-panel {
+    background: var(--bg); padding: 34px 36px 30px; width: min(520px, calc(100vw - 40px));
+    position: relative; animation: fadeUp 0.28s ease both;
+    border: 1px solid var(--border);
+  }
+  .note-label {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+  }
+  .note-body {
+    font-family: var(--reading); font-size: 0.96rem; line-height: 1.72; color: #211D1A;
+  }
+  .note-body p { margin-bottom: 14px; }
+  .note-body p:last-child { margin-bottom: 0; }
+  .note-body a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .note-close {
+    position: absolute; top: 12px; right: 16px; font-size: 1.3rem; background: none;
+    border: none; cursor: pointer; color: var(--ink2); line-height: 1; padding: 4px;
+  }
   
   .drawer-qr-btn {
     font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
@@ -323,7 +385,7 @@
   .drawer-qr-btn:hover { color: var(--ink); border-color: var(--ink); }
 
   @media (max-width: 768px) {
-    .back-top { bottom: 20px; right: 20px; width: 36px; height: 36px; }
+    .back-top { bottom: 32px; right: 20px; width: 36px; height: 36px; }
   }
 
   .drawer-lang-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
@@ -383,8 +445,8 @@
       <button class="drawer-lang-btn" onclick="selectLang('ru')">RU</button>
       <button class="drawer-qr-btn" onclick="openQR()">QR</button>
     </div>
-    <!-- qr already added above -->
   </div>
+  <p class="drawer-note" data-i18n="site.note">All articles are 100% human-written.</p>
 </div>
 
 <div class="topic-header">
@@ -411,38 +473,38 @@
     <div class="section-block" id="s1">
       <p class="section-label" data-i18n="life.s1">Introduction</p>
       <h2 class="section-heading" data-i18n="life.s1.heading">What is immortality?</h2>
-      <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
+      <div class="placeholder-text" data-i18n="placeholder">Loading......</div>
       <div class="article-quote">
-        <blockquote>It is one of the most remarkable things that in all of the biological sciences there is no clue as to the necessity of death.  If you say we want to make perpetual motion, we have discovered enough laws as we studied physics to see that it is either absolutely impossible or else the laws are wrong.  But there is nothing in biology yet found that indicates the inevitability of death.  This suggests to me that it is not at all inevitable, and that it is only a matter of time before the biologists discover what it is that is causing us the trouble and that that terrible universal disease or temporariness of the human’s body will be cured.</blockquote>
-        <cite>Richard Feynman, 1999</cite>
+        <blockquote>Loading...</blockquote>
+        <cite>Loading...</cite>
       </div>
-      <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
+      <div class="placeholder-text" data-i18n="placeholder">Loading......</div>
       <h2 class="section-heading" data-i18n="life.s2.heading">Before we begin...</h2>
-      <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
+      <div class="placeholder-text" data-i18n="placeholder">Loading......</div>
     </div>
 
     <div class="section-block" id="s2">
       <p class="section-label" data-i18n="life.s2">General objections</p>
       <h2 class="section-heading" data-i18n="life.s2.heading">What can be done today?</h2>
-      <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
+      <div class="placeholder-text" data-i18n="placeholder">Loading......</div>
     </div>
 
     <div class="section-block" id="s3">
       <p class="section-label" data-i18n="life.s3">Society: Politics &amp; Economics</p>
       <h2 class="section-heading">Who gets to live longer?</h2>
-      <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
+      <div class="placeholder-text" data-i18n="placeholder">Loading......</div>
     </div>
 
     <div class="section-block" id="s4">
       <p class="section-label" data-i18n="life.s3">Overpopulation</p>
       <h2 class="section-heading">Who gets to live longer?</h2>
-      <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
+      <div class="placeholder-text" data-i18n="placeholder">Loading......</div>
     </div>
 
     <div class="section-block" id="s5">
       <p class="section-label" data-i18n="life.s3">Conclusion</p>
       <h2 class="section-heading">Who gets to live longer?</h2>
-      <div class="placeholder-text" data-i18n="placeholder">[ Your text goes here. ]</div>
+      <div class="placeholder-text" data-i18n="placeholder">Loading......</div>
     </div>
 
     <div class="section-block" id="s6">
@@ -469,6 +531,7 @@
 </div>
 
 <footer>
+  <p class="site-note" data-i18n="site.note">All articles are 100% human-written.</p>
   <span data-i18n="footer.text">© Humanity Tomorrow 2026</span>
 </footer>
 
@@ -482,10 +545,11 @@ const translations = {
     'life.s1':'Introduction','life.s1.heading':'What is immortality?', 'life.s2.heading':'Before we begin...', 
     'life.s2':'General objections','life.s3.heading':'Why do we age?',
     'life.s3':'Society: Politics & Economics','life.s4.heading':'What can be done today?',
-    'life.s4':'Overpopulation', 'life.s5.heading':'Bububu?',
-    'life.s5':'Conclusion', 'life.s6.heading':'Bububu?',
+    'life.s4':'Overpopulation', 'life.s5.heading':'Loading...',
+    'life.s5':'Conclusion', 'life.s6.heading':'Loading...',
     'sidebar.resources':'Resources',
-    'placeholder':'[ Your text goes here. Replace this block with your own writing. ]',
+    'site.note':'All articles are 100% human-written.',
+    'placeholder':'Loading...',
     'footer.text':'© Humanity Tomorrow 2026',
   },
   ru: {
@@ -496,8 +560,8 @@ const translations = {
     'life.s1':'Вступление','life.s1.heading':'Прежде чем мы начнём...',
     'life.s2':'Общие возражения','life.s2.heading':'Почему мы стареем?',
     'life.s3':'Общество: политика и экономика','life.s3.heading':'Что можно делать сегодня?',
-    'life.s4':'Перенаселение', 'life.s4.heading':'Bububu?',
-    'life.s5':'Заключение', 'life.s5.heading':'Bububu?',
+    'life.s4':'Перенаселение', 'life.s4.heading':'Loading...',
+    'life.s5':'Заключение', 'life.s5.heading':'Loading...',
     'sidebar.resources':'Ключевые ресурсы',
     'placeholder':'[ Ваш текст здесь. ]',
     'footer.text':'© Humanity Tomorrow 2026',
@@ -510,8 +574,8 @@ const translations = {
     'life.s1':'Вступ','life.s1.heading':'Перед тим, як почати...',
     'life.s2':'Загальні заперечення','life.s2.heading':'Чому ми старіємо?',
     'life.s3':'Суспільство: політика та економіка','life.s3.heading':'Що можна робити сьогодні?',
-    'life.s4':'Перенаселення', 'life.s4.heading':'Bububu?',
-    'life.s4':'Висновки', 'life.s5.heading':'Bububu?',
+    'life.s4':'Перенаселення', 'life.s4.heading':'Loading...',
+    'life.s4':'Висновки', 'life.s5.heading':'Loading...',
     'sidebar.resources':'Ресурси',
     'placeholder':'[ Ваш текст тут. ]',
     'footer.text':'© Humanity Tomorrow 2026',
@@ -519,11 +583,26 @@ const translations = {
 };
 
 let currentLang = localStorage.getItem('lang') || 'en';
+const loadingPlaceholders = { en: 'Loading...', ru: 'Загрузка...', ua: 'Завантаження...' };
+const siteNoteText = {
+  en: 'Articles are written by humans. AI is used only for code and design.',
+  ru: 'Статьи написаны людьми. ИИ используется только для кода и дизайна.',
+  ua: 'Статті написані людьми. ШІ використовується лише для коду та дизайну.'
+};
+siteNoteText.en = 'All articles are 100% human-written.';
+siteNoteText.ru = 'Все статьи на 100% написаны людьми.';
+siteNoteText.ua = 'Усі статті на 100% написані людьми.';
 applyLang(currentLang);
 
 function applyLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     if (translations[lang][el.getAttribute('data-i18n')]) el.textContent = translations[lang][el.getAttribute('data-i18n')];
+  });
+  document.querySelectorAll('[data-i18n="placeholder"]').forEach((el) => {
+    el.textContent = loadingPlaceholders[lang] || loadingPlaceholders.en;
+  });
+  document.querySelectorAll('[data-i18n="site.note"]').forEach((el) => {
+    el.textContent = siteNoteText[lang] || siteNoteText.en;
   });
   document.getElementById('langCurrent').textContent = lang.toUpperCase();
   document.querySelectorAll('.lang-option').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
@@ -560,6 +639,14 @@ function toggleDrawer() {
     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAEICAIAAAAslP2oAAAFGklEQVR4nO3dQWolNxRA0ThkKwnZ/2pCsgWPDJ5nkFHg1kCgh1Td5wwbd1V9978ISi3p4/vr8xfg/349/QBwI2FAEAYEYUAQBgRhQBAGBGFAEAYEYUAQBgRhQBAGBGFAEAaE31b/wu9//DnxHNv98/df+eerz796naefX/WjPucpq5/XiAFBGBCEAUEYEIQBQRgQhAFheR7jya734qum3/evXn/Xe/3p55z2lu/DEyMGBGFAEAYEYUAQBgRhQBAGhG3zGE+m3+uv2jXvscv0vMTq879l/cb0v4sRA4IwIAgDgjAgCAOCMCAIA8L4PMZtdr3Xn77vruecnpf4URkxIAgDgjAgCAOCMCAIA4IwIPx08xhPptdp7Nqfano+xPzGf4wYEIQBQRgQhAFBGBCEAUEYEMbnMW57L746P7BrncOpdSC3rce47fvwxIgBQRgQhAFBGBCEAUEYEIQBYds8xm3nTE9bnfe47eef7Jr3ePv3wYgBQRgQhAFBGBCEAUEYEIQB4eP76/P0M7zSrn2ops/fuO1c87cwYkAQBgRhQBAGBGFAEAYEYUBYXo8xvX5g1/M8mX7fv7oP1er132J6Xcf0982IAUEYEIQBQRgQhAFBGBCEAeHY+Rin1iFM73c0/XmfnDr340f9fRoxIAgDgjAgCAOCMCAIA4IwIBw7H+PUeRHTTq1D2PV5V69z6tyM6fkNIwYEYUAQBgRhQBAGBGFAEAaE5fMx3rI/0lvO277t9/Nk+nPd9vsxYkAQBgRhQBAGBGFAEAYEYUBYXo+x6//Bn9qPaNfPT5ueL5pez3BqPYnzMWCQMCAIA4IwIAgDgjAgCAPC+Dnfu9y2f9HqfU/NM0zPF53ifAw4QBgQhAFBGBCEAUEYEIQBYXw9xq7/fz+9PmHXuder139yan3IW/aPcj4GHCAMCMKAIAwIwoAgDAjCgLDtnO8nbzlHYnr9w+r1T+27Nb2v1LRd3xMjBgRhQBAGBGFAEAYEYUAQBoTxeYxVu96vT7+nX3VqPcb0dW5bZ+J8DBgkDAjCgCAMCMKAIAwIwoAwPo9x27kZb1nXsWrXOpDV6087dV8jBgRhQBAGBGFAEAYEYUAQBoRt53zfdp1d8xWn9sV6y7kc0/Mnp853N2JAEAYEYUAQBgRhQBAGBGFA+Pj++jxy4+n5gV3vs09df5dTz3nqnJNdjBgQhAFBGBCEAUEYEIQBQRgQlucxTp1Tcdv5DLfNw0x/rlNOnQdvxIAgDAjCgCAMCMKAIAwIwoBwbD3GKaf2idrl1PzJbfMk089vxIAgDAjCgCAMCMKAIAwIwoBw7HyMabveu596f/+WfZx23fe2/aaMGBCEAUEYEIQBQRgQhAFBGBCW5zGe3LY+4cmpc7JX1w/c9rl23fctjBgQhAFBGBCEAUEYEIQBQRgQts1jPHnL+/Lb9lOaPl981fR9b1vXYcSAIAwIwoAgDAjCgCAMCMKAMD6P8RZvWVdwar+s6XPKV+/7xDwGDBIGBGFAEAYEYUAQBgRhQPjp5jFOvY9fdep87ul1EdPP6ZxvGCQMCMKAIAwIwoAgDAjCgDA+j3HbOofp9QzT+0fdNg+z+jy75jemv1dGDAjCgCAMCMKAIAwIwoAgDAjb5jFOrVtY9Zb9jqbnJU7tB/WWc06MGBCEAUEYEIQBQRgQhAFBGBA+vr8+Tz8DXMeIAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQB4V9KszKQdzBN1QAAAABJRU5ErkJggg==" alt="QR">
     <p class="qr-share-text" id="qrShareText">Share the knowledge</p>
     <p class="qr-url">humanitytomorrow.site</p>
+  </div>
+</div>
+
+<div class="note-overlay" id="noteOverlay">
+  <div class="note-panel">
+    <button class="note-close" id="noteClose" type="button">&times;</button>
+    <p class="note-label" id="noteLabel">Note</p>
+    <div class="note-body" id="noteBody"></div>
   </div>
 </div>
 
@@ -657,6 +744,9 @@ function applyFaqUi(lang) {
     const key = el.getAttribute('data-i18n');
     if (ui[key]) el.textContent = ui[key];
   });
+  document.querySelectorAll('[data-i18n="site.note"]').forEach((el) => {
+    el.textContent = siteNoteText[lang] || siteNoteText.en;
+  });
   document.getElementById('qrShareText').textContent = ui['qr.share'];
   document.querySelector('footer [data-i18n="footer.text"]').textContent = ui['footer.text'];
 }
@@ -670,6 +760,7 @@ function renderFaqToc(page, lang) {
     const link = document.createElement('a');
     link.href = `#${section.id}`;
     link.textContent = section.tocLabel || section.label;
+    link.dataset.target = section.id;
     li.appendChild(link);
 
     const titledItems = (section.items || []).filter((item) => item && item.id && item.title);
@@ -682,6 +773,8 @@ function renderFaqToc(page, lang) {
         const subLink = document.createElement('a');
         subLink.href = `#${item.id}`;
         subLink.textContent = item.title;
+        subLink.dataset.target = item.id;
+        subLink.dataset.section = section.id;
         subItem.appendChild(subLink);
         sublist.appendChild(subItem);
       });
@@ -696,10 +789,121 @@ function renderFaqToc(page, lang) {
   const resourcesLink = document.createElement('a');
   resourcesLink.href = '#s6';
   resourcesLink.textContent = getFaqUi(lang)['sidebar.resources'];
+  resourcesLink.dataset.target = 's6';
   resourcesLi.appendChild(resourcesLink);
   toc.appendChild(resourcesLi);
 
   updateTocFades();
+  updateActiveTocState();
+}
+
+let noteState = { counter: 0, registry: new Map() };
+
+function resetNoteState() {
+  noteState = { counter: 0, registry: new Map() };
+}
+
+function getBlockNotes(block) {
+  const map = new Map();
+  (block.notes || []).forEach((note) => {
+    if (note && note.id) map.set(note.id, note);
+  });
+  return map;
+}
+
+function getNoteEntry(noteId, notesById) {
+  const note = notesById.get(noteId);
+  if (!note) return null;
+
+  if (!noteState.registry.has(noteId)) {
+    noteState.counter += 1;
+    noteState.registry.set(noteId, { ...note, number: noteState.counter });
+  }
+
+  return noteState.registry.get(noteId);
+}
+
+function createNoteRef(noteEntry) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'note-ref';
+  button.textContent = `[${noteEntry.number}]`;
+  button.setAttribute('aria-label', `Open note ${noteEntry.number}`);
+  button.addEventListener('click', () => openNote(noteEntry.id));
+  return button;
+}
+
+function appendTextWithNotes(target, text, notesById) {
+  const source = text || '';
+  const pattern = /\[\[note:([a-zA-Z0-9_-]+)\]\]/g;
+  let cursor = 0;
+  let match;
+
+  while ((match = pattern.exec(source)) !== null) {
+    if (match.index > cursor) {
+      target.appendChild(document.createTextNode(source.slice(cursor, match.index)));
+    }
+
+    const noteEntry = getNoteEntry(match[1], notesById);
+    if (noteEntry) {
+      target.appendChild(createNoteRef(noteEntry));
+    } else {
+      target.appendChild(document.createTextNode(`[missing note: ${match[1]}]`));
+    }
+
+    cursor = pattern.lastIndex;
+  }
+
+  if (cursor < source.length) {
+    target.appendChild(document.createTextNode(source.slice(cursor)));
+  }
+}
+
+function setHtmlWithNotes(target, html, notesById) {
+  target.innerHTML = (html || '').replace(/\[\[note:([a-zA-Z0-9_-]+)\]\]/g, '<span class="note-slot" data-note-id="$1"></span>');
+  target.querySelectorAll('.note-slot').forEach((slot) => {
+    const noteEntry = getNoteEntry(slot.dataset.noteId, notesById);
+    if (noteEntry) {
+      slot.replaceWith(createNoteRef(noteEntry));
+    } else {
+      slot.replaceWith(document.createTextNode(`[missing note: ${slot.dataset.noteId}]`));
+    }
+  });
+}
+
+function openNote(noteId) {
+  const note = noteState.registry.get(noteId);
+  if (!note) return;
+
+  document.getElementById('noteLabel').textContent = `Note ${note.number}`;
+  const noteBody = document.getElementById('noteBody');
+  noteBody.innerHTML = '';
+
+  if (note.html) {
+    noteBody.innerHTML = note.html;
+  } else if (note.text) {
+    const paragraph = document.createElement('p');
+    paragraph.style.whiteSpace = 'pre-line';
+    paragraph.textContent = note.text;
+    noteBody.appendChild(paragraph);
+  }
+
+  if (note.url) {
+    const paragraph = document.createElement('p');
+    const link = document.createElement('a');
+    link.href = note.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = note.linkLabel || note.url;
+    paragraph.appendChild(link);
+    noteBody.appendChild(paragraph);
+  }
+
+  document.getElementById('noteOverlay').classList.add('open');
+}
+
+function closeNote() {
+  document.getElementById('noteOverlay').classList.remove('open');
 }
 
 function updateTocFades() {
@@ -708,7 +912,8 @@ function updateTocFades() {
   if (!shell || !block) return;
 
   const hasOverflow = block.scrollHeight - block.clientHeight > 2;
-  shell.classList.toggle('fade-top', block.scrollTop > 2);
+  const touched = block.dataset.tocTouched === 'true';
+  shell.classList.toggle('fade-top', touched && block.scrollTop > 2);
   shell.classList.toggle('fade-bottom', hasOverflow && block.scrollTop + block.clientHeight < block.scrollHeight - 2);
 }
 
@@ -744,27 +949,111 @@ function bindTocScroll() {
   const block = document.getElementById('tocBlock');
   if (!block || block.dataset.bound === 'true') return;
 
+  const markTouched = () => { block.dataset.tocTouched = 'true'; };
+  block.addEventListener('wheel', markTouched, { passive: true });
+  block.addEventListener('touchmove', markTouched, { passive: true });
   block.addEventListener('scroll', updateTocFades, { passive: true });
   block.dataset.bound = 'true';
   updateTocFades();
 }
 
+function updateDesktopTocState() {
+  const toc = document.querySelector('.toc-col');
+  const shell = document.querySelector('.article-shell');
+  if (!toc || !shell) return;
+
+  if (window.innerWidth <= 1239) {
+    toc.style.position = '';
+    toc.style.top = '';
+    toc.style.left = '';
+    return;
+  }
+
+  const shellRect = shell.getBoundingClientRect();
+  const shellTop = window.scrollY + shellRect.top;
+  const shellBottom = shellTop + shell.offsetHeight;
+  const tocHeight = toc.offsetHeight;
+  const topOffset = 108;
+  const fixedLeft = Math.max(24, (window.innerWidth / 2) - 350 - 290);
+  const stopTop = Math.max(0, shell.offsetHeight - tocHeight);
+
+  if (window.scrollY + topOffset <= shellTop) {
+    toc.style.position = 'absolute';
+    toc.style.top = '0px';
+    toc.style.left = 'calc(-250px - 40px)';
+    return;
+  }
+
+  if (window.scrollY + topOffset + tocHeight >= shellBottom) {
+    toc.style.position = 'absolute';
+    toc.style.top = `${stopTop}px`;
+    toc.style.left = 'calc(-250px - 40px)';
+    return;
+  }
+
+  toc.style.position = 'fixed';
+  toc.style.top = `${topOffset}px`;
+  toc.style.left = `${fixedLeft}px`;
+}
+
+function updateActiveTocState() {
+  const links = Array.from(document.querySelectorAll('#tocList a[data-target]'));
+  if (!links.length) return;
+
+  const markerY = window.scrollY + (window.innerWidth <= 768 ? 120 : 170);
+  let activeId = links[0].dataset.target;
+
+  links.forEach((link) => {
+    const target = document.getElementById(link.dataset.target);
+    if (!target) return;
+    const targetTop = window.scrollY + target.getBoundingClientRect().top;
+    if (targetTop <= markerY) activeId = link.dataset.target;
+  });
+
+  links.forEach((link) => link.classList.toggle('active', link.dataset.target === activeId));
+
+  const activeLink = links.find((link) => link.dataset.target === activeId);
+  if (activeLink && activeLink.dataset.section) {
+    const parentLink = document.querySelector(`#tocList > li > a[data-target="${activeLink.dataset.section}"]`);
+    if (parentLink) parentLink.classList.add('active');
+  }
+}
+
 function renderFaqBlock(block) {
+  const notesById = getBlockNotes(block);
   switch (block.type) {
-    case 'paragraph':
-      return makeEl('p', 'content-paragraph', block.text || '');
+    case 'paragraph': {
+      const paragraph = makeEl('p', 'content-paragraph');
+      appendTextWithNotes(paragraph, block.text || '', notesById);
+      return paragraph;
+    }
     case 'subheading':
       return makeEl('h3', 'content-subheading', block.text || '');
     case 'quote': {
       const wrap = makeEl('div', 'article-quote');
-      wrap.appendChild(makeEl('blockquote', '', block.text || ''));
+      const quote = makeEl('blockquote', '');
+      const quoteText = makeEl('span', 'quote-text');
+      let quoteTextContent = block.text || '';
+      if (block.appendNoteAtEnd && block.notes && block.notes[0]) {
+        const trailingId = block.notes[0].id;
+        quoteTextContent = quoteTextContent.replace(`[[note:${trailingId}]]`, '');
+      }
+      appendTextWithNotes(quoteText, quoteTextContent, notesById);
+      quote.appendChild(quoteText);
+      if (block.appendNoteAtEnd && block.notes && block.notes[0]) {
+        const trailingNote = getNoteEntry(block.notes[0].id, notesById);
+        if (trailingNote) quote.appendChild(createNoteRef(trailingNote));
+      }
+      wrap.appendChild(quote);
       if (block.cite) wrap.appendChild(makeEl('cite', '', block.cite));
       return wrap;
     }
     case 'list': {
       const list = makeEl('ul', 'content-list');
       (block.items || []).forEach((item) => {
-        list.appendChild(makeEl('li', '', item));
+        const li = makeEl('li', '');
+        appendTextWithNotes(li, item, notesById);
+        list.appendChild(li);
       });
       return list;
     }
@@ -782,7 +1071,7 @@ function renderFaqBlock(block) {
     }
     case 'html': {
       const wrap = makeEl('div', 'content-html');
-      wrap.innerHTML = block.html || '';
+      setHtmlWithNotes(wrap, block.html || '', notesById);
       return wrap;
     }
     default:
@@ -852,6 +1141,7 @@ function renderFaqPage(lang) {
   prepareFaqLayout();
   const page = getFaqPage(lang);
   if (!page) return;
+  resetNoteState();
   document.getElementById('pageTitle').textContent = page.pageTitle;
   document.getElementById('pageIntro').textContent = page.intro;
 
@@ -867,6 +1157,7 @@ function renderFaqPage(lang) {
   });
 
   resourcesMain.appendChild(renderFaqResources(page.resources || [], lang));
+  updateDesktopTocState();
 }
 
 selectLang = function(lang) {
@@ -880,6 +1171,7 @@ selectLang = function(lang) {
   document.getElementById('mobileDrawer').classList.remove('open');
   document.getElementById('burger').classList.remove('open');
   document.body.style.overflow = '';
+  updateActiveTocState();
 };
 
 openQR = function() {
@@ -889,12 +1181,27 @@ openQR = function() {
 
 document.getElementById('backTop').textContent = '\u2191';
 document.querySelector('.qr-close').textContent = '\u00D7';
+document.getElementById('noteClose').textContent = '\u00D7';
+document.getElementById('noteClose').addEventListener('click', closeNote);
+document.getElementById('noteOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeNote();
+});
 document.documentElement.lang = currentLang;
 applyFaqUi(currentLang);
 renderFaqPage(currentLang);
 updateLangButtons(currentLang);
 bindTocScroll();
-window.addEventListener('resize', updateTocFades);
+updateDesktopTocState();
+updateActiveTocState();
+window.addEventListener('scroll', () => {
+  updateDesktopTocState();
+  updateActiveTocState();
+}, { passive: true });
+window.addEventListener('resize', () => {
+  updateTocFades();
+  updateDesktopTocState();
+  updateActiveTocState();
+});
 </script>
 </body>
 </html>

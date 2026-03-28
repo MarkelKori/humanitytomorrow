@@ -97,6 +97,7 @@
     border: 1px solid var(--border); background: transparent; color: var(--ink2); cursor: pointer; transition: all 0.2s;
   }
   .drawer-lang-btn.active, .drawer-lang-btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .drawer-note { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82rem; line-height: 1.7; color: var(--ink2); }
 
   /* ── HOME ── */
   .home-hero { padding: 160px 48px 60px; max-width: 900px; }
@@ -123,7 +124,8 @@
   .topic-card.soon { cursor: default; opacity: 0.5; pointer-events: none; }
 
   /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .site-note { max-width: 520px; font-size: 0.8rem; line-height: 1.7; color: var(--ink2); }
   footer span { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em; color: var(--ink2); }
 
   /* ── ANIMATIONS ── */
@@ -139,12 +141,13 @@
     .mobile-drawer { display: flex; }
     .home-hero { padding: 100px 20px 40px; }
     .topic-grid { grid-template-columns: 1fr; margin: 0 20px 60px; }
-    footer { padding: 24px 20px; flex-direction: column; gap: 8px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .site-note { max-width: none; }
   }
 
   /* ── BACK TO TOP ── */
   .back-top {
-    position: fixed; bottom: 32px; right: 32px; z-index: 80;
+position: fixed; bottom: 56px; right: 32px; z-index: 80;
     width: 40px; height: 40px;
     background: var(--ink); color: var(--bg);
     border: none; cursor: pointer;
@@ -182,7 +185,7 @@
   .drawer-qr-btn:hover { color: var(--ink); border-color: var(--ink); }
 
   @media (max-width: 768px) {
-    .back-top { bottom: 20px; right: 20px; width: 36px; height: 36px; }
+.back-top { bottom: 32px; right: 20px; width: 36px; height: 36px; }
   }
 
   .drawer-lang-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
@@ -235,7 +238,7 @@
   <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
   <a class="drawer-link" href="/donate/" data-i18n="nav.donate">Donate</a>
   <div class="drawer-lang">
-    <p class="drawer-lang-label">Language</p>
+    <p class="drawer-lang-label" data-i18n="lang.label">Language</p>
     <div class="drawer-lang-row">
       <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>
       <button class="drawer-lang-btn" onclick="selectLang('ua')">UA</button>
@@ -243,6 +246,7 @@
     <button class="drawer-qr-btn" onclick="openQR()">QR</button>
     </div>
   </div>
+  <p class="drawer-note" data-i18n="site.note">All articles are 100% human-written.</p>
 </div>
 
 <div class="home-hero">
@@ -273,6 +277,7 @@
 </div>
 
 <footer>
+  <p class="site-note" data-i18n="site.note">All articles are 100% human-written.</p>
   <span data-i18n="footer.text">© 2026 Humanity Tomorrow</span>
 </footer>
 
@@ -312,11 +317,28 @@ const translations = {
 };
 
 let currentLang = localStorage.getItem('lang') || 'en';
+const extraUiText = {
+  langLabel: { en: 'Language', ru: 'Язык', ua: 'Мова' },
+  siteNote: {
+    en: 'All articles are 100% human-written.',
+    ru: 'Статьи написаны людьми. ИИ используется только для кода и дизайна.',
+    ua: 'Статті написані людьми. ШІ використовується лише для коду та дизайну.'
+  }
+};
+extraUiText.siteNote.en = 'All articles are 100% human-written.';
+extraUiText.siteNote.ru = 'Все статьи на 100% написаны людьми.';
+extraUiText.siteNote.ua = 'Усі статті на 100% написані людьми.';
 applyLang(currentLang);
 
 function applyLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     if (translations[lang][el.getAttribute('data-i18n')]) el.textContent = translations[lang][el.getAttribute('data-i18n')];
+  });
+  document.querySelectorAll('[data-i18n="lang.label"]').forEach((el) => {
+    el.textContent = extraUiText.langLabel[lang] || extraUiText.langLabel.en;
+  });
+  document.querySelectorAll('[data-i18n="site.note"]').forEach((el) => {
+    el.textContent = extraUiText.siteNote[lang] || extraUiText.siteNote.en;
   });
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     if (translations[lang][el.getAttribute('data-i18n-html')]) el.innerHTML = translations[lang][el.getAttribute('data-i18n-html')];
