@@ -726,7 +726,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
           },
           {
             id: 'society-04',
-            title: 'Чи вистачить часу для кохання?',
+            title: 'Достатньо часу для кохання?',
             blocks: [
               {
                 type: 'paragraph',
