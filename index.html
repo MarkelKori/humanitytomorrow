@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F5F2EC; --bg2: #EDE9E1; --ink: #1A1814; --ink2: #6B6560;
+    --bg: #F5F2EC; --bg2: #EDE9E1; --ink: #1A1814; --ink2: #47413B;
     --accent-ai: #1A5C8A; --accent-future: #C1440E; --accent-life: #2E7A4F;
     --border: rgba(26,24,20,0.12);
     --serif: 'Playfair Display', Georgia, serif;
@@ -29,11 +29,11 @@
     background: rgba(245,242,236,0.92); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo { font-family: var(--serif); font-size: 1.1rem; font-style: italic; color: var(--ink); text-decoration: none; }
+  .nav-logo { font-family: var(--serif); font-size: 1.18rem; font-style: italic; color: var(--ink); text-decoration: none; }
   .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
   .nav-links a {
-    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--ink2); text-decoration: none; transition: color 0.2s;
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(26,24,20,0.72); text-decoration: none; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
   .nav-links a.active { color: var(--ink); border-bottom: 1px solid currentColor; }
@@ -42,9 +42,9 @@
   /* ── LANG DROPDOWN ── */
   .lang-switcher { position: relative; margin-left: 24px; }
   .lang-current {
-    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em;
     text-transform: uppercase; padding: 3px 10px 3px 8px;
-    border: 1px solid var(--border); background: transparent; color: var(--ink2);
+    border: 1px solid var(--border); background: transparent; color: rgba(26,24,20,0.72);
     cursor: pointer; display: flex; align-items: center; gap: 6px;
     transition: all 0.2s; user-select: none;
   }
@@ -100,25 +100,25 @@
   .drawer-note { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82rem; line-height: 1.7; color: var(--ink2); }
 
   /* ── HOME ── */
-  .home-hero { padding: 160px 48px 60px; max-width: 900px; }
-  .home-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink2); margin-bottom: 24px; }
-  .home-title { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.08; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 32px; }
-  .home-title em { font-style: italic; color: var(--ink2); }
-  .home-desc { font-size: 1.05rem; color: var(--ink2); max-width: 560px; line-height: 1.75; margin-bottom: 64px; }
+  .home-hero { padding: 132px 48px 38px; max-width: 920px; }
+  .home-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,24,20,0.62); margin-bottom: 24px; }
+  .home-title { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.04; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .home-title em { font-style: italic; color: #5E5751; }
+  .home-desc { font-size: 1.16rem; color: rgba(26,24,20,0.9); max-width: 620px; line-height: 1.72; margin-bottom: 48px; }
 
   /* ── CARDS ── */
-  .topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 0 48px 80px; }
-  .topic-card { background: var(--bg); padding: 48px 40px; cursor: pointer; transition: background 0.25s; position: relative; overflow: hidden; text-decoration: none; display: block; }
+  .topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 0 48px 72px; }
+  .topic-card { background: var(--bg); padding: 40px 36px; cursor: pointer; transition: background 0.25s; position: relative; overflow: hidden; text-decoration: none; display: block; }
   .topic-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--card-color); transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
   .topic-card:hover { background: var(--bg2); }
   .topic-card:hover::before { transform: scaleX(1); }
   .topic-card[data-topic="life"] { --card-color: var(--accent-life); }
   .topic-card[data-topic="ai"]   { --card-color: var(--accent-ai); }
   .topic-card[data-topic="future"] { --card-color: var(--accent-future); }
-  .card-num { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--ink2); margin-bottom: 20px; opacity: 0.6; }
-  .card-title { font-family: var(--serif); font-size: 1.55rem; font-weight: 400; line-height: 1.2; margin-bottom: 16px; color: var(--card-color); }
-  .card-desc { font-size: 0.88rem; color: var(--ink2); line-height: 1.65; margin-bottom: 28px; }
-  .card-link { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--card-color); display: inline-flex; align-items: center; gap: 8px; }
+  .card-num { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; color: rgba(26,24,20,0.5); margin-bottom: 18px; opacity: 1; }
+  .card-title { font-family: var(--serif); font-size: 1.72rem; font-weight: 400; line-height: 1.16; margin-bottom: 14px; color: var(--card-color); }
+  .card-desc { font-size: 0.98rem; color: rgba(26,24,20,0.86); line-height: 1.58; margin-bottom: 22px; }
+  .card-link { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--card-color); display: inline-flex; align-items: center; gap: 8px; }
   .card-link::after { content: '→'; transition: transform 0.2s; }
   .topic-card:hover .card-link::after { transform: translateX(4px); }
   .topic-card.soon { cursor: default; opacity: 0.5; pointer-events: none; }
@@ -139,7 +139,7 @@
     .nav-links { display: none; }
     .burger { display: flex; }
     .mobile-drawer { display: flex; }
-    .home-hero { padding: 100px 20px 40px; }
+    .home-hero { padding: 96px 20px 34px; }
     .topic-grid { grid-template-columns: 1fr; margin: 0 20px 60px; }
     footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
     .site-note { max-width: none; }

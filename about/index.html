@@ -13,13 +13,13 @@
   *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
   body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-weight:300;line-height:1.6;overflow-x:hidden;}
   nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(245,242,236,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-  .nav-logo{font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--ink);text-decoration:none;}
+  .nav-logo{font-family:var(--serif);font-size:1.18rem;font-style:italic;color:var(--ink);text-decoration:none;}
   .nav-links{display:flex;align-items:center;gap:36px;list-style:none;}
-  .nav-links a{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color 0.2s;}
+  .nav-links a{font-family:var(--mono);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(26,24,20,0.72);text-decoration:none;transition:color 0.2s;}
   .nav-links a:hover{color:var(--ink);}.nav-links a.active{color:var(--ink);border-bottom:1px solid currentColor;}
   .nav-links a.dimmed{opacity:0.35;cursor:default;pointer-events:none;}
   .lang-switcher{position:relative;margin-left:24px;}
-  .lang-current{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px 3px 8px;border:1px solid var(--border);background:transparent;color:var(--ink2);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s;user-select:none;}
+  .lang-current{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px 3px 8px;border:1px solid var(--border);background:transparent;color:rgba(26,24,20,0.72);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s;user-select:none;}
   .lang-current::after{content:'▾';font-size:0.6rem;opacity:0.5;}.lang-current:hover{color:var(--ink);border-color:var(--ink);}
   .lang-dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--bg);border:1px solid var(--border);min-width:72px;z-index:200;}
   .lang-switcher.open .lang-dropdown{display:block;}
