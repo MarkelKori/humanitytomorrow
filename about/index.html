@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#F5F2EC;--bg2:#EDE9E1;--ink:#1A1814;--ink2:#6B6560;--border:rgba(26,24,20,0.12);--serif:'Playfair Display',Georgia,serif;--mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif; }
+  :root { --bg:#F5F2EC;--bg2:#EDE9E1;--ink:#1A1814;--ink2:#47413B;--accent:#0E7A45;--border:rgba(26,24,20,0.12);--serif:'Playfair Display',Georgia,serif;--mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif; }
   *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
   body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-weight:300;line-height:1.6;overflow-x:hidden;}
   nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(245,242,236,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
@@ -40,9 +40,10 @@
   .drawer-lang-btn{font-family:var(--mono);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 18px;border:1px solid var(--border);background:transparent;color:var(--ink2);cursor:pointer;transition:all 0.2s;}
   .drawer-lang-btn.active,.drawer-lang-btn:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);}
   .drawer-note{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);font-size:0.82rem;line-height:1.7;color:var(--ink2);}
-  .about-layout{padding:140px 48px 80px;max-width:680px;animation:fadeUp 0.5s ease both;}
-  .about-layout h1{font-family:var(--serif);font-size:2.8rem;font-weight:400;letter-spacing:-0.02em;margin-bottom:40px;line-height:1.1;}
-  .about-layout p{font-size:1rem;color:var(--ink2);line-height:1.8;margin-bottom:24px;}
+  .about-layout{padding:140px 48px 96px;max-width:700px;margin:0 auto;animation:fadeUp 0.5s ease both;}
+  .about-layout h1{font-family:var(--serif);font-size:clamp(2.35rem,5vw,3.9rem);font-weight:400;letter-spacing:-0.02em;margin-bottom:42px;line-height:1.08;}
+  .about-layout p{font-family:var(--sans);font-size:1rem;color:rgba(26,24,20,0.9);line-height:1.9;margin-bottom:26px;font-weight:300;}
+  .about-layout .about-kicker{font-family:var(--mono);font-size:0.66rem;line-height:1;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);margin-bottom:18px;}
   .about-contact{margin-top:40px;padding-top:28px;border-top:1px solid var(--border);}
   .about-contact .about-contact-label{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink2);opacity:0.62;margin-bottom:14px;}
   .about-contact p{margin-bottom:0;}
@@ -155,6 +156,7 @@
   <p class="drawer-note" data-i18n="site.note">All articles are 100% human-written.</p>
 </div>
 <div class="about-layout">
+  <p class="about-kicker" data-i18n="nav.about">About</p>
   <h1 data-i18n="about.title">About</h1>
   <p data-i18n="about.p1">Humanity Tomorrow is a project aimed at popularizing knowledge and developing ideas about the future of the human being and humanity.</p>
   <p data-i18n="about.p2">The project is in its early stage and is ready to grow in different directions. What tomorrow will bring can only be guessed.</p>
@@ -184,6 +186,7 @@ applyLang(currentLang);
 </script>
 <script>
 Object.assign(translations.en, {
+  'about.title': 'About',
   'about.p1': 'Humanity Tomorrow is a project aimed at popularizing knowledge and developing ideas about the future of the human being and humanity.',
   'about.p2': 'The project is in its early stage and is ready to grow in different directions. What tomorrow will bring can only be guessed.',
   'about.p3': 'The project was founded by Markel Kori and currently fully reflects his values and ideas. As the team expands, this may change.',
@@ -191,6 +194,7 @@ Object.assign(translations.en, {
   'about.email': 'E-mail:'
 });
 Object.assign(translations.ru, {
+  'about.title': 'О сайте',
   'about.p1': 'Humanity Tomorrow — это проект, направленный на популяризацию знаний и развитие идей о будущем человека и человечества.',
   'about.p2': 'Проект находится на начальном этапе и готов расти в разных направлениях. Что будет завтра — можно лишь предполагать!',
   'about.p3': 'Проект был основан Маркелом Кори и на данный момент полностью отражает именно его ценности и идеи. При дальнейшем расширении команды это может измениться.',
@@ -198,6 +202,7 @@ Object.assign(translations.ru, {
   'about.email': 'E-mail:'
 });
 Object.assign(translations.ua, {
+  'about.title': 'Про сайт',
   'about.p1': 'Humanity Tomorrow — це проєкт, спрямований на популяризацію знань і розвиток ідей про майбутнє людини та людства.',
   'about.p2': 'Проєкт перебуває на початковому етапі і готовий зростати в різних напрямах. Що буде завтра — можна лише припускати!',
   'about.p3': 'Проєкт був заснований Маркелом Корі і наразі повністю відображає саме його цінності та ідеї. У разі подальшого розширення команди це може змінитися.',

@@ -1212,19 +1212,20 @@ function updateDesktopTocState() {
   const tocHeight = toc.offsetHeight;
   const topOffset = 108;
   const fixedLeft = Math.max(24, (window.innerWidth / 2) - 790);
+  const absoluteLeft = fixedLeft - shellRect.left;
   const stopTop = Math.max(0, shell.offsetHeight - tocHeight);
 
   if (window.scrollY + topOffset <= shellTop) {
     toc.style.position = 'absolute';
     toc.style.top = '0px';
-    toc.style.left = 'calc(-250px - 40px)';
+    toc.style.left = `${absoluteLeft}px`;
     return;
   }
 
   if (window.scrollY + topOffset + tocHeight >= shellBottom) {
     toc.style.position = 'absolute';
     toc.style.top = `${stopTop}px`;
-    toc.style.left = 'calc(-250px - 40px)';
+    toc.style.left = `${absoluteLeft}px`;
     return;
   }
 

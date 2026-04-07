@@ -10,7 +10,7 @@
           ['Старение', 120000, '#2E7A4F', '120,000 смертей/день\n= 43.8 млн в год\n≈ 75% всех смертей'],
           ['Голод', 25000, '#6B6560', '25,000 смертей/день\n= 9.1 млн в год\nПреимущественно дети в Африке и Азии'],
           ['Нехватка воды', 3800, '#EDE9E1', '3,800 смертей/день\n= 1.4 млн в год\nОт заболеваний, связанных с грязной водой, и от обезвоживания'],
-          ['Войны', 187, '#F5F2EC', '187 смертей/день\n≈ 68,000\nОт всех конфликтов в мире. Цифра очень приблизительная']
+          ['Войны', 187, '#F5F2EC', '187 смертей/день\nОт всех конфликтов в мире. Цифра очень приблизительная']
         ],
         unit: 'смертей/день'
       },
@@ -42,10 +42,10 @@
         ]
       },
       experience: {
-        eyebrow: 'Жить вечно не значит исчерпать жизнь',
+        eyebrow: '',
         title: 'Сколько нужно времени, чтобы всё испытать?',
         intro: 'Даже если мир застынет, на чтение, обучение, путешествия и игры потребуются века.',
-        note: 'И это только малая часть возможного опыта.',
+        note: '',
         unit: 'лет',
         monthShort: 'мес.',
         total: (years) => `Итого: ${years}+ лет непрерывной практики`,
@@ -69,7 +69,7 @@
           ['Старіння', 120000, '#2E7A4F', '120,000 смертей/день\n= 43.8 млн на рік\n≈ 75% усіх смертей'],
           ['Голод', 25000, '#6B6560', '25,000 смертей/день\n= 9.1 млн на рік\nПереважно діти в Африці та Азії'],
           ['Нестача води', 3800, '#EDE9E1', '3,800 смертей/день\n= 1.4 млн на рік\nВід захворювань, пов’язаних із брудною водою, і від зневоднення'],
-          ['Війни', 187, '#F5F2EC', '187 смертей/день\n≈ 68,000\nВід усіх конфліктів у світі. Цифра дуже приблизна']
+          ['Війни', 187, '#F5F2EC', '187 смертей/день\nВід усіх конфліктів у світі. Цифра дуже приблизна']
         ],
         unit: 'смертей/день'
       },
@@ -101,10 +101,10 @@
         ]
       },
       experience: {
-        eyebrow: 'Жити вічно не означає вичерпати життя',
+        eyebrow: '',
         title: 'Скільки потрібно часу, щоб усе пережити?',
         intro: 'Навіть якщо світ застигне, на читання, навчання, подорожі та ігри потрібні століття.',
-        note: 'І це лише мала частина можливого досвіду.',
+        note: '',
         unit: 'років',
         monthShort: 'міс.',
         total: (years) => `Разом: ${years}+ років безперервної практики`,
@@ -128,7 +128,7 @@
           ['Aging', 120000, '#2E7A4F', '120,000 deaths/day\n= 43.8 million per year\n≈ 75% of all deaths'],
           ['Hunger', 25000, '#6B6560', '25,000 deaths/day\n= 9.1 million per year\nMostly children in Africa and Asia'],
           ['Lack of water', 3800, '#EDE9E1', '3,800 deaths/day\n= 1.4 million per year\nFrom dirty-water diseases and dehydration'],
-          ['Wars', 187, '#F5F2EC', '187 deaths/day\n≈ 68,000\nFrom all conflicts worldwide. Very approximate']
+          ['Wars', 187, '#F5F2EC', '187 deaths/day\nFrom all conflicts worldwide. Very approximate']
         ],
         unit: 'deaths/day'
       },
@@ -160,10 +160,10 @@
         ]
       },
       experience: {
-        eyebrow: 'Living forever does not mean exhausting life',
+        eyebrow: '',
         title: 'How long would it take to experience everything?',
         intro: 'Even if the world stood still, reading, learning, travel, and games would take centuries.',
-        note: 'And this is only a small part of possible experience.',
+        note: '',
         unit: 'years',
         monthShort: 'mo.',
         total: (years) => `Total: ${years}+ years of continuous practice`,
@@ -193,10 +193,11 @@
     const root = el('figure', `article-visual article-visual-${id}`);
     root.dataset.visualId = id;
     const header = el('figcaption', 'article-visual-header');
-    header.append(el('p', 'article-visual-eyebrow', spec.eyebrow), el('h3', 'article-visual-title', spec.title), el('p', 'article-visual-intro', spec.intro));
+    if (spec.eyebrow) header.appendChild(el('p', 'article-visual-eyebrow', spec.eyebrow));
+    header.append(el('h3', 'article-visual-title', spec.title), el('p', 'article-visual-intro', spec.intro));
     root.appendChild(header);
     root.appendChild(id === 'deaths' ? deaths(spec) : id === 'land' ? land(spec) : id === 'budget' ? budget(spec) : experience(spec));
-    root.appendChild(el('p', 'article-visual-note', spec.note));
+    if (spec.note) root.appendChild(el('p', 'article-visual-note', spec.note));
     return root;
   }
 
@@ -205,11 +206,12 @@
     const wrap = el('div', 'visual-bars visual-deaths-bars');
     spec.data.forEach(([label, value, color, tip]) => {
       const item = el('div', 'visual-bar-item');
-      item.dataset.tooltip = tip;
       item.style.setProperty('--bar-color', color);
       item.style.setProperty('--bar-height', `${Math.max(1, value / max * 100)}%`);
       const track = el('div', 'visual-bar-track');
-      track.appendChild(el('div', 'visual-bar'));
+      const bar = el('div', 'visual-bar');
+      bar.dataset.tooltip = tip;
+      track.appendChild(bar);
       item.append(track, el('p', 'visual-bar-value', fmt(value)), el('p', 'visual-bar-unit', spec.unit), el('p', 'visual-bar-label', label));
       wrap.appendChild(item);
     });

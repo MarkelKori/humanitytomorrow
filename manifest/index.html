@@ -6,17 +6,16 @@
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <title>Manifest — Humanity Tomorrow</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #F5F2EC;
     --bg2: #EDE9E1;
     --ink: #1A1814;
-    --ink2: #6B6560;
+    --ink2: #47413B;
     --accent: #0E7A45;
     --border: rgba(26,24,20,0.12);
     --serif: 'Playfair Display', Georgia, serif;
-    --reading: 'Source Serif 4', Georgia, serif;
     --mono: 'DM Mono', monospace;
     --sans: 'DM Sans', sans-serif;
   }
@@ -61,10 +60,10 @@
   .manifest-layout { max-width: 700px; margin-left: calc(50% - 350px); padding: 140px 48px 96px; animation: fadeUp 0.5s ease both; }
   .manifest-kicker { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
   .manifest-title { font-family: var(--serif); font-size: clamp(2.35rem, 5vw, 3.9rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 42px; }
-  .manifest-body p { font-size: 1rem; line-height: 1.9; color: var(--ink); margin-bottom: 26px; }
+  .manifest-body p { font-family: var(--sans); font-size: 1rem; line-height: 1.9; font-weight: 300; color: rgba(26,24,20,0.9); margin-bottom: 26px; }
   .manifest-body p:last-child { margin-bottom: 0; }
   .article-quote { margin: 36px 0; padding: 0 0 0 24px; border-left: 2px solid rgba(26,24,20,0.16); }
-  .article-quote blockquote { font-family: var(--reading); font-size: 1.1rem; font-style: italic; font-weight: 400; line-height: 1.8; color: #4F4943; margin: 0 0 10px; }
+  .article-quote blockquote { font-family: var(--sans); font-size: 1rem; font-style: italic; font-weight: 300; line-height: 1.9; color: rgba(26,24,20,0.9); margin: 0 0 10px; }
   .article-quote .quote-text::before { content: '\201C'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 3px; }
   .article-quote .quote-text::after { content: '\201D'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-left: 2px; }
   .note-ref { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); background: transparent; border: none; cursor: pointer; padding: 0 2px; vertical-align: super; line-height: 1; }
@@ -375,7 +374,6 @@ function openNote(noteId) {
   document.getElementById('noteLabel').textContent = `${copy.noteLabel} ${note.number}`;
   const noteBody = document.getElementById('noteBody');
   noteBody.innerHTML = '';
-  noteBody.appendChild(makeEl('p', '', note.text));
   const paragraph = makeEl('p');
   const link = document.createElement('a');
   link.href = note.url;
