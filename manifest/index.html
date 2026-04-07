@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>Manifest — Humanity Tomorrow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F2EC;
+    --bg2: #EDE9E1;
+    --ink: #1A1814;
+    --ink2: #6B6560;
+    --accent: #0E7A45;
+    --border: rgba(26,24,20,0.12);
+    --serif: 'Playfair Display', Georgia, serif;
+    --reading: 'Source Serif 4', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(245,242,236,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--serif); font-size: 1.18rem; font-style: italic; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(26,24,20,0.72); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--ink); border-bottom: 1px solid currentColor; }
+  .nav-links a.dimmed { opacity: 0.35; cursor: default; pointer-events: none; }
+  .lang-switcher { position: relative; margin-left: 20px; }
+  .lang-current { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px 3px 8px; border: 1px solid var(--border); background: transparent; color: rgba(26,24,20,0.72); cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; user-select: none; }
+  .lang-current::after { content: '▾'; font-size: 0.6rem; opacity: 0.5; }
+  .lang-current:hover { color: var(--ink); border-color: var(--ink); }
+  .lang-dropdown { display: none; position: absolute; top: calc(100% + 6px); right: 0; background: var(--bg); border: 1px solid var(--border); min-width: 72px; z-index: 200; }
+  .lang-switcher.open .lang-dropdown { display: block; }
+  .lang-option { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 12px; color: var(--ink2); cursor: pointer; display: block; width: 100%; background: transparent; border: none; text-align: left; transition: background 0.15s; }
+  .lang-option:hover { background: var(--bg2); color: var(--ink); }
+  .lang-option.active { color: var(--ink); }
+  .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .burger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.25s; }
+  .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .mobile-drawer { display: none; position: fixed; top: 61px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; padding: 40px 32px; flex-direction: column; overflow-y: auto; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
+  .mobile-drawer.open { transform: translateX(0); }
+  .drawer-link { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--ink); text-decoration: none; padding: 16px 0; display: block; background: none; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid var(--border); width: 100%; text-align: left; cursor: pointer; transition: color 0.2s; }
+  .drawer-link:hover { color: var(--ink2); }
+  .drawer-link.dimmed { opacity: 0.35; cursor: default; }
+  .drawer-link:last-of-type { border-bottom: none; }
+  .drawer-lang { padding-top: 24px; }
+  .drawer-lang-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink2); opacity: 0.5; margin-bottom: 16px; }
+  .drawer-lang-row { display: flex; align-items: center; gap: 8px; }
+  .drawer-lang-btn { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border: 1px solid var(--border); background: transparent; color: var(--ink2); cursor: pointer; transition: all 0.2s; }
+  .drawer-lang-btn.active, .drawer-lang-btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .drawer-note { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82rem; line-height: 1.7; color: var(--ink2); }
+
+  .manifest-layout { max-width: 700px; margin-left: calc(50% - 350px); padding: 140px 48px 96px; animation: fadeUp 0.5s ease both; }
+  .manifest-kicker { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+  .manifest-title { font-family: var(--serif); font-size: clamp(2.35rem, 5vw, 3.9rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 42px; }
+  .manifest-body p { font-size: 1rem; line-height: 1.9; color: var(--ink); margin-bottom: 26px; }
+  .manifest-body p:last-child { margin-bottom: 0; }
+  .article-quote { margin: 36px 0; padding: 0 0 0 24px; border-left: 2px solid rgba(26,24,20,0.16); }
+  .article-quote blockquote { font-family: var(--reading); font-size: 1.1rem; font-style: italic; font-weight: 400; line-height: 1.8; color: #4F4943; margin: 0 0 10px; }
+  .article-quote .quote-text::before { content: '\201C'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 3px; }
+  .article-quote .quote-text::after { content: '\201D'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-left: 2px; }
+  .note-ref { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); background: transparent; border: none; cursor: pointer; padding: 0 2px; vertical-align: super; line-height: 1; }
+  .note-ref:hover { color: var(--ink); }
+  .note-overlay { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(26,24,20,0.46); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+  .note-overlay.open { display: flex; }
+  .note-panel { background: var(--bg); border: 1px solid var(--border); width: min(460px, 92vw); padding: 34px 38px 36px; position: relative; animation: fadeUp 0.24s ease both; }
+  .note-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2); opacity: 0.62; margin-bottom: 16px; }
+  .note-body { color: var(--ink2); font-size: 0.93rem; line-height: 1.75; }
+  .note-body p { margin-bottom: 14px; }
+  .note-body p:last-child { margin-bottom: 0; }
+  .note-body a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(26,24,20,0.28); }
+  .note-body a:hover { border-bottom-color: var(--ink); }
+  .note-close { position: absolute; top: 12px; right: 16px; font-size: 1.3rem; background: none; border: none; cursor: pointer; color: var(--ink2); line-height: 1; padding: 4px; }
+  .back-top { position: fixed; bottom: 104px; right: 32px; z-index: 80; width: 40px; height: 40px; background: var(--ink); color: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; font-size: 1.1rem; line-height: 1; }
+  .back-top.visible { opacity: 1; pointer-events: auto; }
+  .back-top:hover { transform: translateY(-3px); }
+  footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .site-note { max-width: 520px; font-size: 0.8rem; line-height: 1.7; color: var(--ink2); }
+  footer span { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em; color: var(--ink2); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 900px) {
+    .manifest-layout { margin: 0 auto; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .burger { display: flex; }
+    .mobile-drawer { display: flex; }
+    .manifest-layout { padding: 106px 20px 72px; }
+    .manifest-title { margin-bottom: 32px; }
+    .manifest-body p { font-size: 0.98rem; line-height: 1.82; }
+    .article-quote { margin: 32px 0; padding-left: 18px; }
+    .article-quote blockquote { font-size: 1.05rem; }
+    .note-panel { padding: 32px 28px; }
+    .back-top { bottom: 32px; right: 20px; width: 36px; height: 36px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">Humanity Tomorrow</a>
+  <ul class="nav-links">
+    <li><a href="/" data-i18n="nav.home">Home</a></li>
+    <li><a href="/immortalism/" data-i18n="nav.life">Immortalism</a></li>
+    <li><a class="dimmed" data-i18n="nav.ai">AI Risks</a></li>
+    <li><a class="dimmed" data-i18n="nav.future">Future</a></li>
+    <li><a href="/about/" data-i18n="nav.about">About</a></li>
+    <li><a href="/manifest/" class="active" data-i18n="nav.manifest">Manifest</a></li>
+    <li><a href="/donate/" data-i18n="nav.donate">Donate</a></li>
+    <li>
+      <div class="lang-switcher" id="langSwitcher">
+        <div class="lang-current" id="langCurrent">EN</div>
+        <div class="lang-dropdown">
+          <button class="lang-option active" onclick="selectLang('en')">EN</button>
+          <button class="lang-option" onclick="selectLang('ua')">UA</button>
+          <button class="lang-option" onclick="selectLang('ru')">RU</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <button class="burger" id="burger" onclick="toggleDrawer()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <a class="drawer-link" href="/" data-i18n="nav.home">Home</a>
+  <a class="drawer-link" href="/immortalism/" data-i18n="nav.life">Immortalism</a>
+  <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
+  <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
+  <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
+  <a class="drawer-link" href="/manifest/" data-i18n="nav.manifest">Manifest</a>
+  <a class="drawer-link" href="/donate/" data-i18n="nav.donate">Donate</a>
+  <div class="drawer-lang">
+    <p class="drawer-lang-label" data-i18n="lang.label">Language</p>
+    <div class="drawer-lang-row">
+      <button class="drawer-lang-btn active" onclick="selectLang('en')">EN</button>
+      <button class="drawer-lang-btn" onclick="selectLang('ua')">UA</button>
+      <button class="drawer-lang-btn" onclick="selectLang('ru')">RU</button>
+    </div>
+  </div>
+  <p class="drawer-note" data-i18n="site.note">All articles are 100% human-written.</p>
+</div>
+
+<main class="manifest-layout">
+  <p class="manifest-kicker" data-i18n="manifest.kicker">Manifest</p>
+  <h1 class="manifest-title" id="manifestTitle">Markel Kori — Manifesto (v 1.0)</h1>
+  <article class="manifest-body" id="manifestBody"></article>
+</main>
+
+<footer>
+  <p class="site-note" data-i18n="site.note">All articles are 100% human-written.</p>
+  <span data-i18n="footer.text">© 2026 Humanity Tomorrow</span>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="note-overlay" id="noteOverlay">
+  <div class="note-panel">
+    <button class="note-close" id="noteClose" type="button">×</button>
+    <p class="note-label" id="noteLabel">Note</p>
+    <div class="note-body" id="noteBody"></div>
+  </div>
+</div>
+
+<script>
+const translations = {
+  en: {
+    'nav.home': 'Home',
+    'nav.ai': 'AI Risks',
+    'nav.future': 'Future',
+    'nav.life': 'Immortalism',
+    'nav.manifest': 'Manifest',
+    'nav.about': 'About',
+    'nav.donate': 'Donate',
+    'lang.label': 'Language',
+    'manifest.kicker': 'Manifest',
+    'site.note': 'All articles are 100% human-written.',
+    'footer.text': '© 2026 Humanity Tomorrow'
+  },
+  ru: {
+    'nav.home': 'Главная',
+    'nav.ai': 'Риски ИИ',
+    'nav.future': 'Будущее',
+    'nav.life': 'Иммортализм',
+    'nav.manifest': 'Манифест',
+    'nav.about': 'О сайте',
+    'nav.donate': 'Поддержать',
+    'lang.label': 'Язык',
+    'manifest.kicker': 'Манифест',
+    'site.note': 'Все статьи на 100% написаны людьми.',
+    'footer.text': '© 2026 Humanity Tomorrow'
+  },
+  ua: {
+    'nav.home': 'Головна',
+    'nav.ai': 'Ризики ШІ',
+    'nav.future': 'Майбутнє',
+    'nav.life': 'Імморталізм',
+    'nav.manifest': 'Маніфест',
+    'nav.about': 'Про сайт',
+    'nav.donate': 'Підтримати',
+    'lang.label': 'Мова',
+    'manifest.kicker': 'Маніфест',
+    'site.note': 'Усі статті на 100% написані людьми.',
+    'footer.text': '© 2026 Humanity Tomorrow'
+  }
+};
+
+const manifestCopy = {
+  en: {
+    browserTitle: 'Manifest — Humanity Tomorrow',
+    title: 'Markel Kori — Manifesto (v 1.0)',
+    noteLabel: 'Note',
+    blocks: [
+      { type: 'p', text: 'There is an enormous amount of suffering on Earth. I see the primary goal of civilization not as justifying this suffering, but as reducing it and, if possible, eliminating it. This is simple humanism: let us do everything possible so that sentient beings have the greatest possible freedom of action and are not forced to die or suffer.' },
+      { type: 'p', text: 'This may become possible through scientific and technological progress, which should already be humanity’s most important priority. Science is the best tool for managing reality that humans have ever created. The use of scientific knowledge should be directed first of all toward improving the well-being of sentient beings, extending life, and preventing existential risks, such as threats from the rapid development of artificial intelligence, the threat of nuclear war, or climate change.' },
+      { type: 'p', text: 'One of the greatest goals of our civilization may be the complete overcoming of the “necessary” nature of death. This is not only about defeating aging, but also about additional methods of preserving life and consciousness, and about reviving already dead beings if that proves physically possible.' },
+      {
+        type: 'quote',
+        text: 'One example of technological revival that interests me would be the work of a vast space-based computational infrastructure built around Dyson spheres[[note:dyson]] (for example, a Matrioshka brain[[note:matrioshka]]), made of matter similar to computronium[[note:computronium]], which reconstructs the informational structure of a personality and later assembles it on a biological or any other chosen substrate.',
+        notes: [
+          { id: 'dyson', text: 'Dyson sphere', url: 'https://en.wikipedia.org/wiki/Dyson_sphere' },
+          { id: 'matrioshka', text: 'Matrioshka brain', url: 'https://en.wikipedia.org/wiki/Matrioshka_brain' },
+          { id: 'computronium', text: 'Computronium', url: 'https://en.wikipedia.org/wiki/Computronium' }
+        ]
+      },
+      { type: 'p', text: 'Such complex futuristic ideas involve an enormous number of open questions and unsolved problems. The most important thing in discussing them is to remain strictly within the bounds of the scientific approach, rational thinking, and humanism, without allowing prejudice, cultural taboos, or intellectual laziness.' },
+      { type: 'p', text: 'I am not interested in religion, esotericism, or any pseudoscientific concepts. Everything I have proposed in this manifesto is not forbidden by the laws of physics according to our current understanding.' },
+      { type: 'p', text: 'I do not claim that any of the stated goals are definitely possible, but I do claim that it is necessary to strive toward these goals and study them within the following framework:' },
+      { type: 'p', text: 'We should not abandon a great goal merely because it may be difficult to achieve. It would be reasonable to abandon any goal like those mentioned above only if it is rigorously proven to be either physically impossible or technologically impossible to realize even on enormous timescales. I call this approach “make it, or prove that it\'s impossible.”' },
+      { type: 'p', text: 'All the aspirations described above, and the goods that follow from them, must apply to absolutely every person on Earth, regardless of any parameters.' }
+    ]
+  },
+  ru: {
+    browserTitle: 'Манифест — Humanity Tomorrow',
+    title: 'Маркел Кори — Манифест (v 1.0)',
+    noteLabel: 'Примечание',
+    blocks: [
+      { type: 'p', text: 'На Земле существует огромное количество страданий. Основной целью цивилизации я вижу не оправдание этих страданий, а их уменьшение и, если возможно, устранение. Это простой гуманизм: давайте делать всё возможное, чтобы чувствующие существа имели максимальную свободу действий и не были вынуждены умирать или страдать.' },
+      { type: 'p', text: 'Это может стать возможным благодаря научно-техническому прогрессу, который уже сейчас должен быть важнейшим приоритетом человечества. Наука — лучший инструмент управления реальностью, который когда-либо создал человек. Использование научных знаний должно быть прежде всего направлено на повышение благополучия чувствующих существ, продление жизни и предотвращение экзистенциальных рисков, таких как угрозы от стремительного развития искусственного интеллекта, угроза ядерной войны или изменение климата.' },
+      { type: 'p', text: 'Одной из величайших целей нашей цивилизации может стать полное преодоление «необходимой» природы смерти. Речь идёт не только о победе над старением, но и о дополнительных методах сохранения жизни и сознания, а также о возрождении уже умерших существ, если это окажется физически возможным.' },
+      {
+        type: 'quote',
+        text: 'Примером технологического возрождения, в котором я заинтересован, можно считать работу огромной космической вычислительной инфраструктуры на основе сфер Дайсона[[note:dyson]] (например, мозга-матрёшки[[note:matrioshka]]), состоящей из вещества, подобного компьютронию[[note:computronium]], которая восстанавливает информационную структуру личности, а затем собирает её на биологическом или любом другом выбранном носителе.',
+        notes: [
+          { id: 'dyson', text: 'Сфера Дайсона', url: 'https://en.wikipedia.org/wiki/Dyson_sphere' },
+          { id: 'matrioshka', text: 'Мозг-матрёшка', url: 'https://en.wikipedia.org/wiki/Matrioshka_brain' },
+          { id: 'computronium', text: 'Компьютроний', url: 'https://en.wikipedia.org/wiki/Computronium' }
+        ]
+      },
+      { type: 'p', text: 'Для таких сложных футуристических идей существует огромное количество открытых вопросов и нерешённых задач. Самое главное в их обсуждении — строго оставаться в рамках научного подхода, рационального мышления и гуманизма, не допуская предубеждений, культурных табу и интеллектуальной лени.' },
+      { type: 'p', text: 'Меня не интересуют религия, эзотерика и любые псевдонаучные концепции. Всё, что я предложил в этом манифесте, согласно современным представлениям не запрещено физическими законами.' },
+      { type: 'p', text: 'Я не утверждаю, что какие-либо из заявленных целей точно возможны, но утверждаю необходимость стремления к этим целям и их исследования в таких рамках:' },
+      { type: 'p', text: 'Мы не должны отказываться от большой цели лишь потому, что её может быть трудно осуществить. Отказаться от любой цели, подобной упомянутым выше, было бы разумно только в том случае, если будет строго доказано, что она либо физически невозможна, либо технологически невозможна для реализации даже в огромных временных масштабах. Я называю этот подход «make it, or prove that it\'s impossible».' },
+      { type: 'p', text: 'Все описанные выше стремления и блага, вытекающие из этих стремлений, должны касаться абсолютно каждого человека на Земле, независимо от любых параметров.' }
+    ]
+  },
+  ua: {
+    browserTitle: 'Маніфест — Humanity Tomorrow',
+    title: 'Маркел Корі — Маніфест (v 1.0)',
+    noteLabel: 'Примітка',
+    blocks: [
+      { type: 'p', text: 'На Землі існує величезна кількість страждань. Основною метою цивілізації я бачу не виправдання цих страждань, а їх зменшення і, якщо можливо, усунення. Це простий гуманізм: давайте робити все можливе, щоб чутливі істоти мали максимальну свободу дій і не були змушені вмирати чи зазнавати страждань.' },
+      { type: 'p', text: 'Це може стати можливим завдяки науково-технічному прогресу, який уже зараз має бути найважливішим пріоритетом людства. Наука — це найкращий інструмент для керування реальністю, який коли-небудь створила людина. Використання наукових знань має бути передусім спрямоване на підвищення добробуту чутливих істот, продовження життя та запобігання екзистенційним ризикам, таким як загрози від стрімкого розвитку штучного інтелекту, загроза ядерної війни або зміна клімату.' },
+      { type: 'p', text: 'Однією з найвеличніших цілей нашої цивілізації може стати повне подолання «необхідної» природи смерті. Йдеться не лише про перемогу над старінням, а й про додаткові методи збереження життя і свідомості та про відродження вже померлих істот, якщо це виявиться фізично можливим.' },
+      {
+        type: 'quote',
+        text: 'Прикладом технологічного відродження, в якому я зацікавлений, можна вважати роботу величезної космічної обчислювальної інфраструктури на основі сфер Дайсона[[note:dyson]] (наприклад, мозку-матрьошки[[note:matrioshka]]), що складаються з речовини, подібної до комп’ютронію[[note:computronium]], яка відновлює інформаційну структуру особистості, а згодом збирає її на біологічному або будь-якому іншому обраному носії.',
+        notes: [
+          { id: 'dyson', text: 'Сфера Дайсона', url: 'https://en.wikipedia.org/wiki/Dyson_sphere' },
+          { id: 'matrioshka', text: 'Мозок-матрьошка', url: 'https://en.wikipedia.org/wiki/Matrioshka_brain' },
+          { id: 'computronium', text: 'Комп’ютроній', url: 'https://en.wikipedia.org/wiki/Computronium' }
+        ]
+      },
+      { type: 'p', text: 'Для таких складних футуристичних ідей існує величезна кількість відкритих питань і нерозв’язаних завдань. Найголовніше в їх обговоренні — суворо триматися в межах наукового підходу, раціонального мислення та гуманізму, не допускаючи упереджень, культурних табу та інтелектуальних лінощів.' },
+      { type: 'p', text: 'Мене не цікавить релігія, езотерика, будь-які псевдонаукові концепції. Все, що я запропонував у цьому маніфесті, не є забороненим фізичними законами згідно з сучасними уявленнями.' },
+      { type: 'p', text: 'Я не стверджую, що будь-які із заявлених цілей точно можливі, але стверджую необхідність прагнення до цих цілей та їхнього дослідження у таких рамках:' },
+      { type: 'p', text: 'Ми не повинні відмовлятися від великої мети лише тому, що її може бути важко здійснити. Відмовитися від будь-якої мети, подібної до згаданих вище, було б розумно лише в тому разі, якщо буде суворо доведено, що вона або фізично неможлива, або технологічно неможлива до реалізації навіть у величезних часових масштабах. Я називаю цей підхід «make it, or prove that it\'s impossible».' },
+      { type: 'p', text: 'Усі описані вище прагнення і блага, що випливають із цих прагнень, мають стосуватися абсолютно кожної людини на Землі, незалежно від будь-яких параметрів.' }
+    ]
+  }
+};
+
+let currentLang = getInitialLang();
+let noteState = { counter: 0, registry: new Map() };
+
+function getInitialLang() {
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get('lang');
+  const fromStorage = localStorage.getItem('lang');
+  return translations[fromUrl] ? fromUrl : translations[fromStorage] ? fromStorage : 'en';
+}
+
+function makeEl(tag, className, text) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text !== undefined) el.textContent = text;
+  return el;
+}
+
+function resetNotes() {
+  noteState = { counter: 0, registry: new Map() };
+}
+
+function getNoteEntry(note, lang) {
+  if (!noteState.registry.has(note.id)) {
+    noteState.counter += 1;
+    noteState.registry.set(note.id, { ...note, number: noteState.counter, lang });
+  }
+  return noteState.registry.get(note.id);
+}
+
+function createNoteRef(noteEntry) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'note-ref';
+  button.textContent = `[${noteEntry.number}]`;
+  button.setAttribute('aria-label', `${manifestCopy[noteEntry.lang].noteLabel} ${noteEntry.number}`);
+  button.addEventListener('click', () => openNote(noteEntry.id));
+  return button;
+}
+
+function appendTextWithNotes(target, text, notes, lang) {
+  const notesById = new Map((notes || []).map((note) => [note.id, note]));
+  const pattern = /\[\[note:([a-zA-Z0-9_-]+)\]\]/g;
+  let lastIndex = 0;
+  let match;
+  while ((match = pattern.exec(text || '')) !== null) {
+    if (match.index > lastIndex) {
+      target.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+    }
+    const note = notesById.get(match[1]);
+    if (note) target.appendChild(createNoteRef(getNoteEntry(note, lang)));
+    lastIndex = pattern.lastIndex;
+  }
+  if (lastIndex < (text || '').length) target.appendChild(document.createTextNode(text.slice(lastIndex)));
+}
+
+function renderManifest(lang) {
+  const copy = manifestCopy[lang] || manifestCopy.en;
+  const body = document.getElementById('manifestBody');
+  body.innerHTML = '';
+  resetNotes();
+  document.getElementById('manifestTitle').textContent = copy.title;
+  document.title = copy.browserTitle;
+  copy.blocks.forEach((block) => {
+    if (block.type === 'quote') {
+      const wrap = makeEl('div', 'article-quote');
+      const quote = makeEl('blockquote');
+      const span = makeEl('span', 'quote-text');
+      appendTextWithNotes(span, block.text, block.notes, lang);
+      quote.appendChild(span);
+      wrap.appendChild(quote);
+      body.appendChild(wrap);
+      return;
+    }
+    const paragraph = makeEl('p');
+    appendTextWithNotes(paragraph, block.text, block.notes, lang);
+    body.appendChild(paragraph);
+  });
+}
+
+function openNote(noteId) {
+  const note = noteState.registry.get(noteId);
+  if (!note) return;
+  const copy = manifestCopy[note.lang] || manifestCopy.en;
+  document.getElementById('noteLabel').textContent = `${copy.noteLabel} ${note.number}`;
+  const noteBody = document.getElementById('noteBody');
+  noteBody.innerHTML = '';
+  noteBody.appendChild(makeEl('p', '', note.text));
+  const paragraph = makeEl('p');
+  const link = document.createElement('a');
+  link.href = note.url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.textContent = note.url;
+  paragraph.appendChild(link);
+  noteBody.appendChild(paragraph);
+  document.getElementById('noteOverlay').classList.add('open');
+}
+
+function closeNote() {
+  document.getElementById('noteOverlay').classList.remove('open');
+}
+
+function applyLang(lang) {
+  const dict = translations[lang] || translations.en;
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) el.textContent = dict[key];
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('langCurrent').textContent = lang.toUpperCase();
+  document.querySelectorAll('.lang-option').forEach((button) => {
+    button.classList.toggle('active', button.textContent.toLowerCase() === lang);
+  });
+  document.querySelectorAll('.drawer-lang-btn').forEach((button) => {
+    button.classList.toggle('active', button.textContent.toLowerCase() === lang);
+  });
+  renderManifest(lang);
+}
+
+function selectLang(lang) {
+  currentLang = translations[lang] ? lang : 'en';
+  localStorage.setItem('lang', currentLang);
+  applyLang(currentLang);
+  document.getElementById('langSwitcher').classList.remove('open');
+}
+
+document.getElementById('langCurrent').addEventListener('click', (event) => {
+  event.stopPropagation();
+  document.getElementById('langSwitcher').classList.toggle('open');
+});
+document.addEventListener('click', () => document.getElementById('langSwitcher').classList.remove('open'));
+
+function toggleDrawer() {
+  const open = document.getElementById('mobileDrawer').classList.toggle('open');
+  document.getElementById('burger').classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('backTop').classList.toggle('visible', window.scrollY > 400);
+});
+document.getElementById('noteClose').addEventListener('click', closeNote);
+document.getElementById('noteOverlay').addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) closeNote();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeNote();
+});
+
+applyLang(currentLang);
+</script>
+</body>
+</html>

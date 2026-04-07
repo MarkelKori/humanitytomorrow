@@ -20,7 +20,7 @@
 
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(245,242,236,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
   .nav-logo { font-family: var(--serif); font-size: 1.18rem; font-style: italic; color: var(--ink); text-decoration: none; }
-  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
   .nav-links a { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(26,24,20,0.72); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--ink); }
   .nav-links a.active { color: var(--ink); border-bottom: 1px solid currentColor; }
@@ -128,6 +128,7 @@
     <li><a class="dimmed" data-i18n="nav.ai">AI Risks</a></li>
     <li><a class="dimmed" data-i18n="nav.future">Future</a></li>
     <li><a href="/about/" data-i18n="nav.about">About</a></li>
+    <li><a href="/manifest/" data-i18n="nav.manifest">Manifest</a></li>
     <li><a href="/donate/" class="active" data-i18n="nav.donate">Donate</a></li>
     <li>
       <div class="lang-switcher" id="langSwitcher">
@@ -151,6 +152,7 @@
   <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
   <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
   <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
+  <a class="drawer-link" href="/manifest/" data-i18n="nav.manifest">Manifest</a>
   <a class="drawer-link" href="/donate/" data-i18n="nav.donate">Donate</a>
   <div class="drawer-lang">
     <p class="drawer-lang-label" data-i18n="lang.label">Language</p>
@@ -241,7 +243,7 @@
 <script>
 const translations = {
   en: {
-    'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.about':'About','nav.donate':'Donate',
+    'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.manifest':'Manifest','nav.about':'About','nav.donate':'Donate',
     'donate.title':'Support the work',
     'donate.intro':'This site is independent and free. If you find it valuable, consider supporting its development.',
     'donate.choose':'Choose an amount',
@@ -256,7 +258,7 @@ const translations = {
     'footer.text':'© 2026 Humanity Tomorrow',
   },
   ru: {
-    'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.about':'О сайте','nav.donate':'Поддержать',
+    'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.manifest':'Манифест','nav.about':'О сайте','nav.donate':'Поддержать',
     'donate.title':'Поддержите проект',
     'donate.intro':'Этот сайт независим и бесплатен. Если он вам полезен — поддержите его развитие.',
     'donate.choose':'Выберите сумму',
@@ -271,7 +273,7 @@ const translations = {
     'footer.text':'© 2026 Humanity Tomorrow',
   },
   ua: {
-    'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.about':'Про сайт','nav.donate':'Підтримати',
+    'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.manifest':'Маніфест','nav.about':'Про сайт','nav.donate':'Підтримати',
     'donate.title':'Підтримайте проект',
     'donate.intro':'Цей сайт незалежний і безкоштовний. Якщо він вам корисний — підтримайте його розвиток.',
     'donate.choose':'Оберіть суму',

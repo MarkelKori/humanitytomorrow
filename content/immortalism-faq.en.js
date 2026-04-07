@@ -317,6 +317,10 @@ window.immortalismPageContent = window.immortalismPageContent || {};
                 text: 'For example, off the top of my head, to read all of Dumas would require several months of nonstop reading, yes, even without pauses to blink, yawn, or go to the toilet.'
               },
               {
+                type: 'visual',
+                visual: 'experience'
+              },
+              {
                 type: 'paragraph',
                 text: 'What is more, as already mentioned above, in the future we may gain the ability to manage our brains and our mental states, perhaps even switching on heightened curiosity at will, as well as immersing ourselves in virtual worlds with an absolutely limitless quantity of experience.'
               }
@@ -514,6 +518,10 @@ window.immortalismPageContent = window.immortalismPageContent || {};
                     url: 'https://www.oxfam.org/en/press-releases/21000-people-are-dying-each-day-conflict-fuelled-hunger-around-world'
                   }
                 ]
+              },
+              {
+                type: 'visual',
+                visual: 'deaths'
               },
               {
                 type: 'paragraph',
@@ -967,6 +975,10 @@ window.immortalismPageContent = window.immortalismPageContent || {};
                 ]
               },
               {
+                type: 'visual',
+                visual: 'land'
+              },
+              {
                 type: 'paragraph',
                 text: 'In short, it is wrong to view overpopulation simply as an increase in the number of people. There is still an enormous amount we can do about this issue. Talk of shortages of water, food, or housing due to overpopulation is to a large degree a discussion of how we produce food and use land, not a matter of there simply being too many human bodies.'
               }
@@ -1055,6 +1067,10 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               {
                 type: 'paragraph',
                 text: 'In other words, governments spend almost a third of their budgets on problems caused by aging, yet they are in no hurry to spend even 1 percent on fighting aging itself.'
+              },
+              {
+                type: 'visual',
+                visual: 'budget'
               },
               {
                 type: 'paragraph',

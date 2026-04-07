@@ -296,6 +296,10 @@ window.immortalismPageContent = window.immortalismPageContent || {};
                 text: 'Наприклад, щоб прочитати всі твори Дюма, знадобиться кілька місяців безперервного читання, так, навіть без пауз на кліпання, позіхання чи походи до туалету.'
               },
               {
+                type: 'visual',
+                visual: 'experience'
+              },
+              {
                 type: 'paragraph',
                 text: 'Мало того: як уже було згадано вище, в майбутньому нам може стати доступним керування своїм мозком і психічними станами, можна буде вмикати собі підвищену цікавість, а також занурюватися у віртуальні світи з абсолютно безмежною кількістю досвіду.'
               }
@@ -493,6 +497,10 @@ window.immortalismPageContent = window.immortalismPageContent || {};
                     url: 'https://www.oxfam.org/en/press-releases/21000-people-are-dying-each-day-conflict-fuelled-hunger-around-world'
                   }
                 ]
+              },
+              {
+                type: 'visual',
+                visual: 'deaths'
               },
               {
                 type: 'paragraph',
@@ -946,6 +954,10 @@ window.immortalismPageContent = window.immortalismPageContent || {};
                 ]
               },
               {
+                type: 'visual',
+                visual: 'land'
+              },
+              {
                 type: 'paragraph',
                 text: 'Коротко кажучи, розглядати перенаселення просто як збільшення кількості людей неправильно. Ми ще дуже багато можемо зробити з цією проблемою. Розмови про нестачу води, їжі чи житла через перенаселення значною мірою є розмовами про те, як саме ми виробляємо їжу й використовуємо землю, а не про те, що людських тіл просто стане надто багато.'
               }
@@ -1034,6 +1046,10 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               {
                 type: 'paragraph',
                 text: 'Іншими словами, держави витрачають майже третину своїх бюджетів на проблеми, спричинені старінням, але не поспішають витрачати навіть 1 відсоток на боротьбу із самим старінням.'
+              },
+              {
+                type: 'visual',
+                visual: 'budget'
               },
               {
                 type: 'paragraph',

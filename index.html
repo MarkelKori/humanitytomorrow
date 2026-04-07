@@ -30,7 +30,7 @@
     border-bottom: 1px solid var(--border);
   }
   .nav-logo { font-family: var(--serif); font-size: 1.18rem; font-style: italic; color: var(--ink); text-decoration: none; }
-  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
   .nav-links a {
     font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em;
     text-transform: uppercase; color: rgba(26,24,20,0.72); text-decoration: none; transition: color 0.2s;
@@ -213,6 +213,7 @@
     <li><a class="dimmed" data-i18n="nav.ai">AI Risks</a></li>
     <li><a class="dimmed" data-i18n="nav.future">Future</a></li>
     <li><a href="/about/" data-i18n="nav.about">About</a></li>
+    <li><a href="/manifest/" data-i18n="nav.manifest">Manifest</a></li>
     <li><a href="/donate/" data-i18n="nav.donate">Donate</a></li>
     <li>
       <div class="lang-switcher" id="langSwitcher">
@@ -236,6 +237,7 @@
   <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
   <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
   <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
+  <a class="drawer-link" href="/manifest/" data-i18n="nav.manifest">Manifest</a>
   <a class="drawer-link" href="/donate/" data-i18n="nav.donate">Donate</a>
   <div class="drawer-lang">
     <p class="drawer-lang-label" data-i18n="lang.label">Language</p>
@@ -284,7 +286,7 @@
 <script>
 const translations = {
   en: {
-    'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.about':'About','nav.donate':'Donate',
+    'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.manifest':'Manifest','nav.about':'About','nav.donate':'Donate',
     'home.label':'DEMO VERSION',
     'home.title':'On the things<br>that <em>really</em><br>matter.',
     'home.desc':'Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future.',
@@ -295,7 +297,7 @@ const translations = {
     'footer.text':'© 2026 Humanity Tomorrow',
   },
   ru: {
-    'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.about':'О сайте','nav.donate':'Поддержать',
+    'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.manifest':'Манифест','nav.about':'О сайте','nav.donate':'Поддержать',
     'home.label':'ДЕМО ВЕРСИЯ',
     'home.title':'О вещах, которые<br><em>правда</em><br>важны.',
     'home.desc':'Получите ответы на вопросы, которые у вас могли возникнуть при погружении в тему продления жизни, ИИ рисков и будущего.',
@@ -305,7 +307,7 @@ const translations = {
     'card.read':'Читать','card.soon':'Скоро',
   },
   ua: {
-    'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.about':'Про сайт','nav.donate':'Підтримати',
+    'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.manifest':'Маніфест','nav.about':'Про сайт','nav.donate':'Підтримати',
     'home.label':'ДЕМО ВЕРСІЯ',
     'home.title':'Про речі, які<br><em>дійсно</em><br>важливі.',
     'home.desc':'Отримайте відповіді на всі питання, які могли у вас виникнути при зануренні в теми продовження життя, ризиків ШІ та майбутнього.',
