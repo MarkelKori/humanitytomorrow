@@ -383,7 +383,7 @@
     text-align: center;
     margin-bottom: 12px;
   }
-  .visual-land-row { display: flex; height: 150px; border: 1px solid rgba(26,24,20,0.18); overflow: visible; }
+  .visual-land-row { display: flex; height: 150px; border: 1px solid rgba(26,24,20,0.18); overflow: hidden; }
   .visual-land-segment {
     flex: var(--segment-grow) 1 0;
     min-width: 0;
@@ -401,8 +401,8 @@
   }
   .visual-land-segment.is-light { color: var(--ink); }
   .visual-land-segment.is-empty { padding-left: 0; padding-right: 0; opacity: 0; pointer-events: none; }
-  .visual-land-segment span { font-family: var(--sans); font-size: 0.82rem; font-weight: 600; line-height: 1.18; }
-  .visual-land-segment strong { font-family: var(--sans); font-size: 0.9rem; }
+  .visual-land-segment span { font-family: var(--sans); font-size: 0.82rem; font-weight: 600; line-height: 1.18; overflow-wrap: anywhere; word-break: break-word; hyphens: auto; }
+  .visual-land-segment strong { font-family: var(--sans); font-size: 0.9rem; overflow-wrap: anywhere; word-break: break-word; hyphens: auto; }
   .visual-budget { display: grid; grid-template-columns: minmax(190px, 0.76fr) 1fr; align-items: center; gap: 24px; }
   .visual-pie {
     width: min(100%, 240px);
@@ -526,6 +526,9 @@
     .visual-bar-unit { display: none; }
     .visual-bar-label { font-size: 0.7rem; }
     .visual-land-row { height: 140px; }
+    .visual-land-segment { padding: 8px 6px; gap: 4px; }
+    .visual-land-segment span { font-size: 0.7rem; line-height: 1.12; }
+    .visual-land-segment strong { font-size: 0.76rem; line-height: 1.14; }
     .visual-budget { grid-template-columns: 1fr; gap: 22px; }
     .visual-pie { width: min(260px, 82vw); }
     .visual-exp-row { grid-template-columns: 1fr; gap: 7px; }
@@ -579,12 +582,15 @@
     display: none; position: fixed; inset: 0; z-index: 310;
     background: rgba(26,24,20,0.5); backdrop-filter: blur(4px);
     align-items: center; justify-content: center;
+    padding: 12px;
   }
   .note-overlay.open { display: flex; }
   .note-panel {
-    background: var(--bg); padding: 34px 36px 30px; width: min(520px, calc(100vw - 40px));
+    background: var(--bg); padding: 34px 36px 30px; width: min(520px, calc(100vw - 24px)); max-width: calc(100vw - 24px); max-height: calc(100vh - 24px);
     position: relative; animation: fadeUp 0.28s ease both;
     border: 1px solid var(--border);
+    overflow-y: auto;
+    box-sizing: border-box;
   }
   .note-label {
     font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em;
@@ -617,6 +623,8 @@
 
   @media (max-width: 768px) {
     .back-top { bottom: 32px; right: 20px; width: 36px; height: 36px; }
+    .note-panel { width: calc(100vw - 24px); max-width: calc(100vw - 24px); max-height: calc(100vh - 24px); padding: 24px 20px 22px; }
+    .note-body { font-size: 0.9rem; line-height: 1.64; }
   }
 
   .drawer-lang-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
@@ -644,7 +652,7 @@
     <li><a class="dimmed" data-i18n="nav.ai">AI Risks</a></li>
     <li><a class="dimmed" data-i18n="nav.future">Future</a></li>
     <li><a href="/about/" data-i18n="nav.about">About</a></li>
-    <li><a href="/manifest/" data-i18n="nav.manifest">Manifest</a></li>
+    <li><a href="/manifest/" data-i18n="nav.manifest">Manifesto</a></li>
     <li><a href="/donate/" data-i18n="nav.donate">Donate</a></li>
     <li>
       <div class="lang-switcher" id="langSwitcher">
@@ -668,7 +676,7 @@
   <span class="drawer-link dimmed" data-i18n="nav.ai">AI Risks</span>
   <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
   <a class="drawer-link" href="/about/" data-i18n="nav.about">About</a>
-  <a class="drawer-link" href="/manifest/" data-i18n="nav.manifest">Manifest</a>
+  <a class="drawer-link" href="/manifest/" data-i18n="nav.manifest">Manifesto</a>
   <a class="drawer-link" href="/donate/" data-i18n="nav.donate">Donate</a>
   <div class="drawer-lang">
     <p class="drawer-lang-label" data-i18n="lang.label">Language</p>
@@ -771,7 +779,7 @@
 <script>
 const translations = {
   en: {
-    'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.manifest':'Manifest','nav.about':'About','nav.donate':'Donate',
+    'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.manifest':'Manifesto','nav.about':'About','nav.donate':'Donate',
     'toc.title':'Contents',
     'life.title':'Immortalism FAQ',
     'life.intro':'From the problem of boredom to overpopulation, from eternal dictators to the meaning of life, this FAQ aims to answer any questions you may have.',
@@ -909,7 +917,7 @@ const faqUiTranslations = {
     'nav.ai': 'AI Risks',
     'nav.future': 'Future',
     'nav.life': 'Immortalism',
-    'nav.manifest': 'Manifest',
+    'nav.manifest': 'Manifesto',
     'nav.about': 'About',
     'nav.donate': 'Donate',
     'lang.label': 'Language',
