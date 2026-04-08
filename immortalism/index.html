@@ -474,8 +474,8 @@
     color: #4F4943;
     margin: 0 0 10px;
   }
-  .article-quote .quote-text::before { content: '\201C'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 3px; }
-  .article-quote .quote-text::after { content: '\201D'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-left: 2px; }
+  .article-quote .quote-text::before { content: '\00AB'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 4px; }
+  .article-quote .quote-text::after { content: '\00BB'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-left: 4px; }
   .article-quote cite { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); opacity: 0.5; display: block; font-style: normal; }
 
   /* ── RESOURCES ── */
@@ -545,6 +545,13 @@
     .visual-pie,
     .visual-exp-track::before {
       animation: none;
+    }
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .article-visual [data-tooltip]::after {
+      content: none;
+      display: none;
     }
   }
 
