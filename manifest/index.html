@@ -62,6 +62,14 @@
   .manifest-title { font-family: var(--serif); font-size: clamp(2.35rem, 5vw, 3.9rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 42px; text-align: center; }
   .manifest-body p { font-family: var(--sans); font-size: 1rem; line-height: 1.9; font-weight: 300; color: rgba(26,24,20,0.9); margin-bottom: 26px; }
   .manifest-body p:last-child { margin-bottom: 0; }
+  .manifest-cta { position: relative; margin-top: 54px; padding: 30px 30px 32px; border: 1px solid rgba(122,46,58,0.16); background: linear-gradient(135deg, rgba(255,255,255,0.58), rgba(237,233,225,0.96)); overflow: hidden; }
+  .manifest-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(122,46,58,0.12), transparent 48%); pointer-events: none; }
+  .manifest-cta::after { content: ''; position: absolute; top: 0; left: 30px; right: 30px; height: 1px; background: linear-gradient(90deg, transparent, rgba(122,46,58,0.58), transparent); }
+  .manifest-cta-label { position: relative; z-index: 1; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .manifest-cta-text { position: relative; z-index: 1; font-size: 1.02rem; line-height: 1.85; color: rgba(26,24,20,0.88); margin-bottom: 24px; }
+  .manifest-cta-button { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; background: var(--ink); color: var(--bg); text-decoration: none; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 16px 28px rgba(26,24,20,0.12); }
+  .manifest-cta-button::after { content: '↗'; font-size: 0.92rem; line-height: 1; }
+  .manifest-cta-button:hover { transform: translateY(-2px); background: var(--accent); box-shadow: 0 18px 34px rgba(122,46,58,0.2); }
   .article-quote { margin: 36px 0; padding: 0 0 0 24px; border-left: 2px solid rgba(26,24,20,0.16); }
   .article-quote blockquote { font-family: var(--sans); font-size: 1rem; font-style: italic; font-weight: 300; line-height: 1.9; color: rgba(26,24,20,0.9); margin: 0 0 10px; }
   .article-quote .quote-text::before { content: '\00AB'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 4px; }
@@ -97,6 +105,10 @@
     .manifest-layout { padding: 106px 20px 72px; }
     .manifest-title { margin-bottom: 32px; }
     .manifest-body p { font-size: 0.98rem; line-height: 1.82; }
+    .manifest-cta { margin-top: 42px; padding: 24px 20px 22px; }
+    .manifest-cta::after { left: 20px; right: 20px; }
+    .manifest-cta-text { font-size: 0.97rem; line-height: 1.78; }
+    .manifest-cta-button { width: 100%; justify-content: center; }
     .article-quote { margin: 32px 0; padding-left: 18px; }
     .article-quote blockquote { font-size: 1.05rem; }
     .note-panel { width: calc(100vw - 24px); max-width: calc(100vw - 24px); max-height: calc(100vh - 24px); padding: 24px 20px 22px; }
@@ -154,6 +166,11 @@
   <p class="manifest-kicker" data-i18n="manifest.kicker">Manifesto</p>
   <h1 class="manifest-title" id="manifestTitle">Markel Kori — Manifesto (v 1.0)</h1>
   <article class="manifest-body" id="manifestBody"></article>
+  <section class="manifest-cta" aria-labelledby="manifestCtaLabel">
+    <p class="manifest-cta-label" id="manifestCtaLabel">Invitation</p>
+    <p class="manifest-cta-text" id="manifestCtaText">If after reading you feel an inner resonance and want to think or act in the directions described, you can fill out this form.</p>
+    <a class="manifest-cta-button" id="manifestCtaButton" href="https://docs.google.com/forms/d/e/1FAIpQLSe4o3KLeImP35_mqq16w1EiLHOBqOrSnPY9SqAnNErE3wDonQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">Open form</a>
+  </section>
 </main>
 
 <footer>
@@ -219,6 +236,9 @@ const manifestCopy = {
     browserTitle: 'Manifesto — Humanity Tomorrow',
     title: 'Markel Kori — Manifesto (v 1.0)',
     noteLabel: 'Note',
+    ctaLabel: 'Invitation',
+    ctaText: 'If after reading you feel an inner resonance and want to think or act in the directions described, you can fill out this form.',
+    ctaButton: 'Open form',
     blocks: [
       { type: 'p', text: 'There is an enormous amount of suffering on Earth. I see the primary goal of civilization not as justifying this suffering, but as reducing it and, if possible, eliminating it. This is simple humanism: let us do everything possible so that sentient beings have the greatest possible freedom of action and are not forced to die or suffer.' },
       { type: 'p', text: 'This may become possible through scientific and technological progress, which should already be humanity’s most important priority. Science is the best tool for managing reality that humans have ever created. The use of scientific knowledge should be directed first of all toward improving the well-being of sentient beings, extending life, and preventing existential risks, such as threats from the rapid development of artificial intelligence, the threat of nuclear war, or climate change.' },
@@ -243,6 +263,9 @@ const manifestCopy = {
     browserTitle: 'Манифест — Humanity Tomorrow',
     title: 'Маркел Кори — Манифест (v 1.0)',
     noteLabel: 'Примечание',
+    ctaLabel: 'Форма',
+    ctaText: 'Если после прочтения вы чувствуете внутреннее совпадение и хотите думать или действовать в описанных направлениях, — вы можете заполнить эту форму.',
+    ctaButton: 'Заполнить форму',
     blocks: [
       { type: 'p', text: 'На Земле существует огромное количество страданий. Основной целью цивилизации я вижу не оправдание этих страданий, а их уменьшение и, если возможно, устранение. Это простой гуманизм: давайте делать всё возможное, чтобы чувствующие существа имели максимальную свободу действий и не были вынуждены умирать или страдать.' },
       { type: 'p', text: 'Это может стать возможным благодаря научно-техническому прогрессу, который уже сейчас должен быть важнейшим приоритетом человечества. Наука — лучший инструмент управления реальностью, который когда-либо создал человек. Использование научных знаний должно быть прежде всего направлено на повышение благополучия чувствующих существ, продление жизни и предотвращение экзистенциальных рисков, таких как угрозы от стремительного развития искусственного интеллекта, угроза ядерной войны или изменение климата.' },
@@ -267,6 +290,9 @@ const manifestCopy = {
     browserTitle: 'Маніфест — Humanity Tomorrow',
     title: 'Маркел Корі — Маніфест (v 1.0)',
     noteLabel: 'Примітка',
+    ctaLabel: 'Форма',
+    ctaText: 'Якщо після прочитання ви відчуваєте внутрішній збіг і хочете думати чи діяти в описаних напрямах, — ви можете заповнити цю форму.',
+    ctaButton: 'Заповнити форму',
     blocks: [
       { type: 'p', text: 'На Землі існує величезна кількість страждань. Основною метою цивілізації я бачу не виправдання цих страждань, а їх зменшення і, якщо можливо, усунення. Це простий гуманізм: давайте робити все можливе, щоб чутливі істоти мали максимальну свободу дій і не були змушені вмирати чи зазнавати страждань.' },
       { type: 'p', text: 'Це може стати можливим завдяки науково-технічному прогресу, який уже зараз має бути найважливішим пріоритетом людства. Наука — це найкращий інструмент для керування реальністю, який коли-небудь створила людина. Використання наукових знань має бути передусім спрямоване на підвищення добробуту чутливих істот, продовження життя та запобігання екзистенційним ризикам, таким як загрози від стрімкого розвитку штучного інтелекту, загроза ядерної війни або зміна клімату.' },
@@ -291,6 +317,10 @@ const manifestCopy = {
 
 let currentLang = getInitialLang();
 let noteState = { counter: 0, registry: new Map() };
+const manifestFormLinks = {
+  default: 'https://docs.google.com/forms/d/e/1FAIpQLSe4o3KLeImP35_mqq16w1EiLHOBqOrSnPY9SqAnNErE3wDonQ/viewform?usp=header',
+  ua: 'https://docs.google.com/forms/d/e/1FAIpQLSc-cRKlnxLKeETo_-rrRz8ZyHZz_oFUZJgc7zlCMEqkYIrztQ/viewform?usp=header'
+};
 
 function getInitialLang() {
   const params = new URLSearchParams(window.location.search);
@@ -350,6 +380,10 @@ function renderManifest(lang) {
   body.innerHTML = '';
   resetNotes();
   document.getElementById('manifestTitle').textContent = copy.title;
+  document.getElementById('manifestCtaLabel').textContent = copy.ctaLabel || manifestCopy.en.ctaLabel;
+  document.getElementById('manifestCtaText').textContent = copy.ctaText || manifestCopy.en.ctaText;
+  document.getElementById('manifestCtaButton').textContent = copy.ctaButton || manifestCopy.en.ctaButton;
+  document.getElementById('manifestCtaButton').href = manifestFormLinks[lang] || manifestFormLinks.default;
   document.title = copy.browserTitle;
   copy.blocks.forEach((block) => {
     if (block.type === 'quote') {
