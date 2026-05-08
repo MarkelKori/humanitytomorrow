@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Humanity Tomorrow manifesto on reducing suffering, scientific progress, life extension, and existential risks.">
+<meta property="og:title" content="Manifesto — Humanity Tomorrow">
+<meta property="og:description" content="A manifesto on reducing suffering, scientific progress, life extension, and the future of sentient beings.">
+<meta property="og:image" content="https://humanitytomorrow.site/preview.png">
+<meta property="og:image:width" content="1731">
+<meta property="og:image:height" content="909">
+<meta property="og:url" content="https://humanitytomorrow.site/manifest/">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Manifesto — Humanity Tomorrow">
+<meta name="twitter:description" content="A manifesto on reducing suffering, scientific progress, life extension, and the future of sentient beings.">
+<meta name="twitter:image" content="https://humanitytomorrow.site/preview.png">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <title>Manifesto — Humanity Tomorrow</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,7 +86,8 @@
   .article-quote blockquote { font-family: var(--sans); font-size: 1rem; font-style: italic; font-weight: 300; line-height: 1.9; color: rgba(26,24,20,0.9); margin: 0 0 10px; }
   .article-quote .quote-text::before { content: '\00AB'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 4px; }
   .article-quote .quote-text::after { content: '\00BB'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-left: 4px; }
-  .note-ref { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); background: transparent; border: none; cursor: pointer; padding: 0 2px; vertical-align: super; line-height: 1; }
+  .note-join { white-space: nowrap; }
+  .note-ref { display: inline; margin-left: 0.18em; padding: 0; border: none; background: none; color: var(--accent); font-family: var(--mono); font-size: 0.45em; line-height: 1; cursor: pointer; vertical-align: super; }
   .note-ref:hover { color: var(--ink); }
   .note-overlay { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(26,24,20,0.46); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 12px; }
   .note-overlay.open { display: flex; }
@@ -358,17 +371,41 @@ function createNoteRef(noteEntry) {
   return button;
 }
 
+function appendTextWithJoinedNote(target, segment, noteRef) {
+  const trailingWord = /(\S+)(\s*)$/.exec(segment || '');
+  if (!trailingWord) {
+    target.appendChild(noteRef);
+    return;
+  }
+
+  const wordStart = trailingWord.index;
+  if (wordStart > 0) {
+    target.appendChild(document.createTextNode(segment.slice(0, wordStart)));
+  }
+
+  const wrap = makeEl('span', 'note-join');
+  wrap.appendChild(document.createTextNode(trailingWord[1]));
+  wrap.appendChild(noteRef);
+  target.appendChild(wrap);
+
+  if (trailingWord[2]) {
+    target.appendChild(document.createTextNode(trailingWord[2]));
+  }
+}
+
 function appendTextWithNotes(target, text, notes, lang) {
   const notesById = new Map((notes || []).map((note) => [note.id, note]));
   const pattern = /\[\[note:([a-zA-Z0-9_-]+)\]\]/g;
   let lastIndex = 0;
   let match;
   while ((match = pattern.exec(text || '')) !== null) {
-    if (match.index > lastIndex) {
-      target.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-    }
+    const segment = text.slice(lastIndex, match.index);
     const note = notesById.get(match[1]);
-    if (note) target.appendChild(createNoteRef(getNoteEntry(note, lang)));
+    if (note) {
+      appendTextWithJoinedNote(target, segment, createNoteRef(getNoteEntry(note, lang)));
+    } else if (segment) {
+      target.appendChild(document.createTextNode(segment));
+    }
     lastIndex = pattern.lastIndex;
   }
   if (lastIndex < (text || '').length) target.appendChild(document.createTextNode(text.slice(lastIndex)));
