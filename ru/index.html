@@ -55,6 +55,32 @@
   .nav-links a:hover { color: var(--ink); }
   .nav-links a.active { color: var(--ink); border-bottom: 1px solid currentColor; }
   .nav-links a.dimmed { opacity: 0.35; cursor: default; pointer-events: none; }
+  .nav-links a[data-i18n="nav.donate"] {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px 3px 8px;
+    border: 1px solid rgba(46,122,79,0.42);
+    background: transparent;
+    color: #2E7A4F;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .nav-links a[data-i18n="nav.donate"]:hover,
+  .nav-links a[data-i18n="nav.donate"].active {
+    color: #245F3E;
+    border-color: #2E7A4F;
+    background: rgba(46,122,79,0.08);
+  }
+  .drawer-link[data-i18n="nav.donate"] {
+    color: #2E7A4F;
+    font-weight: 500;
+  }
 
   /* ── LANG DROPDOWN ── */
   .lang-switcher { position: relative; margin-left: 24px; }
@@ -269,7 +295,7 @@
 </div>
 
 <div class="home-hero">
-  <p class="home-label" data-i18n="home.label">ДЕМО ВЕРСИЯ</p>
+  <p class="home-label" data-i18n="home.label">EARLY VERSION</p>
   <h1 class="home-title" data-i18n-html="home.title">О вещах, которые<br><em>правда</em><br>важны.</h1>
   <p class="home-desc" data-i18n="home.desc">Получите ответы на вопросы, которые у вас могли возникнуть при погружении в тему продления жизни, ИИ рисков и будущего.</p>
 </div>
@@ -304,7 +330,7 @@
 const translations = {
   en: {
     'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.manifest':'Manifesto','nav.about':'About','nav.donate':'Donate',
-    'home.label':'DEMO VERSION',
+    'home.label':'EARLY VERSION',
     'home.title':'On the things<br>that <em>really</em><br>matter.',
     'home.desc':'Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future.',
     'card.life.desc':'Find out why living forever is good, and death is an absolute evil.',
@@ -315,7 +341,7 @@ const translations = {
   },
   ru: {
     'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.manifest':'Манифест','nav.about':'О сайте','nav.donate':'Поддержать',
-    'home.label':'ДЕМО ВЕРСИЯ',
+    'home.label':'EARLY VERSION',
     'home.title':'О вещах, которые<br><em>правда</em><br>важны.',
     'home.desc':'Получите ответы на вопросы, которые у вас могли возникнуть при погружении в тему продления жизни, ИИ рисков и будущего.',
     'card.life.desc':' Узнайте, почему жить вечно — это хорошо, а смерть — абсолютное зло.',
@@ -325,7 +351,7 @@ const translations = {
   },
   ua: {
     'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.manifest':'Маніфест','nav.about':'Про сайт','nav.donate':'Підтримати',
-    'home.label':'ДЕМО ВЕРСІЯ',
+    'home.label':'EARLY VERSION',
     'home.title':'Про речі, які<br><em>дійсно</em><br>важливі.',
     'home.desc':'Отримайте відповіді на всі питання, які могли у вас виникнути при зануренні в теми продовження життя, ризиків ШІ та майбутнього.',
     'card.life.desc':'Дізнайтеся, чому вічне життя — це добре, а смерть — абсолютне зло. ',

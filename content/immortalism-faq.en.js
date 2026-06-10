@@ -332,7 +332,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
             blocks: [
               {
                 type: 'paragraph',
-                text: 'To my mind, this is one of the silliest misconceptions about immortality.'
+                text: 'This is one of the most common and, to my mind, strangest misconceptions about immortality.'
               },
               {
                 type: 'paragraph',
@@ -348,7 +348,13 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'If I want to play the guitar, then I want to play the guitar. If I want to write a book, I want to write a book. A rose is a rose is a rose, that is all. I do not do these things because I will die, not because I must "manage to try them in time," but simply because I want to.'
+                text: 'If I want to play the guitar, then I want to play the guitar. If I want to write a book, I want to write a book. A rose is a rose is a rose, that is all[[note:rose-is-a-rose]]. I do not do these things because I will die, not because I must "manage to try them in time," but simply because I want to.',
+                notes: [
+                  {
+                    id: 'rose-is-a-rose',
+                    url: 'https://en.wikipedia.org/wiki/Rose_is_a_rose_is_a_rose_is_a_rose'
+                  }
+                ]
               },
               {
                 type: 'paragraph',
@@ -457,7 +463,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'And evolution is a "blind watchmaker." It has no goal, it can make mistakes, and so on. It does not strive toward any ideal; it merely fixes those factors that happened to be useful for reproduction at a given time and place. That is all. Evolution should not be treated as a genius architect whom foolish humans have no right to challenge.'
+                text: 'And evolution is a "blind watchmaker." It has no goal, it can make mistakes, and so on. It does not strive toward any ideal; it merely fixes those factors that happened to be useful for reproduction at a given time and place. That is all. Evolution should not be treated as a genius architect whom humans have no right to challenge.'
               },
               {
                 type: 'paragraph',
@@ -876,7 +882,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Perhaps, if the population really were to reach its limit, which is far from certain, some system of support for dynamic equilibrium would be created. It would note every registered death and notify people who wish to have children and have joined a queue that a place had opened up. But that is only my fantasy and need not become reality. Even so, it is already a far more rational and reasonable option than the repellent and, to my mind, very foolish literary trope that one must choose between immortality and reproduction.'
+                text: 'Perhaps, if the population really were to reach its limit, which is far from certain, some system of support for dynamic equilibrium would be created. It would note every registered death and notify people who wish to have children and have joined a queue that a place had opened up. But that is only my fantasy and need not become reality. Even so, it is already a far more rational and reasonable option than the repellent literary trope that one must choose between immortality and reproduction.'
               }
             ]
           },

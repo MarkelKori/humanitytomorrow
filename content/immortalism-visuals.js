@@ -43,7 +43,7 @@
       },
       experience: {
         eyebrow: '',
-        title: 'Сколько нужно времени, чтобы всё испытать?',
+        title: 'Сколько времени могут занять лишь некоторые развлечения?',
         intro: 'Даже если мир застынет, на чтение, обучение, путешествия и игры потребуются века.',
         note: '',
         unit: 'лет',
@@ -51,8 +51,8 @@
         total: (years) => `Итого: ${years}+ лет непрерывной практики`,
         data: [
           ['Все книги Дюма', 0.5, '#C1440E', 'Александр Дюма: около 0.5 года при чтении 8 часов в день'],
-          ['Топ 10 инструментов', 10, '#9B59B6', 'Мастерство в 10 инструментах: около 10 лет'],
-          ['Топ 20 языков мира', 20, '#2E7A4F', 'Мастерство в 20 языках: около 20 лет'],
+          ['IMDb Top 250', 0.67, '#9B59B6', '500 лучших фильмов (рейтинг IMDb Top 250: https://www.imdb.com/chart/top/): по 1 фильму в день — около 8 месяцев'],
+          ['Rolling Stone 500 Albums', 0.92, '#2E7A4F', 'Rolling Stone\'s 500 Greatest Albums of All Time: если уделять музыке по 2 часа в день, весь путь займёт около 11 месяцев'],
           ['Вся научная фантастика', 50, '#1A5C8A', 'Все книги в жанре sci-fi: около 50 лет'],
           ['Все игры Steam', 130, '#16A085', 'Все игры Steam: около 130 лет'],
           ['6 мес. в 450 городах >1 млн', 225, '#D35400', 'По 6 месяцев в каждом городе с населением >1 млн: около 225 лет']
@@ -102,7 +102,7 @@
       },
       experience: {
         eyebrow: '',
-        title: 'Скільки потрібно часу, щоб усе пережити?',
+        title: 'Скільки часу можуть зайняти лише деякі розваги?',
         intro: 'Навіть якщо світ застигне, на читання, навчання, подорожі та ігри потрібні століття.',
         note: '',
         unit: 'років',
@@ -110,8 +110,8 @@
         total: (years) => `Разом: ${years}+ років безперервної практики`,
         data: [
           ['Усі книги Дюма', 0.5, '#C1440E', 'Усі книги Дюма: близько 0.5 року'],
-          ['Топ 10 інструментів', 10, '#9B59B6', 'Майстерність у 10 інструментах: близько 10 років'],
-          ['Топ 20 мов світу', 20, '#2E7A4F', 'Майстерність у 20 мовах: близько 20 років'],
+          ['IMDb Top 250', 0.67, '#9B59B6', '500 найкращих фільмів (рейтинг IMDb Top 250: https://www.imdb.com/chart/top/): по 1 фільму на день — близько 8 місяців'],
+          ['Rolling Stone 500 Albums', 0.92, '#2E7A4F', 'Rolling Stone\'s 500 Greatest Albums of All Time: якщо приділяти музиці по 2 години на день, увесь шлях займе близько 11 місяців'],
           ['Уся наукова фантастика', 50, '#1A5C8A', 'Усі книги в жанрі sci-fi: близько 50 років'],
           ['Усі ігри Steam', 130, '#16A085', 'Усі ігри Steam: близько 130 років'],
           ['6 міс. у 450 містах >1 млн', 225, '#D35400', 'По 6 місяців у кожному місті >1 млн: близько 225 років']
@@ -161,7 +161,7 @@
       },
       experience: {
         eyebrow: '',
-        title: 'How long would it take to experience everything?',
+        title: 'How long could just a few entertainments take?',
         intro: 'Even if the world stood still, reading, learning, travel, and games would take centuries.',
         note: '',
         unit: 'years',
@@ -169,8 +169,8 @@
         total: (years) => `Total: ${years}+ years of continuous practice`,
         data: [
           ['All books by Dumas', 0.5, '#C1440E', 'All books by Dumas: about 0.5 years'],
-          ['Top 10 instruments', 10, '#9B59B6', 'Mastery of 10 instruments: about 10 years'],
-          ['Top 20 world languages', 20, '#2E7A4F', 'Mastery of 20 languages: about 20 years'],
+          ['IMDb Top 250', 0.67, '#9B59B6', '500 best films (IMDb Top 250 ranking: https://www.imdb.com/chart/top/): 1 film per day — about 8 months'],
+          ['Rolling Stone 500 Albums', 0.92, '#2E7A4F', 'Rolling Stone\'s 500 Greatest Albums of All Time: at 2 hours of music per day, the whole path takes about 11 months'],
           ['All science fiction', 50, '#1A5C8A', 'All sci-fi books: about 50 years'],
           ['All Steam games', 130, '#16A085', 'All Steam games: about 130 years'],
           ['6 mo. in 450 cities >1M', 225, '#D35400', '6 months in every city >1M: about 225 years']
