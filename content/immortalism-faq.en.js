@@ -61,6 +61,10 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
+                text: 'I will try to substantiate the claims above throughout this text. I realize that most readers will not agree with them, and this whole article is meant to examine, with arguments, the reasons why this attitude toward the topic arose.'
+              },
+              {
+                type: 'paragraph',
                 text: 'I want to define the scope of this FAQ: it will concern people who do not age, who have no upper limit on lifespan, but whose average lifespan is more than a thousand years.'
               },
               {
@@ -69,11 +73,11 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'html',
-                html: '<p><strong>a)</strong> If throughout life the human risk of death remained roughly at the level it is at age thirty, then on average we really would live about 1,000 years. This is a rough estimate, but it works for the purposes of our discussion.</p>'
+                html: '<p><strong>a)</strong> If throughout life the human risk of death remained roughly at the level it is at age thirty, then on average we really would live about 1,000 years. This is a very rough estimate, but it works for the purposes of our discussion.</p>'
               },
               {
                 type: 'html',
-                html: '<p><strong>b)</strong> The absolute elimination of death, unlike the idea of radical life extension, belongs at the present stage of humanity more to philosophy. Discussing it would provoke even more questions and outrage, so let us postpone that for another time.</p>'
+                html: '<p><strong>b)</strong> The absolute elimination of death, unlike the idea of radical life extension, belongs at the present stage of humanity more to philosophy or science fiction. Discussing it would provoke even more questions and outrage, so let us postpone that for another time.</p>'
               },
               {
                 type: 'paragraph',
@@ -85,7 +89,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Unfortunately, our world has developed a powerful "culture of death," or deathism, as some call it. We justify death and even exalt it, because for almost all of human history we simply had no other choice. Yet now many outstanding scientists have no doubt that rejuvenation and life extension are goals genuinely achievable through scientific and technological progress.'
+                text: 'Unfortunately, our world has developed a powerful "culture of death," also known as deathism. We justify death and even exalt it, because for almost all of human history we simply had no other choice. Yet now many outstanding scientists have no doubt that rejuvenation and life extension are goals genuinely achievable through scientific and technological progress.'
               },
               {
                 type: 'paragraph',
@@ -105,7 +109,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Over the past decades, scientists have become fully convinced that aging and death are not fundamental laws of the universe, nor magic, but simply specific processes in the organism that can often be slowed or even reversed.'
+                text: 'Over the past decades, the biomedical community has become fully convinced that aging and death are not fundamental laws of the universe, nor magical constraints with deep meaning, but simply specific processes in the organism that can be controlled: for example, slowed down or even reversed. This has already been demonstrated in model organisms and some animals.'
               },
               {
                 type: 'paragraph',
@@ -131,7 +135,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Unfortunately, research into life extension in humans is still in its infancy. Many factors affect this, and I will discuss them in other articles. Who knows, perhaps if not for deathism and distrust, we would already have achieved far greater results.'
+                text: 'Unfortunately, research into life extension in humans is still in its infancy. Many factors affect this, and I will discuss them in other articles. Who knows, perhaps if not for deathism and mistaken ideas about life extension, we would already have achieved far greater results.'
               },
               {
                 type: 'paragraph',
@@ -210,11 +214,11 @@ window.immortalismPageContent = window.immortalismPageContent || {};
             blocks: [
               {
                 type: 'paragraph',
-                text: 'If you are encountering the idea of radical life extension for the first time, you probably assume that a long life would bring many problems. Before you read this entire article and realize that, at least in many ways, you were mistaken, I want to note one thing: no one is going to force you to live forever.'
+                text: 'If you are encountering the idea of radical life extension for the first time, you probably assume that a long life would bring many problems. Before you read this entire article and perhaps change your mind at least partly, I want to note one thing: no one is going to force you to live forever.'
               },
               {
                 type: 'paragraph',
-                text: 'When rejuvenating or life-extending therapy appears in this world, it is hardly likely to be mandatory for every person on Earth. If you truly, sincerely do not want to extend your life and youth, you will always be free to choose otherwise and die, for example, when your body gives out from accumulated damage.'
+                text: 'When rejuvenating or life-extending therapy appears in this world, it is hardly likely to be mandatory for every person on Earth. If you truly, sincerely do not want to extend your life and youth, you will always be free to choose otherwise and die, for example, when your body gives out from accumulated damage, as usually happens.'
               },
               {
                 type: 'paragraph',
