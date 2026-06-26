@@ -117,6 +117,98 @@
     margin: 0 auto;
     white-space: pre-line;
   }
+  .article-kit {
+    width: min(100%, 640px);
+    margin: 34px auto 0;
+    display: grid;
+    gap: 14px;
+    text-align: left;
+  }
+  .pdf-download {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+    border: 1px solid rgba(46,122,79,0.26);
+    background: linear-gradient(135deg, rgba(46,122,79,0.075), rgba(245,242,236,0.82));
+    color: var(--ink);
+    text-decoration: none;
+    box-shadow: 0 18px 48px rgba(46,122,79,0.06);
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+  .pdf-download:hover {
+    transform: translateY(-2px);
+    border-color: rgba(46,122,79,0.55);
+    background: linear-gradient(135deg, rgba(46,122,79,0.12), rgba(245,242,236,0.94));
+  }
+  .pdf-download-mark {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #2E7A4F;
+    border: 1px solid rgba(46,122,79,0.38);
+    padding: 6px 8px;
+  }
+  .pdf-download-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(26,24,20,0.52);
+    margin-bottom: 3px;
+  }
+  .pdf-download-title {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.96rem;
+    font-weight: 500;
+    color: rgba(26,24,20,0.88);
+  }
+  .pdf-download-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    color: #2E7A4F;
+  }
+  .pdf-download-arrow svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .nutshell-card {
+    position: relative;
+    padding: 24px 26px 26px;
+    border: 1px solid rgba(154,106,0,0.23);
+    background:
+      radial-gradient(circle at 9% 0%, rgba(255,255,255,0.72), transparent 34%),
+      linear-gradient(135deg, rgba(255,251,241,0.92), rgba(237,233,225,0.72));
+    box-shadow: 0 22px 58px rgba(82,64,31,0.07);
+  }
+  .nutshell-label {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .nutshell-text {
+    font-family: var(--reading);
+    font-size: 1.02rem;
+    line-height: 1.72;
+    color: rgba(26,24,20,0.88);
+  }
 
   /* ── TOC (desktop sidebar) ── */
   .article-shell { position: relative; width: 100%; max-width: 700px; }
@@ -559,6 +651,11 @@
     .toc-shell { position: static; top: auto; }
     .toc-block { max-height: none; overflow: visible; }
     .topic-intro { font-size: 1rem; }
+    .article-kit { margin-top: 26px; gap: 12px; }
+    .pdf-download { grid-template-columns: 1fr auto; gap: 10px; padding: 15px 16px; }
+    .pdf-download-mark { display: none; }
+    .nutshell-card { padding: 20px 18px 22px; }
+    .nutshell-text { font-size: 0.98rem; line-height: 1.68; }
     .content-paragraph { font-size: 1.055rem; }
     .content-html { font-size: 1.055rem; }
     .content-subheading { font-size: 0.925rem; }
@@ -745,7 +842,26 @@
   <div class="topic-header-inner">
     <span class="topic-tag" data-i18n="nav.life">Immortalism</span>
     <h1 class="topic-title" id="pageTitle">Immortalism FAQ</h1>
-    <p class="topic-intro" id="pageIntro">From the problem of boredom to overpopulation, from eternal dictators to the meaning of life, this FAQ aims to answer any questions you may have about life-extension.</p>
+    <div class="article-kit" id="articleKit">
+      <div class="nutshell-card" id="nutshellCard">
+        <p class="nutshell-label" id="nutshellLabel">As short as possible</p>
+        <p class="nutshell-text" id="nutshellText">Immortalism is the position that the main goal of humanity should be radical life extension. There are countless myths about human immortality and longevity that prevent this topic from being perceived rationally. Old age and death are an enormous burden both economically and morally, and this article offers many arguments for fighting both phenomena.</p>
+      </div>
+      <a class="pdf-download" id="pdfDownload" href="/downloads/immortalism-faq-en.pdf" download="immortalism-faq-en.pdf" type="application/pdf">
+        <span class="pdf-download-mark">PDF</span>
+        <span>
+          <span class="pdf-download-label" id="pdfDownloadLabel">Download PDF</span>
+          <span class="pdf-download-title" id="pdfDownloadTitle">Download the article as a formatted PDF</span>
+        </span>
+        <span class="pdf-download-arrow" aria-hidden="true">
+          <svg viewBox="0 0 18 18" focusable="false">
+            <path d="M9 3v8"></path>
+            <path d="M5.8 7.8 9 11l3.2-3.2"></path>
+            <path d="M4.5 14.5h9"></path>
+          </svg>
+        </span>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -1079,7 +1195,7 @@ const translations = {
     'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.manifest':'Manifesto','nav.about':'About','nav.donate':'Donate',
     'toc.title':'Contents',
     'life.title':'Immortalism FAQ',
-    'life.intro':'From the problem of boredom to overpopulation, from eternal dictators to the meaning of life, this FAQ aims to answer any questions you may have.',
+    'life.intro':'',
     'life.s1':'Introduction','life.s1.heading':'What is immortality?', 'life.s2.heading':'Before we begin...', 
     'life.s2':'General objections','life.s3.heading':'Why do we age?',
     'life.s3':'Society: Politics & Economics','life.s4.heading':'What can be done today?',
@@ -1094,7 +1210,7 @@ const translations = {
     'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.manifest':'Манифест','nav.about':'О сайте','nav.donate':'Поддержать',
     'toc.title':'Содержание',
     'life.title':'FAQ Иммортализма',
-    'life.intro':'From the problem of boredom to overpopulation, from eternal dictators to the meaning of life, this FAQ aims to answer any questions you may have.',
+    'life.intro':'',
     'life.s1':'Вступление','life.s1.heading':'Прежде чем мы начнём...',
     'life.s2':'Общие возражения','life.s2.heading':'Почему мы стареем?',
     'life.s3':'Общество: политика и экономика','life.s3.heading':'Что можно делать сегодня?',
@@ -1108,7 +1224,7 @@ const translations = {
     'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.manifest':'Маніфест','nav.about':'Про сайт','nav.donate':'Підтримати',
     'toc.title':'Зміст',
     'life.title':'FAQ Імморталізму',
-    'life.intro':'From the problem of boredom to overpopulation, from eternal dictators to the meaning of life, this FAQ aims to answer any questions you may have.',
+    'life.intro':'',
     'life.s1':'Вступ','life.s1.heading':'Перед тим, як почати...',
     'life.s2':'Загальні заперечення','life.s2.heading':'Чому ми старіємо?',
     'life.s3':'Суспільство: політика та економіка','life.s3.heading':'Що можна робити сьогодні?',
@@ -1264,6 +1380,32 @@ const faqUiTranslations = {
 };
 
 const faqContent = window.immortalismPageContent || {};
+const articleKitCopy = {
+  en: {
+    pdfHref: '/downloads/immortalism-faq-en.pdf',
+    pdfFile: 'immortalism-faq-en.pdf',
+    pdfLabel: 'Download PDF',
+    pdfTitle: 'Download the article as a formatted PDF',
+    nutshellLabel: 'As short as possible',
+    nutshellText: 'Immortalism is the position that the main goal of humanity should be radical life extension. There are countless myths about human immortality and longevity that prevent this topic from being perceived rationally. Old age and death are an enormous burden both economically and morally, and this article offers many arguments for fighting both phenomena.'
+  },
+  ru: {
+    pdfHref: '/downloads/immortalism-faq-ru.pdf',
+    pdfFile: 'immortalism-faq-ru.pdf',
+    pdfLabel: 'Скачать PDF',
+    pdfTitle: 'Скачать статью в отформатированном PDF',
+    nutshellLabel: 'Кратче некуда',
+    nutshellText: 'Иммортализм — это позиция, которая утверждает, что главной целью человечества должно стать радикальное продление жизни. Про бессмертие и долголетие человека существует огромное количество мифов, которые мешают воспринимать эту тему рационально. Старость и смерть являются огромным бременем как с экономической, так и моральной стороны, и в этой статье приводится большое количество аргументов за то, чтобы бороться с двумя этими явлениями.'
+  },
+  ua: {
+    pdfHref: '/downloads/immortalism-faq-ua.pdf',
+    pdfFile: 'immortalism-faq-ua.pdf',
+    pdfLabel: 'Завантажити PDF',
+    pdfTitle: 'Завантажити статтю у відформатованому PDF',
+    nutshellLabel: 'Коротше нікуди',
+    nutshellText: 'Імморталізм — це позиція, яка стверджує, що головною метою людства має стати радикальне продовження життя. Про безсмертя і довголіття людини існує величезна кількість міфів, які заважають сприймати цю тему раціонально. Старість і смерть є величезним тягарем як з економічного, так і з морального боку, і в цій статті наведено багато аргументів на користь боротьби з обома цими явищами.'
+  }
+};
 
 function getFaqUi(lang) {
   return faqUiTranslations[lang] || faqUiTranslations.en;
@@ -1271,6 +1413,18 @@ function getFaqUi(lang) {
 
 function getFaqPage(lang) {
   return faqContent[lang] || faqContent.en || faqContent.ru || faqContent.ua || null;
+}
+
+function renderArticleKit(lang) {
+  const copy = articleKitCopy[lang] || articleKitCopy.en;
+  const pdfLink = document.getElementById('pdfDownload');
+  if (!pdfLink) return;
+  pdfLink.href = copy.pdfHref;
+  pdfLink.download = copy.pdfFile;
+  document.getElementById('pdfDownloadLabel').textContent = copy.pdfLabel;
+  document.getElementById('pdfDownloadTitle').textContent = copy.pdfTitle;
+  document.getElementById('nutshellLabel').textContent = copy.nutshellLabel;
+  document.getElementById('nutshellText').textContent = copy.nutshellText;
 }
 
 function makeEl(tag, className, text) {
@@ -1700,7 +1854,9 @@ function renderFaqPage(lang) {
   if (!page) return;
   resetNoteState();
   document.getElementById('pageTitle').textContent = page.pageTitle;
-  document.getElementById('pageIntro').textContent = page.intro;
+  const pageIntro = document.getElementById('pageIntro');
+  if (pageIntro) pageIntro.textContent = page.intro;
+  renderArticleKit(lang);
 
   renderFaqToc(page, lang);
 

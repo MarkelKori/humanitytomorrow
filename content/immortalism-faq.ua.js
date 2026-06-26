@@ -11,7 +11,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
 
   window.immortalismPageContent.ua = {
     pageTitle: 'FAQ про імморталізм',
-    intro: 'Від проблеми нудьги до перенаселення, від вічних диктаторів до сенсу життя: це FAQ відповідає на найпоширеніші запитання про продовження життя, омолодження і безсмертя.',
+    intro: '',
     sections: [
       {
         id: 's1',

@@ -36,7 +36,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
 
   window.immortalismPageContent.en = {
     pageTitle: 'Immortalism FAQ',
-    intro: 'From the problem of boredom to overpopulation, from eternal dictators to the meaning of life, this FAQ aims to answer any questions you may have about life-extension.',
+    intro: '',
     sections: [
       {
         id: 's1',
