@@ -223,7 +223,6 @@
       <button class="drawer-qr-btn" onclick="openQR()">QR</button>
     </div>
   </div>
-  <p class="drawer-note" data-i18n="site.note">All articles are 100% human-written.</p>
 </div>
 
 <div class="page-header">
@@ -287,7 +286,7 @@
 </div>
 
 <footer>
-  <p class="site-note" data-i18n="site.note">All articles are 100% human-written.</p>
+  <span>EARLY VERSION</span>
   <span data-i18n="footer.text">© 2026 Humanity Tomorrow</span>
 </footer>
 
@@ -363,16 +362,8 @@ function goToLocalizedPage(lang) {
   return false;
 }
 const extraUiText = {
-  langLabel: { en: 'Language', ru: 'Язык', ua: 'Мова' },
-  siteNote: {
-    en: 'Articles are written by humans. AI is used only for code and design.',
-    ru: 'Статьи написаны людьми. ИИ используется только для кода и дизайна.',
-    ua: 'Статті написані людьми. ШІ використовується лише для коду та дизайну.'
-  }
+  langLabel: { en: 'Language', ru: 'Язык', ua: 'Мова' }
 };
-extraUiText.siteNote.en = 'All articles are 100% human-written.';
-extraUiText.siteNote.ru = 'Все статьи на 100% написаны людьми.';
-extraUiText.siteNote.ua = 'Усі статті на 100% написані людьми.';
 applyLang(currentLang);
 
 function applyLang(lang) {
@@ -382,9 +373,6 @@ function applyLang(lang) {
   });
   document.querySelectorAll('[data-i18n="lang.label"]').forEach((el) => {
     el.textContent = extraUiText.langLabel[lang] || extraUiText.langLabel.en;
-  });
-  document.querySelectorAll('[data-i18n="site.note"]').forEach((el) => {
-    el.textContent = extraUiText.siteNote[lang] || extraUiText.siteNote.en;
   });
   document.getElementById('langCurrent').textContent = lang.toUpperCase();
   document.querySelectorAll('.lang-option').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));

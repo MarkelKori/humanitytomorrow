@@ -144,10 +144,10 @@
 
   /* ── HOME ── */
   .home-hero { padding: 132px 48px 38px; max-width: 920px; }
-  .home-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,24,20,0.62); margin-bottom: 24px; }
   .home-title { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.04; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 24px; }
   .home-title em { font-style: italic; color: #5E5751; }
   .home-desc { font-size: 1.16rem; color: rgba(26,24,20,0.9); max-width: 620px; line-height: 1.72; margin-bottom: 48px; }
+  .home-desc-note { display: block; color: inherit; font-weight: 500; }
 
   /* ── CARDS ── */
   .topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 0 48px 72px; }
@@ -291,13 +291,11 @@
     <button class="drawer-qr-btn" onclick="openQR()">QR</button>
     </div>
   </div>
-  <p class="drawer-note" data-i18n="site.note">All articles are 100% human-written.</p>
 </div>
 
 <div class="home-hero">
-  <p class="home-label" data-i18n="home.label">EARLY VERSION</p>
   <h1 class="home-title" data-i18n-html="home.title">On the things<br>that <em>really</em><br>matter.</h1>
-  <p class="home-desc" data-i18n="home.desc">Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future.</p>
+  <p class="home-desc" data-i18n-html="home.desc">Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future. <span class="home-desc-note">All articles are 100% human-written.</span></p>
 </div>
 
 <div class="topic-grid">
@@ -322,7 +320,7 @@
 </div>
 
 <footer>
-  <p class="site-note" data-i18n="site.note">All articles are 100% human-written.</p>
+  <span>EARLY VERSION</span>
   <span data-i18n="footer.text">© 2026 Humanity Tomorrow</span>
 </footer>
 
@@ -330,9 +328,8 @@
 const translations = {
   en: {
     'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.manifest':'Manifesto','nav.about':'About','nav.donate':'Donate',
-    'home.label':'EARLY VERSION',
     'home.title':'On the things<br>that <em>really</em><br>matter.',
-    'home.desc':'Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future.',
+    'home.desc':'Get answers to all the questions you might have as you explore the topics of life extension, AI risks, and the future. <span class="home-desc-note">All articles are 100% human-written.</span>',
     'card.life.desc':'Find out why aging and death should become optional.',
     'card.ai.desc':'The rapid development of AI could lead to global catastrophes or even human extinction.',
     'card.future.desc':'What are the limits of human development and technology?',
@@ -341,9 +338,8 @@ const translations = {
   },
   ru: {
     'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.manifest':'Манифест','nav.about':'О сайте','nav.donate':'Поддержать',
-    'home.label':'EARLY VERSION',
     'home.title':'О вещах, которые<br><em>правда</em><br>важны.',
-    'home.desc':'Получите ответы на вопросы, которые у вас могли возникнуть при погружении в тему продления жизни, ИИ рисков и будущего.',
+    'home.desc':'Получите ответы на вопросы, которые у вас могли возникнуть при погружении в тему продления жизни, ИИ рисков и будущего. <span class="home-desc-note">Все статьи на 100% написаны людьми.</span>',
     'card.life.desc':'Узнайте, почему старение и смерть должны стать необязательными.',
     'card.ai.desc':'Стремительное развитие ИИ может привести к глобальным катастрофам или даже вымиранию человечества.',
     'card.future.desc':'Каковы лимиты развития человека и его технологий?',
@@ -351,9 +347,8 @@ const translations = {
   },
   ua: {
     'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.manifest':'Маніфест','nav.about':'Про сайт','nav.donate':'Підтримати',
-    'home.label':'EARLY VERSION',
     'home.title':'Про речі, які<br><em>дійсно</em><br>важливі.',
-    'home.desc':'Отримайте відповіді на всі питання, які могли у вас виникнути при зануренні в теми продовження життя, ризиків ШІ та майбутнього.',
+    'home.desc':'Отримайте відповіді на всі питання, які могли у вас виникнути при зануренні в теми продовження життя, ризиків ШІ та майбутнього. <span class="home-desc-note">Усі статті на 100% написані людьми.</span>',
     'card.life.desc':'Дізнайтеся, чому старіння і смерть мають стати необов’язковими.',
     'card.ai.desc':'Стрімкий розвиток ШІ може призвести до глобальних катастроф або навіть вимирання людства.',
     'card.future.desc':'Якими є межі розвитку людини та її технологій?',
@@ -373,16 +368,8 @@ function goToLocalizedPage(lang) {
   return false;
 }
 const extraUiText = {
-  langLabel: { en: 'Language', ru: 'Язык', ua: 'Мова' },
-  siteNote: {
-    en: 'All articles are 100% human-written.',
-    ru: 'Статьи написаны людьми. ИИ используется только для кода и дизайна.',
-    ua: 'Статті написані людьми. ШІ використовується лише для коду та дизайну.'
-  }
+  langLabel: { en: 'Language', ru: 'Язык', ua: 'Мова' }
 };
-extraUiText.siteNote.en = 'All articles are 100% human-written.';
-extraUiText.siteNote.ru = 'Все статьи на 100% написаны людьми.';
-extraUiText.siteNote.ua = 'Усі статті на 100% написані людьми.';
 applyLang(currentLang);
 
 function applyLang(lang) {
@@ -391,9 +378,6 @@ function applyLang(lang) {
   });
   document.querySelectorAll('[data-i18n="lang.label"]').forEach((el) => {
     el.textContent = extraUiText.langLabel[lang] || extraUiText.langLabel.en;
-  });
-  document.querySelectorAll('[data-i18n="site.note"]').forEach((el) => {
-    el.textContent = extraUiText.siteNote[lang] || extraUiText.siteNote.en;
   });
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     if (translations[lang][el.getAttribute('data-i18n-html')]) el.innerHTML = translations[lang][el.getAttribute('data-i18n-html')];

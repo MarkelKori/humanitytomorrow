@@ -835,7 +835,6 @@
       <button class="drawer-qr-btn" onclick="openQR()">QR</button>
     </div>
   </div>
-  <p class="drawer-note" data-i18n="site.note">All articles are 100% human-written.</p>
 </div>
 
 <div class="topic-header">
@@ -1186,7 +1185,7 @@
 </div>
 
 <footer>
-  <p class="site-note" data-i18n="site.note">All articles are 100% human-written.</p>
+  <span>EARLY VERSION</span>
   <span data-i18n="footer.text">© Humanity Tomorrow 2026</span>
 </footer>
 
@@ -1203,7 +1202,6 @@ const translations = {
     'life.s4':'Overpopulation', 'life.s5.heading':'Loading...',
     'life.s5':'Conclusion', 'life.s6.heading':'Loading...',
     'sidebar.resources':'Resources',
-    'site.note':'All articles are 100% human-written.',
     'placeholder':'Loading...',
     'footer.text':'© Humanity Tomorrow 2026',
   },
@@ -1249,14 +1247,6 @@ function goToImmortalismLang(lang) {
   return false;
 }
 const loadingPlaceholders = { en: 'Loading...', ru: 'Загрузка...', ua: 'Завантаження...' };
-const siteNoteText = {
-  en: 'Articles are written by humans. AI is used only for code and design.',
-  ru: 'Статьи написаны людьми. ИИ используется только для кода и дизайна.',
-  ua: 'Статті написані людьми. ШІ використовується лише для коду та дизайну.'
-};
-siteNoteText.en = 'All articles are 100% human-written.';
-siteNoteText.ru = 'Все статьи на 100% написаны людьми.';
-siteNoteText.ua = 'Усі статті на 100% написані людьми.';
 applyLang(currentLang);
 
 function applyLang(lang) {
@@ -1265,9 +1255,6 @@ function applyLang(lang) {
   });
   document.querySelectorAll('[data-i18n="placeholder"]').forEach((el) => {
     el.textContent = loadingPlaceholders[lang] || loadingPlaceholders.en;
-  });
-  document.querySelectorAll('[data-i18n="site.note"]').forEach((el) => {
-    el.textContent = siteNoteText[lang] || siteNoteText.en;
   });
   document.getElementById('langCurrent').textContent = lang.toUpperCase();
   document.querySelectorAll('.lang-option').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
@@ -1450,9 +1437,6 @@ function applyFaqUi(lang) {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
     if (ui[key]) el.textContent = ui[key];
-  });
-  document.querySelectorAll('[data-i18n="site.note"]').forEach((el) => {
-    el.textContent = siteNoteText[lang] || siteNoteText.en;
   });
   document.getElementById('qrShareText').textContent = ui['qr.share'];
   document.querySelector('footer [data-i18n="footer.text"]').textContent = ui['footer.text'];

@@ -170,7 +170,6 @@
       <button class="drawer-lang-btn" onclick="selectLang('ru')">RU</button>
     </div>
   </div>
-  <p class="drawer-note" data-i18n="site.note">All articles are 100% human-written.</p>
 </div>
 <div class="about-layout">
   <p class="about-kicker" data-i18n="nav.about">About</p>
@@ -184,7 +183,7 @@
   </div>
 </div>
 <footer>
-  <p class="site-note" data-i18n="site.note">All articles are 100% human-written.</p>
+  <span>EARLY VERSION</span>
   <span data-i18n="footer.text">© 2026 Humanity Tomorrow</span>
 </footer>
 <script>
@@ -200,15 +199,11 @@ function goToLocalizedPage(lang) {
   }
   return false;
 }
-const extraUiText={siteNote:{en:'Articles are written by humans. AI is used only for code and design.',ru:'Статьи написаны людьми. ИИ используется только для кода и дизайна.',ua:'Статті написані людьми. ШІ використовується лише для коду та дизайну.'}};
-function applyLang(lang){if(!translations[lang])return;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.getAttribute('data-i18n');if(translations[lang][key])el.textContent=translations[lang][key];});document.querySelectorAll('[data-i18n="site.note"]').forEach(el=>{el.textContent=extraUiText.siteNote[lang]||extraUiText.siteNote.en;});document.documentElement.lang=lang;document.getElementById('langCurrent').textContent=lang.toUpperCase();document.querySelectorAll('.lang-option').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang));document.querySelectorAll('.drawer-lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang));}
+function applyLang(lang){if(!translations[lang])return;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.getAttribute('data-i18n');if(translations[lang][key])el.textContent=translations[lang][key];});document.documentElement.lang=lang;document.getElementById('langCurrent').textContent=lang.toUpperCase();document.querySelectorAll('.lang-option').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang));document.querySelectorAll('.drawer-lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang));}
 function selectLang(lang){currentLang=translations[lang]?lang:'en';if(goToLocalizedPage(currentLang))return;applyLang(currentLang);document.getElementById('langSwitcher').classList.remove('open');}
 document.getElementById('langCurrent').addEventListener('click',e=>{e.stopPropagation();document.getElementById('langSwitcher').classList.toggle('open');});
 document.addEventListener('click',()=>document.getElementById('langSwitcher').classList.remove('open'));
 function toggleDrawer(){const open=document.getElementById('mobileDrawer').classList.toggle('open');document.getElementById('burger').classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
-extraUiText.siteNote.en='All articles are 100% human-written.';
-extraUiText.siteNote.ru='Все статьи на 100% написаны людьми.';
-extraUiText.siteNote.ua='Усі статті на 100% написані людьми.';
 applyLang(currentLang);
 </script>
 <script>
