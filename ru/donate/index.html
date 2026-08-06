@@ -176,6 +176,29 @@
     footer { padding: 24px 20px; flex-direction: column; gap: 8px; }
 .back-top { bottom: 32px; right: 20px; width: 36px; height: 36px; }
   }
+  .nav-links a[data-i18n="nav.donate"] {
+    color: rgb(83,127,151);
+    border-color: rgba(83,127,151,0.42);
+    padding-left: 9px;
+    padding-right: 9px;
+    justify-content: center;
+  }
+  .nav-links a[data-i18n="nav.donate"].active {
+    color: rgb(83,127,151);
+    border-color: rgba(83,127,151,0.42);
+    background: transparent;
+  }
+  .nav-links a[data-i18n="nav.donate"]:hover {
+    color: rgb(83,127,151);
+    border-color: rgba(83,127,151,0.62);
+    background: rgba(214,232,240,0.86);
+  }
+  .drawer-link[data-i18n="nav.donate"] { color: rgb(83,127,151); }
+  .page-tag[data-i18n="nav.donate"] {
+    color: rgb(83,127,151);
+    border-color: rgba(83,127,151,0.42);
+    background: rgba(214,232,240,0.86);
+  }
 </style>
 </head>
 <body>
@@ -249,7 +272,7 @@
       <button class="payment-btn" onclick="window.open('https://buy.stripe.com/8x228lg2n2k1c007rLdIA00', '_blank', 'noopener,noreferrer')">
         <span class="payment-icon">⊟</span>
         <div>
-          <p class="payment-name" data-i18n="donate.bank">Банковский перевод</p>
+          <p class="payment-name" data-i18n="donate.bank">Stripe</p>
           <p class="payment-desc" data-i18n="donate.bank.desc">SEPA и международный</p>
         </div>
       </button>
@@ -311,7 +334,7 @@ const translations = {
     'donate.amt.s':'Small support','donate.amt.m':'Recommended','donate.amt.l':'Generous','donate.amt.custom':'Custom','donate.amt.any':'Any amount',
     'donate.method':'Payment method',
     'donate.paypal.desc':'Fast & secure',
-    'donate.bank':'Bank transfer','donate.bank.desc':'SEPA & international',
+    'donate.bank':'Stripe','donate.bank.desc':'SEPA & international',
     'donate.crypto':'Cryptocurrency',
     'donate.btc.label':'Bitcoin','donate.eth.label':'Ethereum',
     'donate.copy':'click to copy',
@@ -326,7 +349,7 @@ const translations = {
     'donate.amt.s':'Небольшая помощь','donate.amt.m':'Рекомендуем','donate.amt.l':'Щедро','donate.amt.custom':'Другая','donate.amt.any':'Любая сумма',
     'donate.method':'Способ оплаты',
     'donate.paypal.desc':'Быстро и безопасно',
-    'donate.bank':'Банковский перевод','donate.bank.desc':'SEPA и международный',
+    'donate.bank':'Stripe','donate.bank.desc':'SEPA и международный',
     'donate.crypto':'Криптовалюта',
     'donate.btc.label':'Биткоин','donate.eth.label':'Эфириум',
     'donate.copy':'нажмите чтобы скопировать',
@@ -341,7 +364,7 @@ const translations = {
     'donate.amt.s':'Невелика підтримка','donate.amt.m':'Рекомендуємо','donate.amt.l':'Щедро','donate.amt.custom':'Інша','donate.amt.any':'Будь-яка сума',
     'donate.method':'Спосіб оплати',
     'donate.paypal.desc':'Швидко та безпечно',
-    'donate.bank':'Банківський переказ','donate.bank.desc':'SEPA та міжнародний',
+    'donate.bank':'Stripe','donate.bank.desc':'SEPA та міжнародний',
     'donate.crypto':'Криптовалюта',
     'donate.btc.label':'Біткоін','donate.eth.label':'Ефіріум',
     'donate.copy':'натисніть щоб скопіювати',
