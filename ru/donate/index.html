@@ -141,6 +141,7 @@
   will-change: opacity; display: block; position: relative; }
   .crypto-address:hover { background: #e5e1d8; }
   .crypto-address.is-fading { opacity: 0; }
+  .crypto-address.is-copying { cursor: default; pointer-events: none; }
   .crypto-qr { width: 140px; height: 140px; display: block; image-rendering: pixelated; border: 1px solid var(--border); }
   .copy-hint { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); opacity: 0.4; margin-top: 8px; margin-bottom: 0; }
 
@@ -418,6 +419,10 @@ function toggleDrawer() {
 }
 function copyAddr(id, addr) {
   const el = document.getElementById(id);
+  if (!el || el.dataset.copying === 'true') return;
+
+  el.dataset.copying = 'true';
+  el.classList.add('is-copying');
   const fadeMs = 220;
   const showMs = 1500;
   navigator.clipboard.writeText(addr).then(() => {
@@ -441,10 +446,15 @@ function copyAddr(id, addr) {
       el._restoreTimeout = setTimeout(() => {
         el.textContent = el.dataset.originalText;
         el.classList.remove('is-fading');
+        el.classList.remove('is-copying');
+        el.dataset.copying = 'false';
         el._restoreTimeout = null;
       }, fadeMs);
       el._copiedTimeout = null;
     }, showMs);
+  }).catch(() => {
+    el.classList.remove('is-copying');
+    el.dataset.copying = 'false';
   });
 }
 window.addEventListener('scroll', () => {
