@@ -271,7 +271,7 @@
   <ul class="nav-links">
     <li><a href="/ua/" class="active" data-i18n="nav.home">Головна</a></li>
     <li><a href="/ua/immortalism/" data-i18n="nav.life">Імморталізм</a></li>
-    <li><a class="dimmed" data-i18n="nav.ai">Ризики ШІ</a></li>
+    <li><a href="ai/index.html" data-i18n="nav.ai">Ризики ШІ</a></li>
     <li><a class="dimmed" data-i18n="nav.future">Майбутнє</a></li>
     <li><a href="/ua/about/" data-i18n="nav.about">Про сайт</a></li>
     <li><a href="/ua/manifest/" data-i18n="nav.manifest">Маніфест</a></li>
@@ -295,7 +295,7 @@
 <div class="mobile-drawer" id="mobileDrawer">
   <a class="drawer-link" href="/ua/" data-i18n="nav.home">Головна</a>
   <a class="drawer-link" href="/ua/immortalism/" data-i18n="nav.life">Імморталізм</a>
-  <span class="drawer-link dimmed" data-i18n="nav.ai">Ризики ШІ</span>
+  <a class="drawer-link" href="ai/index.html" data-i18n="nav.ai">Ризики ШІ</a>
   <span class="drawer-link dimmed" data-i18n="nav.future">Майбутнє</span>
   <a class="drawer-link" href="/ua/about/" data-i18n="nav.about">Про сайт</a>
   <a class="drawer-link" href="/ua/manifest/" data-i18n="nav.manifest">Маніфест</a>
@@ -323,12 +323,12 @@
     <p class="card-desc" data-i18n="card.life.desc">Дізнайтеся, чому старіння і смерть мають стати необов’язковими.</p>
     <span class="card-link" data-i18n="card.read">Читати</span>
   </a>
-  <div class="topic-card soon" data-topic="ai">
+  <a href="ai/index.html" class="topic-card" data-topic="ai">
     <p class="card-num">02</p>
     <h2 class="card-title" data-i18n="nav.ai">Ризики ШІ</h2>
     <p class="card-desc" data-i18n="card.ai.desc">Стрімкий розвиток ШІ може призвести до глобальних катастроф або навіть вимирання людства.</p>
-    <span class="card-link" data-i18n="card.soon">Незабаром</span>
-  </div>
+    <span class="card-link" data-i18n="card.prototype">Відкрити прототип</span>
+  </a>
   <div class="topic-card soon" data-topic="future">
     <p class="card-num">03</p>
     <h2 class="card-title" data-i18n="nav.future">Майбутнє</h2>
@@ -351,7 +351,7 @@ const translations = {
     'card.life.desc':'Find out why aging and death should become optional.',
     'card.ai.desc':'The rapid development of AI could lead to global catastrophes or even human extinction.',
     'card.future.desc':'What are the limits of human development and technology?',
-    'card.read':'Read more','card.soon':'Coming soon',
+    'card.read':'Read more','card.soon':'Coming soon','card.prototype':'View prototype',
     'footer.text':'© 2026 Humanity Tomorrow',
   },
   ru: {
@@ -361,7 +361,7 @@ const translations = {
     'card.life.desc':'Узнайте, почему старение и смерть должны стать необязательными.',
     'card.ai.desc':'Стремительное развитие ИИ может привести к глобальным катастрофам или даже вымиранию человечества.',
     'card.future.desc':'Каковы лимиты развития человека и его технологий?',
-    'card.read':'Читать','card.soon':'Скоро',
+    'card.read':'Читать','card.soon':'Скоро','card.prototype':'Открыть прототип',
   },
   ua: {
     'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.manifest':'Маніфест','nav.about':'Про сайт','nav.donate':'Підтримати',
@@ -370,7 +370,7 @@ const translations = {
     'card.life.desc':'Дізнайтеся, чому старіння і смерть мають стати необов’язковими.',
     'card.ai.desc':'Стрімкий розвиток ШІ може призвести до глобальних катастроф або навіть вимирання людства.',
     'card.future.desc':'Якими є межі розвитку людини та її технологій?',
-    'card.read':'Читати','card.soon':'Незабаром',
+    'card.read':'Читати','card.soon':'Незабаром','card.prototype':'Відкрити прототип',
   }
 };
 

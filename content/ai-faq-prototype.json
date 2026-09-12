@@ -1,0 +1,146 @@
+{
+  "en": {
+    "title": "AI Risks FAQ",
+    "tag": "AI Risks",
+    "status": "Page prototype",
+    "intro": "A draft of the future FAQ about artificial intelligence. The chapter headings and text below are placeholders, not a finished article.",
+    "summaryLabel": "As short as possible",
+    "summary": "This page will bring together questions about AI capabilities, possible risks, and approaches to safety. For now, it demonstrates the structure of the article: chapters, answers, examples, and notes. The final text and sources will be added later.",
+    "contents": "Contents",
+    "example": "Example block",
+    "exampleText": "This space is reserved for a short example or explanation. It shows how additional context will sit alongside the main text.",
+    "continuation": "The finished answer will develop the argument step by step, explain the terms, and provide links to sources. This temporary paragraph is here to check reading rhythm, spacing, and navigation through a long article.",
+    "list": ["Explain the question and introduce the relevant terms.", "Present the argument, an example, and its limitations.", "Add sources and a short conclusion."],
+    "noteTitle": "Prototype note",
+    "note": "This is a sample note, not a reference to a study. Real explanations and source links will be added during editing.",
+    "nav": {"home":"Home", "life":"Immortalism", "ai":"AI Risks", "future":"Future", "about":"About", "manifest":"Manifesto", "donate":"Donate"},
+    "language": "Language",
+    "share": "Share the knowledge",
+    "early": "EARLY VERSION",
+    "close": "Close",
+    "menu": "Menu",
+    "top": "Back to top",
+    "sections": [
+      {"id":"introduction", "label":"Introduction", "items":[
+        {"id":"why-ai", "title":"Why discuss artificial intelligence?", "text":"This opening section will introduce the subject and explain what the article is intended to cover. For now, this is a placeholder for the introduction, without claims about the probability or timing of future events."},
+        {"id":"how-to-read", "title":"How should I read this FAQ?", "text":"Here we will explain the order of the chapters and how to use the FAQ. Readers will be able to follow the argument from the beginning or jump to a particular question using the contents on the left."}
+      ]},
+      {"id":"capabilities", "label":"Capabilities and limitations", "items":[
+        {"id":"what-is-ai", "title":"What do we mean by AI?", "text":"This answer will introduce the terminology used throughout the article. The final version will distinguish between the systems being discussed rather than treating every use of the word AI as the same thing."},
+        {"id":"progress", "title":"How should we think about progress?", "text":"This space is reserved for a discussion of capabilities and their limits. Examples, comparisons, and the uncertainty around forecasts will be added when the article is written."}
+      ]},
+      {"id":"risks", "label":"Possible risks", "items":[
+        {"id":"risk-types", "title":"What kinds of risks are we discussing?", "text":"Here the article will introduce its main categories of risk. Each category will have its own explanation, with a clear distinction between observations, hypothetical scenarios, and open questions."},
+        {"id":"control", "title":"What would losing control mean?", "text":"This answer will explain what the expression means in the context of the article. A worked example and the assumptions behind it will help make the discussion concrete."}
+      ]},
+      {"id":"questions", "label":"Common questions", "items":[
+        {"id":"uncertainty", "title":"What if the forecasts are wrong?", "text":"This section is reserved for a discussion of uncertainty. The finished text will explain how to assess arguments without presenting assumptions or predictions as established facts."},
+        {"id":"benefits", "title":"How do risks relate to potential benefits?", "text":"Here we will consider how the discussion of risks connects with the potential uses of AI. This placeholder shows the layout of a longer answer, not a conclusion on the subject."}
+      ]},
+      {"id":"safety", "label":"Safety and responses", "items":[
+        {"id":"technical-safety", "title":"What might technical safety involve?", "text":"This space will introduce approaches to evaluating and improving the safety of AI systems. Definitions, illustrations, and limitations will be added before publication."},
+        {"id":"society", "title":"What role do people and institutions play?", "text":"The future answer will discuss questions of responsibility, coordination, and decision-making. For now, the paragraph is only a structural placeholder for this part of the article."}
+      ]},
+      {"id":"conclusion", "label":"Conclusion and sources", "items":[
+        {"id":"takeaways", "title":"What should the reader take away?", "text":"A short conclusion will appear here after the main text is ready. It will collect the key points and distinguish conclusions from questions that remain unresolved."},
+        {"id":"sources", "title":"Where can I read more?", "text":"This section is reserved for verified sources and further reading. There are no research citations in this prototype; the final list will be added together with the article."}
+      ]}
+    ]
+  },
+  "ru": {
+    "title": "Риски ИИ: FAQ",
+    "tag": "Риски ИИ",
+    "status": "Прототип страницы",
+    "intro": "Заготовка будущего FAQ об искусственном интеллекте. Названия глав и текст ниже пока тестовые: это не готовая статья.",
+    "summaryLabel": "Короче некуда",
+    "summary": "Здесь будут собраны вопросы о возможностях ИИ, возможных рисках и подходах к безопасности. Пока страница показывает структуру будущей статьи: главы, ответы, примеры и примечания. Окончательный текст и источники появятся позже.",
+    "contents": "Содержание",
+    "example": "Пример вставки",
+    "exampleText": "Это место для короткого примера или пояснения. Сейчас оно показывает, как дополнительный контекст будет сочетаться с основным текстом.",
+    "continuation": "В готовом ответе аргумент будет разобран последовательно, с объяснением терминов и ссылками на источники. Этот временный абзац нужен для проверки ритма чтения, отступов и навигации по большой статье.",
+    "list": ["Сформулировать вопрос и объяснить необходимые термины.", "Привести аргумент, пример и указать ограничения.", "Добавить источники и короткий вывод."],
+    "noteTitle": "Тестовое примечание",
+    "note": "Это образец примечания, а не ссылка на исследование. Настоящие пояснения и ссылки на источники появятся при редактуре.",
+    "nav": {"home":"Главная", "life":"Иммортализм", "ai":"Риски ИИ", "future":"Будущее", "about":"О сайте", "manifest":"Манифест", "donate":"Поддержать"},
+    "language": "Язык",
+    "share": "Поделись знаниями",
+    "early": "РАННЯЯ ВЕРСИЯ",
+    "close": "Закрыть",
+    "menu": "Меню",
+    "top": "Наверх",
+    "sections": [
+      {"id":"introduction", "label":"Введение", "items":[
+        {"id":"why-ai", "title":"Зачем говорить об искусственном интеллекте?", "text":"Вступительный раздел познакомит читателя с темой и объяснит, какие вопросы рассматривает статья. Пока это заготовка введения, без утверждений о вероятности или сроках будущих событий."},
+        {"id":"how-to-read", "title":"Как читать этот FAQ?", "text":"Здесь будет объяснён порядок глав и принцип работы с FAQ. Можно будет последовательно пройти весь текст или перейти к конкретному вопросу через содержание слева."}
+      ]},
+      {"id":"capabilities", "label":"Возможности и ограничения", "items":[
+        {"id":"what-is-ai", "title":"Что мы называем искусственным интеллектом?", "text":"Этот ответ введёт термины, которые используются в статье. В окончательной версии будут разграничены обсуждаемые системы, чтобы разные значения слова «ИИ» не смешивались между собой."},
+        {"id":"progress", "title":"Как оценивать развитие ИИ?", "text":"Здесь появится обсуждение возможностей и ограничений систем. Примеры, сравнения и разбор неопределённости прогнозов будут добавлены при написании статьи."}
+      ]},
+      {"id":"risks", "label":"Возможные риски", "items":[
+        {"id":"risk-types", "title":"О каких рисках идёт речь?", "text":"Здесь статья представит основные категории рисков. Для каждой категории появится отдельное пояснение с разграничением наблюдений, гипотетических сценариев и открытых вопросов."},
+        {"id":"control", "title":"Что означает потеря контроля?", "text":"В этом ответе будет объяснено значение выражения в контексте статьи. Подробный пример и разбор лежащих в его основе допущений помогут сделать обсуждение конкретным."}
+      ]},
+      {"id":"questions", "label":"Распространённые вопросы", "items":[
+        {"id":"uncertainty", "title":"Что, если прогнозы ошибочны?", "text":"Этот раздел предназначен для обсуждения неопределённости. В готовом тексте будет объяснено, как оценивать аргументы, не выдавая предположения и прогнозы за установленные факты."},
+        {"id":"benefits", "title":"Как риски соотносятся с возможной пользой?", "text":"Здесь мы рассмотрим, как обсуждение рисков связано с потенциальными применениями ИИ. Эта заготовка показывает оформление развёрнутого ответа, а не окончательный вывод по теме."}
+      ]},
+      {"id":"safety", "label":"Безопасность и решения", "items":[
+        {"id":"technical-safety", "title":"Что может включать техническая безопасность?", "text":"Здесь будут представлены подходы к оценке и повышению безопасности систем ИИ. Определения, иллюстрации и ограничения появятся до публикации материала."},
+        {"id":"society", "title":"Какова роль людей и институтов?", "text":"Будущий ответ затронет вопросы ответственности, координации и принятия решений. Пока абзац служит лишь структурной заготовкой для этой части статьи."}
+      ]},
+      {"id":"conclusion", "label":"Заключение и источники", "items":[
+        {"id":"takeaways", "title":"Какие выводы должен сделать читатель?", "text":"Короткое заключение появится здесь после подготовки основного текста. Оно объединит главные мысли и отделит выводы от вопросов, которые пока остаются открытыми."},
+        {"id":"sources", "title":"Где можно прочитать больше?", "text":"Этот раздел предназначен для проверенных источников и дополнительного чтения. В прототипе нет ссылок на исследования: окончательный список будет добавлен вместе со статьёй."}
+      ]}
+    ]
+  },
+  "ua": {
+    "title": "Ризики ШІ: FAQ",
+    "tag": "Ризики ШІ",
+    "status": "Прототип сторінки",
+    "intro": "Заготовка майбутнього FAQ про штучний інтелект. Назви розділів і текст нижче поки тестові: це не готова стаття.",
+    "summaryLabel": "Коротше нікуди",
+    "summary": "Тут будуть зібрані запитання про можливості ШІ, можливі ризики та підходи до безпеки. Поки сторінка показує структуру майбутньої статті: розділи, відповіді, приклади й примітки. Остаточний текст і джерела з’являться пізніше.",
+    "contents": "Зміст",
+    "example": "Приклад вставки",
+    "exampleText": "Це місце для короткого прикладу або пояснення. Зараз воно показує, як додатковий контекст поєднуватиметься з основним текстом.",
+    "continuation": "У готовій відповіді аргумент буде розібрано послідовно, з поясненням термінів і посиланнями на джерела. Цей тимчасовий абзац потрібен для перевірки ритму читання, відступів і навігації великою статтею.",
+    "list": ["Сформулювати запитання й пояснити необхідні терміни.", "Навести аргумент, приклад і вказати обмеження.", "Додати джерела та короткий висновок."],
+    "noteTitle": "Тестова примітка",
+    "note": "Це зразок примітки, а не посилання на дослідження. Справжні пояснення та посилання на джерела з’являться під час редагування.",
+    "nav": {"home":"Головна", "life":"Імморталізм", "ai":"Ризики ШІ", "future":"Майбутнє", "about":"Про сайт", "manifest":"Маніфест", "donate":"Підтримати"},
+    "language": "Мова",
+    "share": "Поділися знаннями",
+    "early": "РАННЯ ВЕРСІЯ",
+    "close": "Закрити",
+    "menu": "Меню",
+    "top": "Нагору",
+    "sections": [
+      {"id":"introduction", "label":"Вступ", "items":[
+        {"id":"why-ai", "title":"Навіщо говорити про штучний інтелект?", "text":"Вступний розділ познайомить читача з темою та пояснить, які запитання розглядає стаття. Поки це заготовка вступу, без тверджень про ймовірність або терміни майбутніх подій."},
+        {"id":"how-to-read", "title":"Як читати цей FAQ?", "text":"Тут буде пояснено порядок розділів і принцип роботи з FAQ. Можна буде послідовно пройти весь текст або перейти до конкретного запитання через зміст ліворуч."}
+      ]},
+      {"id":"capabilities", "label":"Можливості та обмеження", "items":[
+        {"id":"what-is-ai", "title":"Що ми називаємо штучним інтелектом?", "text":"Ця відповідь запровадить терміни, які використовуються у статті. В остаточній версії будуть розмежовані обговорювані системи, щоб різні значення слова «ШІ» не змішувалися між собою."},
+        {"id":"progress", "title":"Як оцінювати розвиток ШІ?", "text":"Тут з’явиться обговорення можливостей та обмежень систем. Приклади, порівняння й розбір невизначеності прогнозів будуть додані під час написання статті."}
+      ]},
+      {"id":"risks", "label":"Можливі ризики", "items":[
+        {"id":"risk-types", "title":"Про які ризики йдеться?", "text":"Тут стаття представить основні категорії ризиків. Для кожної категорії з’явиться окреме пояснення з розмежуванням спостережень, гіпотетичних сценаріїв і відкритих запитань."},
+        {"id":"control", "title":"Що означає втрата контролю?", "text":"У цій відповіді буде пояснено значення вислову в контексті статті. Докладний приклад і розбір покладених в його основу припущень допоможуть зробити обговорення конкретним."}
+      ]},
+      {"id":"questions", "label":"Поширені запитання", "items":[
+        {"id":"uncertainty", "title":"Що, якщо прогнози помилкові?", "text":"Цей розділ призначений для обговорення невизначеності. У готовому тексті буде пояснено, як оцінювати аргументи, не видаючи припущення та прогнози за встановлені факти."},
+        {"id":"benefits", "title":"Як ризики співвідносяться з можливою користю?", "text":"Тут ми розглянемо, як обговорення ризиків пов’язане з потенційними застосуваннями ШІ. Ця заготовка показує оформлення розгорнутої відповіді, а не остаточний висновок щодо теми."}
+      ]},
+      {"id":"safety", "label":"Безпека та рішення", "items":[
+        {"id":"technical-safety", "title":"Що може включати технічна безпека?", "text":"Тут будуть представлені підходи до оцінювання та підвищення безпеки систем ШІ. Визначення, ілюстрації та обмеження з’являться до публікації матеріалу."},
+        {"id":"society", "title":"Яка роль людей та інституцій?", "text":"Майбутня відповідь торкнеться питань відповідальності, координації та ухвалення рішень. Поки абзац слугує лише структурною заготовкою для цієї частини статті."}
+      ]},
+      {"id":"conclusion", "label":"Висновок і джерела", "items":[
+        {"id":"takeaways", "title":"Які висновки має зробити читач?", "text":"Короткий висновок з’явиться тут після підготовки основного тексту. Він об’єднає головні думки та відокремить висновки від запитань, які поки залишаються відкритими."},
+        {"id":"sources", "title":"Де можна прочитати більше?", "text":"Цей розділ призначений для перевірених джерел і додаткового читання. У прототипі немає посилань на дослідження: остаточний список буде додано разом зі статтею."}
+      ]}
+    ]
+  }
+}
