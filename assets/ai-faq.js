@@ -9,21 +9,21 @@ if (content) {
 // Enhance the original paragraphs without changing their inline formatting or links.
 const noteTitles = {
   en: {
-    'part-1-q-1-2': 'It predicts not a word, but a token.',
+    'part-1-q-1-1': 'It predicts not a word, but a token.',
     'part-1-q-2': 'On AI Consciosness',
     'part-1-q-5': 'About conspiracies',
     'part-3-q-19': 'What is a warning shot?',
     'part-3-q-25': 'Who is doomers?'
   },
   ru: {
-    'part-1-q-1-2': 'Он предсказывает не слово, а токен.',
+    'part-1-q-1-1': 'Он предсказывает не слово, а токен.',
     'part-1-q-2': 'О сознании ИИ',
     'part-1-q-5': 'О заговорах',
     'part-3-q-19': 'Что такое предупредительный выстрел?',
     'part-3-q-25': 'Кто такие думеры?'
   },
   ua: {
-    'part-1-q-1-2': 'Він передбачає не слово, а токен.',
+    'part-1-q-1-1': 'Він передбачає не слово, а токен.',
     'part-1-q-2': 'Про свідомість ШІ',
     'part-1-q-5': 'Про змови',
     'part-3-q-19': 'Що таке попереджувальний постріл?',

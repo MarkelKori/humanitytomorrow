@@ -25,6 +25,7 @@ def convert(filename):
                 node.text = re.sub(r'(?<=contains )X(?= questions)', '25', node.text)
                 node.text = re.sub(r'(?<=содержит )[ХX](?= вопросов)', '25', node.text)
                 node.text = re.sub(r'(?<=містить )[ХX](?= запитань)', '25', node.text)
+                node.text = re.sub(r'\s*\((?:See|см\.|Див\.)\s*2\.?\)\.?', '', node.text)
         rels = {r.get('Id'): r.get('Target') for r in etree.fromstring(archive.read('word/_rels/document.xml.rels'))}
         numbering = etree.fromstring(archive.read('word/numbering.xml'))
         def inline(node):
@@ -54,6 +55,12 @@ def convert(filename):
                 text = f'<a href="{esc(target, quote=True)}">{text}</a>'
             return text
 
+        body = document.find('w:body', NS)
+        paragraphs = document.findall('w:body/w:p', NS)
+        token_note = next(p for p in paragraphs if re.match(r'^(Additional information|Дополнительно|Додатково):', ''.join(p.xpath('.//w:t/text()', namespaces=NS)).strip()))
+        next_heading = next(p for p in paragraphs if ''.join(p.xpath('.//w:t/text()', namespaces=NS)).strip().startswith('1.2.'))
+        body.remove(token_note)
+        body.insert(body.index(next_heading), token_note)
         paragraphs = document.findall('w:body/w:p', NS)
         for paragraph in paragraphs:
             if ''.join(paragraph.xpath('.//w:t/text()', namespaces=NS)).strip().startswith('25.'):
