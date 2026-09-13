@@ -53,11 +53,11 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'That is why, for now, by immortality I mean the first steps in that direction: life extension and rejuvenation. That already sounds less frightening, does it not? For those who are wary of grand words, these more familiar terms will do just fine.'
+                text: 'That is why, for now, by immortality I mean progress in that direction: life extension and rejuvenation. That already sounds less frightening, does it not? For those who are wary of grand words, these more familiar terms will do just fine.'
               },
               {
                 type: 'paragraph',
-                text: 'But there is no need to worry that immortality somehow "sounds wrong" either. Death is something we ought to fight; there is nothing good in death. A world without death is a far better world than the one we have now. And since the opposite of death is its absence, that is, immortality, that is what we should strive for.'
+                text: 'In immortalism, the word “immortal” also often refers to a person achieving biological immortality, a trait already found in some living organisms. I will discuss this in more detail later.'
               },
               {
                 type: 'paragraph',
@@ -93,7 +93,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Allow me to quote one of the greatest physicists of the twenty-first century, Richard Feynman:'
+                text: 'Allow me to quote one of the greatest physicists of the twentieth century, Richard Feynman:'
               },
               {
                 type: 'quote',
@@ -109,7 +109,7 @@ window.immortalismPageContent = window.immortalismPageContent || {};
               },
               {
                 type: 'paragraph',
-                text: 'Over the past decades, the biomedical community has become fully convinced that aging and death are not fundamental laws of the universe, nor magical constraints with deep meaning, but simply specific processes in the organism that can be controlled: for example, slowed down or even reversed. This has already been demonstrated in model organisms and some animals.'
+                text: 'Aging is increasingly treated as a modifiable biological process.'
               },
               {
                 type: 'paragraph',

@@ -145,12 +145,13 @@
   /* ── HOME ── */
   .home-hero { padding: 132px 48px 38px; max-width: 920px; }
   .home-title { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.04; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .home-title { overflow-wrap: break-word; }
   .home-title em { font-style: italic; color: #5E5751; }
   .home-desc { font-size: 1.16rem; color: rgba(26,24,20,0.9); max-width: 620px; line-height: 1.72; margin-bottom: 48px; }
   .home-desc-note { display: inline; color: inherit; font-weight: 600; }
 
   /* ── CARDS ── */
-  .topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 0 48px 72px; }
+  .topic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 0 48px 72px; }
   .topic-card { background: var(--bg); padding: 40px 36px; cursor: pointer; transition: background 0.25s; position: relative; overflow: hidden; text-decoration: none; display: block; }
   .topic-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--card-color); transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
   .topic-card:hover { background: var(--bg2); }
@@ -312,7 +313,7 @@
 </div>
 
 <div class="home-hero">
-  <h1 class="home-title" data-i18n-html="home.title">О вещах, которые<br><em>правда</em><br>важны.</h1>
+  <h1 class="home-title" data-i18n-html="home.title">Риски ИИ и<br>продление жизни:<br><em>разбираемся</em></h1>
   <p class="home-desc" data-i18n-html="home.desc">Наш проект объединяет в одном месте исчерпывающие материалы, посвящённые таким темам, как риски искусственного интеллекта, продление жизни и исследования будущего. <span class="home-desc-note">Все статьи на 100% написаны людьми.</span></p>
 </div>
 
@@ -320,25 +321,28 @@
   <a class="topic-card" data-topic="life" href="/ru/immortalism/">
     <p class="card-num">01</p>
     <h2 class="card-title" data-i18n="nav.life">Иммортализм</h2>
-    <p class="card-desc" data-i18n="card.life.desc">Узнайте, почему старение и смерть должны стать необязательными.</p>
+    <p class="card-desc" data-i18n="card.life.desc">Рассмотрите основные аргументы и контраргументы о философской позиции, выступающей за радикальное продление жизни.</p>
     <span class="card-link" data-i18n="card.read">Читать</span>
   </a>
   <a href="ai/index.html" class="topic-card" data-topic="ai">
     <p class="card-num">02</p>
     <h2 class="card-title" data-i18n="nav.ai">Риски ИИ</h2>
-    <p class="card-desc" data-i18n="card.ai.desc">Стремительное развитие ИИ может привести к глобальным катастрофам или даже вымиранию человечества.</p>
+    <p class="card-desc" data-i18n="card.ai.desc">Почему исследователи опасаются потери контроля? Изучите доказательства, возражения и предлагаемые решения.</p>
     <span class="card-link" data-i18n="card.read">Читать</span>
   </a>
+  <!-- Restore this card by moving it out of the template and setting the desktop grid to three columns. -->
+  <template id="futureCardTemplate">
   <div class="topic-card soon" data-topic="future">
     <p class="card-num">03</p>
     <h2 class="card-title" data-i18n="nav.future">Будущее</h2>
     <p class="card-desc" data-i18n="card.future.desc">Каковы лимиты развития человека и его технологий?</p>
     <span class="card-link" data-i18n="card.soon">Скоро</span>
   </div>
+  </template>
 </div>
 
 <footer>
-  <span>EARLY VERSION</span>
+  <span><strong>Все статьи написаны людьми.</strong></span>
   <span data-i18n="footer.text">© 2026 Humanity Tomorrow</span>
 </footer>
 
@@ -346,29 +350,29 @@
 const translations = {
   en: {
     'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.manifest':'Manifesto','nav.about':'About','nav.donate':'Donate',
-    'home.title':'On the things<br>that <em>really</em><br>matter.',
+    'home.title':'AI Risks and<br>Life Extension,<br><em>Explained</em>',
     'home.desc':'Our project brings together comprehensive texts dedicated to understanding topics such as the AI risks, life extension, and future studies. <span class="home-desc-note">All articles are 100% human-written.</span>',
-    'card.life.desc':'Find out why aging and death should become optional.',
-    'card.ai.desc':'The rapid development of AI could lead to global catastrophes or even human extinction.',
+    'card.life.desc':'Examine the main arguments and counterarguments regarding the philosophical position that advocates for a radical life extension.',
+    'card.ai.desc':'Why do researchers worry about loss of control? Explore the evidence, objections and proposed solutions.',
     'card.future.desc':'What are the limits of human development and technology?',
     'card.read':'Read more','card.soon':'Coming soon',
     'footer.text':'© 2026 Humanity Tomorrow',
   },
   ru: {
     'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.manifest':'Манифест','nav.about':'О сайте','nav.donate':'Поддержать',
-    'home.title':'О вещах, которые<br><em>правда</em><br>важны.',
+    'home.title':'Риски ИИ и<br>продление жизни:<br><em>разбираемся</em>',
     'home.desc':'Наш проект объединяет в одном месте исчерпывающие материалы, посвящённые таким темам, как риски искусственного интеллекта, продление жизни и исследования будущего. <span class="home-desc-note">Все статьи на 100% написаны людьми.</span>',
-    'card.life.desc':'Узнайте, почему старение и смерть должны стать необязательными.',
-    'card.ai.desc':'Стремительное развитие ИИ может привести к глобальным катастрофам или даже вымиранию человечества.',
+    'card.life.desc':'Рассмотрите основные аргументы и контраргументы о философской позиции, выступающей за радикальное продление жизни.',
+    'card.ai.desc':'Почему исследователи опасаются потери контроля? Изучите доказательства, возражения и предлагаемые решения.',
     'card.future.desc':'Каковы лимиты развития человека и его технологий?',
     'card.read':'Читать','card.soon':'Скоро',
   },
   ua: {
     'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.manifest':'Маніфест','nav.about':'Про сайт','nav.donate':'Підтримати',
-    'home.title':'Про речі, які<br><em>дійсно</em><br>важливі.',
+    'home.title':'Ризики ШІ та<br>продовження життя:<br><em>пояснюємо</em>',
     'home.desc':'Наш проєкт збирає в одному місці всеосяжні тексти, присвячені розумінню таких тем як ризики ШІ, продовження життя та дослідження майбутнього. <span class="home-desc-note">Усі статті на 100% написані людьми.</span>',
-    'card.life.desc':'Дізнайтеся, чому старіння і смерть мають стати необов’язковими.',
-    'card.ai.desc':'Стрімкий розвиток ШІ може призвести до глобальних катастроф або навіть вимирання людства.',
+    'card.life.desc':'Розгляньте основні аргументи й контраргументи щодо філософської позиції, яка виступає за радикальне продовження життя.',
+    'card.ai.desc':'Чому дослідники побоюються втрати контролю? Ознайомтеся з доказами, запереченнями та запропонованими рішеннями.',
     'card.future.desc':'Якими є межі розвитку людини та її технологій?',
     'card.read':'Читати','card.soon':'Незабаром',
   }

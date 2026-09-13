@@ -159,6 +159,8 @@ for lang, filename in [('en', 'AI Risks - English.docx'), ('ru', 'AI Risks - Rus
         for attr in ['name="description"', 'property="og:description"']:
             text = re.sub(r'<meta ' + attr + r'[^>]*>', f'<meta {attr} content="{title}">', text)
         prefix = '../' if relative == 'ai/index.html' else '../../'
+        if 'hreflang="x-default"' not in text:
+            text = text.replace('</head>', '<link rel="alternate" hreflang="x-default" href="https://humanitytomorrow.site/en/ai/">\n</head>')
         label, download, description = {
             'en': ('As short as possible', 'Download PDF', 'Download the article as a formatted PDF'),
             'ru': ('Короче некуда', 'Скачать PDF', 'Скачать статью в формате PDF'),
