@@ -223,12 +223,17 @@
     max-height: calc(100vh - 118px);
     padding-right: 14px;
     overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
     opacity: 1;
     pointer-events: auto;
   }
-  .toc-block::-webkit-scrollbar { display: none; }
+  .toc-block::-webkit-scrollbar { width: 3px; }
+  .toc-block::-webkit-scrollbar-track { background: transparent; }
+  .toc-block::-webkit-scrollbar-thumb { background: transparent; border-radius: 999px; }
+  .toc-shell:hover .toc-block { scrollbar-color: rgba(107,101,96,0.58) transparent; }
+  .toc-shell:hover .toc-block::-webkit-scrollbar-thumb { background: rgba(107,101,96,0.58); }
+  .toc-shell:hover .toc-block::-webkit-scrollbar-thumb:hover { background: rgba(107,101,96,0.82); }
   .toc-fade {
     position: absolute;
     left: 0;
@@ -386,14 +391,15 @@
     padding: 0;
     border: none;
     background: none;
-    color: var(--accent);
+    color: #168A4D;
     font-family: var(--mono);
-    font-size: 0.45em;
+    font-size: 0.62em;
+    font-weight: 400;
     line-height: 1;
     cursor: pointer;
     vertical-align: super;
   }
-  .note-ref:hover { color: var(--ink); }
+  .note-ref:hover { color: #0D6B3A; }
   .note-ref a { color: inherit; text-decoration: none; }
   .interactive-card { margin-bottom: 16px; padding: 18px 20px; border: 1px dashed rgba(46,122,79,0.45); background: rgba(46,122,79,0.05); }
   .interactive-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
@@ -610,9 +616,10 @@
     color: #4F4943;
     margin: 0 0 10px;
   }
-  .article-quote .quote-text::before { content: '\00AB'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 4px; }
-  .article-quote .quote-text::after { content: '\00BB'; font-family: var(--mono); font-style: normal; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-left: 4px; }
-  .article-quote cite { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); opacity: 0.5; display: block; font-style: normal; }
+  .article-quote .quote-text::before { content: '\00AB'; font-family: var(--mono); font-style: italic; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-right: 4px; }
+  .article-quote .quote-text::after { content: '\00BB'; font-family: var(--mono); font-style: italic; font-size: 0.85rem; color: var(--accent); opacity: 0.6; margin-left: 0; }
+  .article-quote cite { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink2); opacity: 0.78; display: block; font-style: normal; }
+  .article-quote cite .note-ref { font-size: 0.8em; }
 
   /* ── RESOURCES ── */
   .resource-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
@@ -807,6 +814,8 @@
   }
   .drawer-link[data-i18n="nav.donate"] { color: rgb(83,127,151); }
 </style>
+<link rel="stylesheet" href="../../assets/toc-scrollbar.css">
+<script src="../../assets/toc-scrollbar.js" defer></script>
 </head>
 <body>
 
@@ -814,9 +823,8 @@
   <a class="nav-logo" href="/en/">Humanity Tomorrow</a>
   <ul class="nav-links">
     <li><a href="/en/" data-i18n="nav.home">Home</a></li>
-    <li><a href="/en/immortalism/" class="active" data-i18n="nav.life">Immortalism</a></li>
     <li><a href="../ai/index.html" data-i18n="nav.ai">AI Risks</a></li>
-    <li><a class="dimmed" data-i18n="nav.future">Future</a></li>
+    <li><a href="/en/immortalism/" class="active" data-i18n="nav.life">Immortalism</a></li>
     <li><a href="/en/about/" data-i18n="nav.about">About</a></li>
     <li><a href="/en/manifest/" data-i18n="nav.manifest">Manifesto</a></li>
     <li><a href="/en/donate/" data-i18n="nav.donate">Donate</a></li>
@@ -838,9 +846,8 @@
 
 <div class="mobile-drawer" id="mobileDrawer">
   <a class="drawer-link" href="/en/" data-i18n="nav.home">Home</a>
-  <a class="drawer-link" href="/en/immortalism/" data-i18n="nav.life">Immortalism</a>
   <a class="drawer-link" href="../ai/index.html" data-i18n="nav.ai">AI Risks</a>
-  <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
+  <a class="drawer-link" href="/en/immortalism/" data-i18n="nav.life">Immortalism</a>
   <a class="drawer-link" href="/en/about/" data-i18n="nav.about">About</a>
   <a class="drawer-link" href="/en/manifest/" data-i18n="nav.manifest">Manifesto</a>
   <a class="drawer-link" href="/en/donate/" data-i18n="nav.donate">Donate</a>

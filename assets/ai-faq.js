@@ -6,12 +6,66 @@ if (content) {
   document.getElementById('articleMain').innerHTML = content.articleHtml;
   document.getElementById('tocList').innerHTML = content.tocHtml;
 }
+// Present source links as numbered notes, matching the Immortalism FAQ.
+const citationUi = {
+  en: { note: 'Note' },
+  ru: { note: 'Примечание' },
+  ua: { note: 'Примітка' }
+}[language] || { note: 'Note' };
+const citationRegistry = new Map();
+const citationExclusions = new Set([
+  'https://80000hours.org/',
+  'https://bluedot.org/courses/',
+  'https://aisafety.com/map'
+]);
+const citationOverlay = document.createElement('div');
+citationOverlay.className = 'note-overlay';
+citationOverlay.id = 'noteOverlay';
+citationOverlay.setAttribute('role', 'dialog');
+citationOverlay.setAttribute('aria-modal', 'true');
+citationOverlay.setAttribute('aria-labelledby', 'noteLabel');
+citationOverlay.innerHTML = `<div class="note-panel"><button class="note-close" type="button" data-close-overlay aria-label="Close">×</button><p class="note-label" id="noteLabel"></p><div class="note-body" id="noteBody"></div></div>`;
+document.body.appendChild(citationOverlay);
+
+[...document.querySelectorAll('#nutshellCard a, #articleMain a')]
+  .filter((link) => !citationExclusions.has(link.href))
+  .forEach((link, index) => {
+  const number = index + 1;
+  const id = `source-${number}`;
+  const source = { number, url: link.href, label: link.textContent.trim() };
+  citationRegistry.set(id, source);
+
+  const text = document.createElement('span');
+  text.className = 'citation-text';
+  while (link.firstChild) text.appendChild(link.firstChild);
+  text.querySelectorAll('u').forEach((underline) => underline.replaceWith(...underline.childNodes));
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'note-ref';
+  button.textContent = `[${number}]`;
+  button.dataset.openOverlay = 'noteOverlay';
+  button.setAttribute('aria-label', `${citationUi.note} ${number}: ${source.label}`);
+  button.addEventListener('click', () => {
+    document.getElementById('noteLabel').textContent = `${citationUi.note} ${number}`;
+    const body = document.getElementById('noteBody');
+    body.innerHTML = '';
+    const sourceLink = document.createElement('a');
+    sourceLink.href = source.url;
+    sourceLink.target = '_blank';
+    sourceLink.rel = 'noopener noreferrer';
+    sourceLink.textContent = source.url;
+    body.appendChild(sourceLink);
+  });
+  link.replaceWith(text, button);
+  });
 // Enhance the original paragraphs without changing their inline formatting or links.
 const noteTitles = {
   en: {
     'part-1-q-1-1': 'It predicts not a word, but a token.',
     'part-1-q-2': 'On AI Consciosness',
     'part-1-q-5': 'About conspiracies',
+    'part-2-q-13': 'What is x-risk?',
     'part-3-q-19': 'What is a warning shot?',
     'part-3-q-25': 'Who is doomers?'
   },
@@ -19,6 +73,7 @@ const noteTitles = {
     'part-1-q-1-1': 'Он предсказывает не слово, а токен.',
     'part-1-q-2': 'О сознании ИИ',
     'part-1-q-5': 'О заговорах',
+    'part-2-q-13': 'Что такое x-risk?',
     'part-3-q-19': 'Что такое предупредительный выстрел?',
     'part-3-q-25': 'Кто такие думеры?'
   },
@@ -26,6 +81,7 @@ const noteTitles = {
     'part-1-q-1-1': 'Він передбачає не слово, а токен.',
     'part-1-q-2': 'Про свідомість ШІ',
     'part-1-q-5': 'Про змови',
+    'part-2-q-13': 'Що таке x-risk?',
     'part-3-q-19': 'Що таке попереджувальний постріл?',
     'part-3-q-25': 'Хто такі думери?'
   }

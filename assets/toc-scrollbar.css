@@ -1,0 +1,87 @@
+.toc-block {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none;
+}
+
+.toc-block::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.toc-scrollbar {
+  position: absolute;
+  top: 0;
+  right: -34px;
+  bottom: 0;
+  width: 8px;
+  z-index: 8;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.16s ease, visibility 0.16s ease;
+}
+
+.toc-shell:hover .toc-scrollbar,
+.toc-shell:has(.toc-scrollbar-thumb.dragging) .toc-scrollbar {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.toc-scrollbar[hidden] {
+  display: none;
+}
+
+/* Include the scrollbar and its previous position in the hover region. */
+.toc-shell::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -45px;
+  width: 45px;
+  z-index: 7;
+  cursor: default;
+}
+
+.toc-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  min-height: 24px;
+  cursor: default;
+  touch-action: none;
+}
+
+.toc-scrollbar-thumb::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 2.5px;
+  width: 3px;
+  border-radius: 999px;
+  background: #b9b6b2;
+  pointer-events: none;
+}
+
+.toc-scrollbar-thumb:hover::before {
+  background: #aaa7a3;
+}
+
+.toc-scrollbar-thumb.dragging {
+  cursor: default;
+}
+
+.toc-scrollbar-thumb.dragging::before {
+  background: #aaa7a3;
+}
+
+@media (max-width: 768px) {
+  .toc-scrollbar { display: none; }
+  .toc-shell::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc-scrollbar { transition: none; }
+}

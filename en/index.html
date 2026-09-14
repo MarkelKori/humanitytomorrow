@@ -148,7 +148,7 @@
   .home-title { overflow-wrap: break-word; }
   .home-title em { font-style: italic; color: #5E5751; }
   .home-desc { font-size: 1.16rem; color: rgba(26,24,20,0.9); max-width: 620px; line-height: 1.72; margin-bottom: 48px; }
-  .home-desc-note { display: inline; color: inherit; font-weight: 600; }
+  .home-desc-note { display: block; color: inherit; font-weight: 600; }
 
   /* ── CARDS ── */
   .topic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 0 48px 72px; }
@@ -271,9 +271,8 @@
   <a class="nav-logo" href="/en/">Humanity Tomorrow</a>
   <ul class="nav-links">
     <li><a href="/en/" class="active" data-i18n="nav.home">Home</a></li>
-    <li><a href="/en/immortalism/" data-i18n="nav.life">Immortalism</a></li>
     <li><a href="ai/index.html" data-i18n="nav.ai">AI Risks</a></li>
-    <li><a class="dimmed" data-i18n="nav.future">Future</a></li>
+    <li><a href="/en/immortalism/" data-i18n="nav.life">Immortalism</a></li>
     <li><a href="/en/about/" data-i18n="nav.about">About</a></li>
     <li><a href="/en/manifest/" data-i18n="nav.manifest">Manifesto</a></li>
     <li><a href="/en/donate/" data-i18n="nav.donate">Donate</a></li>
@@ -295,9 +294,8 @@
 
 <div class="mobile-drawer" id="mobileDrawer">
   <a class="drawer-link" href="/en/" data-i18n="nav.home">Home</a>
-  <a class="drawer-link" href="/en/immortalism/" data-i18n="nav.life">Immortalism</a>
   <a class="drawer-link" href="ai/index.html" data-i18n="nav.ai">AI Risks</a>
-  <span class="drawer-link dimmed" data-i18n="nav.future">Future</span>
+  <a class="drawer-link" href="/en/immortalism/" data-i18n="nav.life">Immortalism</a>
   <a class="drawer-link" href="/en/about/" data-i18n="nav.about">About</a>
   <a class="drawer-link" href="/en/manifest/" data-i18n="nav.manifest">Manifesto</a>
   <a class="drawer-link" href="/en/donate/" data-i18n="nav.donate">Donate</a>
@@ -314,20 +312,20 @@
 
 <div class="home-hero">
   <h1 class="home-title" data-i18n-html="home.title">AI Risks and<br>Life Extension,<br><em>Explained</em></h1>
-  <p class="home-desc" data-i18n-html="home.desc">Our project brings together comprehensive texts dedicated to understanding topics such as the AI risks, life extension, and future studies. <span class="home-desc-note">All articles are 100% human-written.</span></p>
+  <p class="home-desc" data-i18n-html="home.desc">Our project brings together comprehensive texts dedicated to understanding topics such as the AI risks and life extension. <span class="home-desc-note">All articles are 100% human-written.</span></p>
 </div>
 
 <div class="topic-grid">
-  <a class="topic-card" data-topic="life" href="/en/immortalism/">
-    <p class="card-num">01</p>
-    <h2 class="card-title" data-i18n="nav.life">Immortalism</h2>
-    <p class="card-desc" data-i18n="card.life.desc">Examine the main arguments and counterarguments regarding the philosophical position that advocates for a radical life extension.</p>
-    <span class="card-link" data-i18n="card.read">Read more</span>
-  </a>
   <a href="ai/index.html" class="topic-card" data-topic="ai">
-    <p class="card-num">02</p>
+    <p class="card-num">01</p>
     <h2 class="card-title" data-i18n="nav.ai">AI Risks</h2>
     <p class="card-desc" data-i18n="card.ai.desc">Why do researchers worry about loss of control? Explore the evidence, objections and proposed solutions.</p>
+    <span class="card-link" data-i18n="card.read">Read more</span>
+  </a>
+  <a class="topic-card" data-topic="life" href="/en/immortalism/">
+    <p class="card-num">02</p>
+    <h2 class="card-title" data-i18n="nav.life">Immortalism</h2>
+    <p class="card-desc" data-i18n="card.life.desc">Examine the main arguments and counterarguments regarding the philosophical position that advocates for a radical life extension.</p>
     <span class="card-link" data-i18n="card.read">Read more</span>
   </a>
   <!-- Restore this card by moving it out of the template and setting the desktop grid to three columns. -->
@@ -351,7 +349,7 @@ const translations = {
   en: {
     'nav.home':'Home','nav.ai':'AI Risks','nav.future':'Future','nav.life':'Immortalism','nav.manifest':'Manifesto','nav.about':'About','nav.donate':'Donate',
     'home.title':'AI Risks and<br>Life Extension,<br><em>Explained</em>',
-    'home.desc':'Our project brings together comprehensive texts dedicated to understanding topics such as the AI risks, life extension, and future studies. <span class="home-desc-note">All articles are 100% human-written.</span>',
+    'home.desc':'Our project brings together comprehensive texts dedicated to understanding topics such as the AI risks and life extension. <span class="home-desc-note">All articles are 100% human-written.</span>',
     'card.life.desc':'Examine the main arguments and counterarguments regarding the philosophical position that advocates for a radical life extension.',
     'card.ai.desc':'Why do researchers worry about loss of control? Explore the evidence, objections and proposed solutions.',
     'card.future.desc':'What are the limits of human development and technology?',
@@ -361,7 +359,7 @@ const translations = {
   ru: {
     'nav.home':'Главная','nav.ai':'Риски ИИ','nav.future':'Будущее','nav.life':'Иммортализм','nav.manifest':'Манифест','nav.about':'О сайте','nav.donate':'Поддержать',
     'home.title':'Риски ИИ и<br>продление жизни:<br><em>разбираемся</em>',
-    'home.desc':'Наш проект объединяет в одном месте исчерпывающие материалы, посвящённые таким темам, как риски искусственного интеллекта, продление жизни и исследования будущего. <span class="home-desc-note">Все статьи на 100% написаны людьми.</span>',
+    'home.desc':'Наш проект объединяет в одном месте исчерпывающие материалы, посвящённые таким темам, как риски искусственного интеллекта и продление жизни. <span class="home-desc-note">Все статьи на 100% написаны людьми.</span>',
     'card.life.desc':'Рассмотрите основные аргументы и контраргументы о философской позиции, выступающей за радикальное продление жизни.',
     'card.ai.desc':'Почему исследователи опасаются потери контроля? Изучите доказательства, возражения и предлагаемые решения.',
     'card.future.desc':'Каковы лимиты развития человека и его технологий?',
@@ -370,7 +368,7 @@ const translations = {
   ua: {
     'nav.home':'Головна','nav.ai':'Ризики ШІ','nav.future':'Майбутнє','nav.life':'Імморталізм','nav.manifest':'Маніфест','nav.about':'Про сайт','nav.donate':'Підтримати',
     'home.title':'Ризики ШІ та<br>продовження життя:<br><em>пояснюємо</em>',
-    'home.desc':'Наш проєкт збирає в одному місці всеосяжні тексти, присвячені розумінню таких тем як ризики ШІ, продовження життя та дослідження майбутнього. <span class="home-desc-note">Усі статті на 100% написані людьми.</span>',
+    'home.desc':'Наш проєкт збирає в одному місці всеосяжні тексти, присвячені розумінню таких тем як ризики ШІ та продовження життя. <span class="home-desc-note">Усі статті на 100% написані людьми.</span>',
     'card.life.desc':'Розгляньте основні аргументи й контраргументи щодо філософської позиції, яка виступає за радикальне продовження життя.',
     'card.ai.desc':'Чому дослідники побоюються втрати контролю? Ознайомтеся з доказами, запереченнями та запропонованими рішеннями.',
     'card.future.desc':'Якими є межі розвитку людини та її технологій?',

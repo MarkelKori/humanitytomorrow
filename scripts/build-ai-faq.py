@@ -56,6 +56,80 @@ def convert(filename):
             return text
 
         body = document.find('w:body', NS)
+        # Separate the final action headings from their explanations.
+        language = 'en' if 'English' in filename else ('ru' if 'Russian' in filename else 'ua')
+        action_titles = {
+            'en': ['5. Use your vote.', '6. Participate in public consultations.', '7. Participate in protests and peaceful demonstrations.', '8. Sign petitions and open letters.', '9. Do not make things worse.'],
+            'ru': ['5. Используйте свой голос избирателя.', '6. Участвуйте в публичных обсуждениях.', '7. Участвуйте в акциях протеста и мирных демонстрациях.', '8. Подписывайте петиции и открытые письма.', '9. Не делайте хуже.'],
+            'ua': ['5. Використовуйте свій голос виборця.', '6. Беріть участь у публічних обговореннях.', '7. Беріть участь в акціях протесту й мирних демонстраціях.', '8. Підписуйте петиції та відкриті листи.', '9. Не робіть гірше.'],
+        }[language]
+        obsolete_intro = {
+            'en': 'This article will be updated and improved.',
+            'ru': 'Эта статья будет обновляться и улучшаться.',
+            'ua': 'Ця стаття оновлюватиметься й покращуватиметься.',
+        }[language]
+        embedding_leads = {
+            'en': ('They are represented by ', 'Tokens are converted into '),
+            'ru': ('Они представляют собой ', 'Токены превращаются в '),
+            'ua': ('Вони представлені як ', 'Токени перетворюються на '),
+        }
+        xrisk_copy = {
+            'en': ('Note: ', 'X-risk', ' is short for ', 'existential risk', ', which is any threat that could either wipe out human life completely or permanently and drastically destroy humanity’s future potential.'),
+            'ru': ('Примечание: ', 'X-risk', ' — сокращение от ', 'existential risk', ' («экзистенциальный риск»), то есть любой угрозы, которая может либо полностью уничтожить человеческую жизнь, либо навсегда и радикально лишить человечество его будущего потенциала.'),
+            'ua': ('Примітка: ', 'X-risk', ' — скорочення від ', 'existential risk', ' («екзистенційний ризик»), тобто будь-якої загрози, яка може або повністю знищити людське життя, або назавжди й радикально позбавити людство його майбутнього потенціалу.'),
+        }[language]
+        def make_paragraph(value, bold=False):
+            paragraph = etree.Element(W + 'p')
+            run = etree.SubElement(paragraph, W + 'r')
+            if bold:
+                etree.SubElement(etree.SubElement(run, W + 'rPr'), W + 'b')
+            etree.SubElement(run, W + 't').text = value
+            return paragraph
+        def make_xrisk_note():
+            paragraph = etree.Element(W + 'p')
+            for index, value in enumerate(xrisk_copy):
+                run = etree.SubElement(paragraph, W + 'r')
+                if index in (0, 1, 3):
+                    etree.SubElement(etree.SubElement(run, W + 'rPr'), W + 'b')
+                text = etree.SubElement(run, W + 't')
+                text.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
+                text.text = value
+            return paragraph
+        # Apply editorial changes directly to the import tree so generated HTML
+        # and the source-text integrity check remain in sync.
+        old_lead, new_lead = embedding_leads[language]
+        for paragraph in list(body):
+            value = ''.join(paragraph.xpath('.//w:t/text()', namespaces=NS)).strip()
+            if value.startswith(obsolete_intro):
+                body.remove(paragraph)
+                continue
+            for node in paragraph.findall('.//w:t', NS):
+                if node.text:
+                    node.text = node.text.replace(old_lead, new_lead)
+            value = ''.join(paragraph.xpath('.//w:t/text()', namespaces=NS)).strip()
+            if re.match(r'^13\. .*x-risk', value, re.I):
+                for node in paragraph.findall('.//w:t', NS):
+                    node.text = (node.text or '').replace('x-risk*', 'x-risk')
+                body.insert(body.index(paragraph) + 1, make_xrisk_note())
+        in_actions = False
+        for paragraph in list(body):
+            value = ''.join(paragraph.xpath('.//w:t/text()', namespaces=NS)).strip()
+            if re.match(r'^(PART|БЛОК) 4\.', value):
+                in_actions = True
+            number = re.match(r'^([5-8])\. ', value) if in_actions else None
+            if not number:
+                continue
+            n = int(number[1])
+            replacements = [make_paragraph(action_titles[n - 5 if n < 8 else 4], True)]
+            if n in (5, 6):
+                explanation = value[value.index('(') + 1:value.rindex(')')].strip()
+                replacements.append(make_paragraph(explanation.rstrip('.') + '.'))
+            elif n == 7:
+                replacements.append(make_paragraph(action_titles[3], True))
+            position = body.index(paragraph)
+            body.remove(paragraph)
+            for offset, replacement in enumerate(replacements):
+                body.insert(position + offset, replacement)
         paragraphs = document.findall('w:body/w:p', NS)
         token_note = next(p for p in paragraphs if re.match(r'^(Additional information|Дополнительно|Додатково):', ''.join(p.xpath('.//w:t/text()', namespaces=NS)).strip()))
         next_heading = next(p for p in paragraphs if ''.join(p.xpath('.//w:t/text()', namespaces=NS)).strip().startswith('1.2.'))
@@ -104,10 +178,43 @@ def convert(filename):
             else:
                 blocks.append({'type': 'html', 'html': f'<p>{rich}</p>'})
 
+        quote_data = {
+            'en': {
+                'introduction': ('Look, all I’m asking is that you tell me a specific, detailed story about AI killing everyone that doesn’t sound to me like science fiction.', None, 'https://x.com/robbensinger/status/2098152546225496573?s=20'),
+                'part-2': ('Humans are just stochastic parrots. True intelligence requires the transformer architecture.', 'vik', 'https://x.com/vikhyatk/status/2096717802623398134?s=20'),
+                'part-4': ('There’s no way I alone can make a difference. That would require collective action.', None, 'https://x.com/chrislakin/status/2097798895208419512?s=20'),
+            },
+            'ru': {
+                'introduction': ('Послушайте, всё, о чём я прошу, — расскажите мне конкретную, подробную историю о том, как ИИ убивает всех, которая не звучала бы для меня как научная фантастика.', None, 'https://x.com/robbensinger/status/2098152546225496573?s=20'),
+                'part-2': ('Люди — всего лишь стохастические попугаи. Для настоящего интеллекта нужна архитектура трансформера.', 'vik', 'https://x.com/vikhyatk/status/2096717802623398134?s=20'),
+                'part-4': ('Я один никак не смогу что-то изменить. Для этого нужны коллективные действия.', None, 'https://x.com/chrislakin/status/2097798895208419512?s=20'),
+            },
+            'ua': {
+                'introduction': ('Послухайте, усе, про що я прошу, — розкажіть мені конкретну, докладну історію про те, як ШІ вбиває всіх, яка не звучала б для мене як наукова фантастика.', None, 'https://x.com/robbensinger/status/2098152546225496573?s=20'),
+                'part-2': ('Люди — лише стохастичні папуги. Для справжнього інтелекту потрібна архітектура трансформера.', 'vik', 'https://x.com/vikhyatk/status/2096717802623398134?s=20'),
+                'part-4': ('Я один ніяк не зможу щось змінити. Для цього потрібні колективні дії.', None, 'https://x.com/chrislakin/status/2097798895208419512?s=20'),
+            },
+        }[language]
+        def quote_html(section_id):
+            if section_id not in quote_data:
+                return ''
+            quote, author, url = quote_data[section_id]
+            source = f'<a href="{esc(url, quote=True)}" aria-label="Source"></a>'
+            citation = f'<cite>{esc(author)}{source}</cite>' if author else ''
+            if section_id == 'part-4':
+                first, second = quote.split('. ', 1)
+                quote_body = f'<span class="quote-text quote-first-line">{esc(first)}.</span><br><span class="quote-source-line"><span class="quote-continuation">{esc(second)}</span>{source}</span>'
+                return f'<div class="article-quote ai-added-quote" data-generated-quote="true"><blockquote>{quote_body}</blockquote></div>'
+            else:
+                quote_body = esc(quote)
+                trailing_source = '' if author else source
+            return f'<div class="article-quote ai-added-quote" data-generated-quote="true"><blockquote><span class="quote-text">{quote_body}</span>{trailing_source}</blockquote>{citation}</div>'
+
         article, toc = '', ''
         for section in sections:
             sid = section['id']
             article += f'<section class="section-block" id="{sid}"><h2 class="ai-part-heading">{section["headingHtml"]}</h2>'
+            article += quote_html(sid)
             article += ''.join('<div class="content-html">' + b['html'] + '</div>' for b in section['blocks'])
             toc += f'<li><a href="#{sid}" data-target="{sid}">{esc(section["label"])}</a>'
             if section['items']:
@@ -127,6 +234,8 @@ def convert(filename):
         normalize = lambda t: re.sub(r'\s+', '', t)
         source_text = ''.join(document.xpath('.//w:body//w:t/text()', namespaces=NS))
         output = html_parser.fromstring('<main>' + article + '</main>')
+        for generated in output.xpath('.//*[@data-generated-quote]'):
+            generated.getparent().remove(generated)
         assert normalize(source_text) == normalize(output.text_content()), filename
         source_links = [rels[n.get(R + 'id')] for n in document.findall('.//w:hyperlink', NS) if n.get(R + 'id')]
         assert source_links == output.xpath('.//a/@href'), filename
@@ -177,5 +286,9 @@ for lang, filename in [('en', 'AI Risks - English.docx'), ('ru', 'AI Risks - Rus
         text = re.sub(r'(<h1[^>]*>.*?</h1>)', lambda m: m[1] + kit, text, count=1)
         text = re.sub(r'<script src="[^"]*content/ai-faq\.[^"]+" defer></script>\s*', '', text)
         text = text.replace(f'<script src="{prefix}assets/ai-faq.js" defer></script>', f'<script src="{prefix}content/ai-faq.{lang}.js" defer></script>\n<script src="{prefix}assets/ai-faq.js" defer></script>')
+        if 'toc-scrollbar.css' not in text:
+            text = text.replace(f'<link rel="stylesheet" href="{prefix}assets/ai-faq.css">', f'<link rel="stylesheet" href="{prefix}assets/ai-faq.css">\n<link rel="stylesheet" href="{prefix}assets/toc-scrollbar.css">')
+        if 'toc-scrollbar.js' not in text:
+            text = text.replace(f'<script src="{prefix}assets/ai-faq.js" defer></script>', f'<script src="{prefix}assets/ai-faq.js" defer></script>\n<script src="{prefix}assets/toc-scrollbar.js" defer></script>')
         page.write_text(text, encoding='utf-8')
     print(f'{lang}: {len(data["sections"])} sections, {sum(len(s["items"]) for s in data["sections"])} headings, {links} hyperlinks; full text verified')
