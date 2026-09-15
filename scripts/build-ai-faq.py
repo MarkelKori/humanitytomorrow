@@ -181,17 +181,20 @@ def convert(filename):
         quote_data = {
             'en': {
                 'introduction': ('Look, all I’m asking is that you tell me a specific, detailed story about AI killing everyone that doesn’t sound to me like science fiction.', None, 'https://x.com/robbensinger/status/2098152546225496573?s=20'),
-                'part-2': ('Humans are just stochastic parrots. True intelligence requires the transformer architecture.', 'vik', 'https://x.com/vikhyatk/status/2096717802623398134?s=20'),
+                'part-2': ('AI will probably, most likely, sort of lead to the end of the world, but in the meantime, there will be great companies created with serious machine learning.', 'Sam Altman', 'https://www.techradar.com/pro/quote-of-the-day-by-sam-altman-ai-will-probably-most-likely-lead-to-the-end-of-the-world-but-in-the-meantime-therell-be-great-companies-the-dichotomy-between-grave-existential-risks-and-economic-nirvana'),
+                'part-3': ('Humans are just stochastic parrots. True intelligence requires the transformer architecture.', 'vik', 'https://x.com/vikhyatk/status/2096717802623398134?s=20'),
                 'part-4': ('There’s no way I alone can make a difference. That would require collective action.', None, 'https://x.com/chrislakin/status/2097798895208419512?s=20'),
             },
             'ru': {
                 'introduction': ('Послушайте, всё, о чём я прошу, — расскажите мне конкретную, подробную историю о том, как ИИ убивает всех, которая не звучала бы для меня как научная фантастика.', None, 'https://x.com/robbensinger/status/2098152546225496573?s=20'),
-                'part-2': ('Люди — всего лишь стохастические попугаи. Для настоящего интеллекта нужна архитектура трансформера.', 'vik', 'https://x.com/vikhyatk/status/2096717802623398134?s=20'),
+                'part-2': ('ИИ, вероятно, скорее всего, вроде как приведёт к концу света, но тем временем появятся великие компании, всерьёз занимающиеся машинным обучением.', 'Сэм Альтман', 'https://www.techradar.com/pro/quote-of-the-day-by-sam-altman-ai-will-probably-most-likely-lead-to-the-end-of-the-world-but-in-the-meantime-therell-be-great-companies-the-dichotomy-between-grave-existential-risks-and-economic-nirvana'),
+                'part-3': ('Люди — всего лишь стохастические попугаи. Для настоящего интеллекта нужна архитектура трансформера.', 'vik', 'https://x.com/vikhyatk/status/2096717802623398134?s=20'),
                 'part-4': ('Я один никак не смогу что-то изменить. Для этого нужны коллективные действия.', None, 'https://x.com/chrislakin/status/2097798895208419512?s=20'),
             },
             'ua': {
                 'introduction': ('Послухайте, усе, про що я прошу, — розкажіть мені конкретну, докладну історію про те, як ШІ вбиває всіх, яка не звучала б для мене як наукова фантастика.', None, 'https://x.com/robbensinger/status/2098152546225496573?s=20'),
-                'part-2': ('Люди — лише стохастичні папуги. Для справжнього інтелекту потрібна архітектура трансформера.', 'vik', 'https://x.com/vikhyatk/status/2096717802623398134?s=20'),
+                'part-2': ('ШІ, імовірно, найімовірніше, певною мірою призведе до кінця світу, але тим часом з’являться великі компанії, що серйозно займатимуться машинним навчанням.', 'Сем Альтман', 'https://www.techradar.com/pro/quote-of-the-day-by-sam-altman-ai-will-probably-most-likely-lead-to-the-end-of-the-world-but-in-the-meantime-therell-be-great-companies-the-dichotomy-between-grave-existential-risks-and-economic-nirvana'),
+                'part-3': ('Люди — лише стохастичні папуги. Для справжнього інтелекту потрібна архітектура трансформера.', 'vik', 'https://x.com/vikhyatk/status/2096717802623398134?s=20'),
                 'part-4': ('Я один ніяк не зможу щось змінити. Для цього потрібні колективні дії.', None, 'https://x.com/chrislakin/status/2097798895208419512?s=20'),
             },
         }[language]
@@ -271,6 +274,82 @@ for lang, filename in [('en', 'AI Risks - English.docx'), ('ru', 'AI Risks - Rus
             term,
             1,
         )
+
+    toc_title_overrides = {
+        'en': {
+            'part-1-q-11': '11. This is the natural course of evolution.',
+            'part-2-q-14': '14. To pose a real risk, AI must be able to act in the real world.',
+            'part-2-q-15': '15. Language models do not have a full-fledged world model.',
+            'part-3-q-17': '17. AI has no personal history or continuous identity.',
+            'part-3-q-18': '18. AI cannot conduct R&amp;D independently.',
+            'part-3-q-19': '19. There will be many ‘warning shots’ before a dangerous level is reached.',
+            'part-3-q-20': '20. Transformers are a dead end.',
+            'part-3-q-21': '21. If we do not accelerate AI progress, we delay the arrival of a cure for cancer or aging.',
+            'part-3-q-23': '23. A pause is more dangerous than a race, because others will not stop.',
+            'part-3-q-23-1': '23.1. No one will agree to stop or slow down!',
+            'part-3-q-24': '24. AI will not kill humans because it needs us.',
+            'part-3-q-25': '25. Doomers’ arguments derive the danger from an idealized model of a rational agent.',
+        },
+        'ru': {
+            'part-1-q-11': '11. Это естественный ход эволюции.',
+            'part-2-q-14': '14. Чтобы быть настоящим риском, ИИ должен уметь действовать в реальном мире.',
+            'part-2-q-15': '15. У языковых моделей нет полноценной модели мира.',
+            'part-3-q-17': '17. У ИИ нет личной истории и непрерывной идентичности.',
+            'part-3-q-18': '18. ИИ не способны самостоятельно вести R&amp;D.',
+            'part-3-q-19': '19. До опасного уровня будет много “предупредительных выстрелов”.',
+            'part-3-q-20': '20. Трансформеры — это тупик.',
+            'part-3-q-21': '21. Если мы не будем ускорять прогресс ИИ, то мы откладываем время, за которое могло бы появиться лекарство от рака или старости.',
+            'part-3-q-23': '23. Пауза опаснее гонки, потому что другие не остановятся.',
+            'part-3-q-23-1': '23.1. Никто не будет договариваться об остановке или замедлении!',
+            'part-3-q-24': '24. ИИ не убьёт людей, потому что мы нужны.',
+            'part-3-q-25': '25. Аргументы думеров выводят опасность из идеализированной модели рационального агента.',
+        },
+        'ua': {
+            'part-1-q-11': '11. Це природний хід еволюції.',
+            'part-2-q-14': '14. Щоб становити справжній ризик, ШІ має вміти діяти в реальному світі.',
+            'part-2-q-15': '15. Мовні моделі не мають повноцінної моделі світу.',
+            'part-3-q-17': '17. ШІ не має особистої історії та безперервної ідентичності.',
+            'part-3-q-18': '18. ШІ не здатні самостійно вести R&amp;D.',
+            'part-3-q-19': '19. До небезпечного рівня буде багато «попереджувальних пострілів».',
+            'part-3-q-20': '20. Трансформери — це глухий кут.',
+            'part-3-q-21': '21. Якщо ми не прискорюватимемо прогрес ШІ, то відкладатимемо появу ліків від раку чи старості.',
+            'part-3-q-23': '23. Пауза небезпечніша за гонку, тому що інші не зупиняться.',
+            'part-3-q-23-1': '23.1. Ніхто не домовлятиметься про зупинку чи уповільнення!',
+            'part-3-q-24': '24. ШІ не вб’є людей, тому що ми потрібні.',
+            'part-3-q-25': '25. Аргументи думерів виводять небезпеку з ідеалізованої моделі раціонального агента.',
+        },
+    }[lang]
+    for item_id, title in toc_title_overrides.items():
+        pattern = rf'(<a href="#{re.escape(item_id)}"[^>]*>)[\s\S]*?(</a>)'
+        data['tocHtml'], replacements = re.subn(pattern, rf'\g<1>{title}\g<2>', data['tocHtml'], count=1)
+        assert replacements == 1, (lang, item_id)
+
+    probability_sentence = {
+        'en': 'Rationalists remember that neither 0% nor 100% is a probability.',
+        'ru': 'Рационалисты помнят, что ни 0%, ни 100% не являются вероятностями.',
+        'ua': 'Раціоналісти пам’ятають, що ні 0%, ні 100% не є ймовірностями.',
+    }[lang]
+    probability_source = '<a href="https://www.lesswrong.com/posts/QGkYCwyC7wTDyt3yT/0-and-1-are-not-probabilities" aria-label="Source"></a>'
+    assert data['articleHtml'].count(probability_sentence) == 1, lang
+    data['articleHtml'] = data['articleHtml'].replace(probability_sentence, probability_sentence + probability_source, 1)
+
+    q4_next_paragraph = {
+        'en': 'If we examine the word ‘religion’',
+        'ru': 'Если разбирать слово “религия”',
+        'ua': 'Якщо розбирати слово «релігія»',
+    }[lang]
+    q4_followup = {
+        'en': 'Of course, the fact that some prominent people talk about this proves nothing. I am not trying to appeal to authority; I am only showing that claims such as “only fanatics and people who do not understand AI talk about this” are false.',
+        'ru': 'Впрочем, конечно, то, что об этом говорят какие-то выдающиеся люди, ничего не доказывает. Я не пытаюсь апеллировать к авторитету, а лишь показываю ошибочность утверждений вроде «об этом говорят только фанатики и те, кто не понимает ИИ».',
+        'ua': 'Утім, звичайно, те, що якісь видатні люди про це говорять, нічого не доводить. Я не намагаюся апелювати до авторитету, а лише показую хибність тверджень на кшталт «про це говорять лише фанатики та ті, хто не розуміє ШІ».',
+    }[lang]
+    marker = f'<div class="content-html"><p>{q4_next_paragraph}'
+    assert data['articleHtml'].count(marker) == 1, lang
+    data['articleHtml'] = data['articleHtml'].replace(
+        marker,
+        f'<div class="content-html"><p>{q4_followup}</p></div>{marker}',
+        1,
+    )
     (ROOT / 'content' / f'ai-faq.{lang}.js').write_text(
         '/* Generated by scripts/build-ai-faq.py from the original DOCX. */\nwindow.aiPageContent = window.aiPageContent || {};\n'
         + f'window.aiPageContent.{lang} = ' + json.dumps(data, ensure_ascii=False, indent=2) + ';\n', encoding='utf-8')
